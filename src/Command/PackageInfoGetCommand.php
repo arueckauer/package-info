@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use function array_keys;
 use function file_exists;
 use function file_get_contents;
 use function implode;
@@ -77,22 +78,16 @@ class PackageInfoGetCommand extends Command
             $developmentRequirements = $this->requirement->parseDevelopmentRequirements($branch);
 
             $rows[] = [
-                'package'                 => $package->toString(),
-                'branch'                  => $branch->getName(),
-                'requirements'            => implode("\n", $requirements),
-                'developmentRequirements' => implode("\n", $developmentRequirements),
+                'package'                  => $package->toString(),
+                'branch'                   => $branch->getName(),
+                'requirements'             => implode("\n", $requirements),
+                'development-requirements' => implode("\n", $developmentRequirements),
             ];
         }
 
-        $headers = [
-            'package',
-            'branch',
-            'requirements',
-            'developmentRequirements',
-        ];
-        $table   = new Table($output);
+        $table = new Table($output);
         $table
-            ->setHeaders($headers)
+            ->setHeaders(array_keys($rows[0]))
             ->setRows($rows)
             ->render();
 
