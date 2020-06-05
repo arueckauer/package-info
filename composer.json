@@ -1,0 +1,52 @@
+{
+    "name": "arueckauer/package-info",
+    "type": "project",
+    "description": "Verifying requirements of composer packages of a GitHub organization",
+    "homepage": "https://github.com/arueckauer/package-info",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Andi Rückauer",
+            "email": "arueckauer@gmail.com",
+            "homepage": "https://arueckauer.github.io/",
+            "role": "Project Lead"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "composer/semver": "^3.0",
+        "knplabs/github-api": "^2.14",
+        "laminas/laminas-config-aggregator": "^1.2",
+        "laminas/laminas-servicemanager": "^3.4",
+        "laminas/laminas-stdlib": "^3.2.1",
+        "mezzio/mezzio": "^3.2.1",
+        "mezzio/mezzio-helpers": "^5.3",
+        "ocramius/package-versions": "^1.8",
+        "php-http/guzzle6-adapter": "^2.0",
+        "symfony/console": "^5.1"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "^2.0",
+        "phpunit/phpunit": "^9.1",
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "PackageInfo\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PackageInfoTest\\": "test"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf"
+    }
+}

@@ -1,0 +1,38 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'laminas',
+        'laminas-api-tools',
+        'mezzio',
+    ],
+    'ignore_repositories'      => [
+        'laminas/documentation',
+        'laminas/.github',
+        'laminas/laminas.github.io',
+        'laminas/documentation-theme',
+        'laminas/technical-steering-committee',
+        'laminas/tutorials',
+        'laminas/twitter-automation',
+        'laminas-api-tools/.github',
+        'mezzio/.github',
+        'mezzio/mezzio.github.io',
+        'mezzio/mezzio.dev',
+    ],
+    'ignore_branches'          => [
+        'gh-pages',
+    ],
+    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'requirements'             => [
+        'php' => '7.2.0',
+    ],
+    'development_requirements' => [
+        'laminas/laminas-coding-standard' => '2.0.0',
+        'phpunit/phpunit'                 => '7.1.0',
+        'vimeo/psalm'                     => '3.11.0',
+        'phpstan/phpstan'                 => '0.12.0',
+    ],
+];

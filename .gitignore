@@ -1,0 +1,5 @@
+/data/
+/vendor/
+!/data/.gitkeep
+composer.lock
+phpunit.xml

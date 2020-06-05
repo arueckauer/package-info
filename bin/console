@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+use PackageInfo\Command\CacheBuildCommand;
+use PackageInfo\Command\PackageInfoGetCommand;
+use PackageInfo\Command\PackageInfoListCommand;
+use PackageVersions\Versions;
+use Symfony\Component\Console\Application;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+call_user_func(static function() {
+    $container = require __DIR__ . '/../config/container.php';
+
+    $version = strstr(Versions::getVersion('arueckauer/package-info'), '@', true);
+    $application = new Application('arueckauer/package-info', $version);
+
+    $application->addCommands([
+        $container->get(CacheBuildCommand::class),
+        $container->get(PackageInfoGetCommand::class),
+        $container->get(PackageInfoListCommand::class),
+    ]);
+
+    $application->run();
+});
