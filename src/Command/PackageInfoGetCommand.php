@@ -79,6 +79,7 @@ class PackageInfoGetCommand extends Command
 
             $rows[] = [
                 'package'                  => $package->toString(),
+                'composer-package-name'    => $branch->getComposerPackageName(),
                 'branch'                   => $branch->getName(),
                 'requirements'             => implode("\n", $requirements),
                 'development-requirements' => implode("\n", $developmentRequirements),

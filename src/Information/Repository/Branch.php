@@ -15,6 +15,7 @@ use const JSON_THROW_ON_ERROR;
 class Branch
 {
     private string $name;
+    private string $composerPackageName    = '';
     private bool $composerJsonPresent      = false;
     private string $phpVersion             = 'Undefined';
     private array $requirements            = [];
@@ -40,6 +41,10 @@ class Branch
                 $composer = json_decode($composerJson, true, 512, JSON_THROW_ON_ERROR);
             } catch (JsonException $e) {
             }
+        }
+
+        if (isset($composer['name'])) {
+            $this->setComposerPackageName($composer['name']);
         }
 
         $requirements = [];
@@ -71,6 +76,16 @@ class Branch
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getComposerPackageName(): string
+    {
+        return $this->composerPackageName;
+    }
+
+    public function setComposerPackageName(string $composerPackageName): void
+    {
+        $this->composerPackageName = $composerPackageName;
     }
 
     public function isComposerJsonPresent(): bool
