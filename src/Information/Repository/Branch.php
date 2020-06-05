@@ -63,14 +63,6 @@ class Branch
         $this->setDevelopmentRequirements($developmentRequirements);
     }
 
-    public function toArray(): array
-    {
-        return [
-            'name'       => $this->getName(),
-            'phpVersion' => $this->getPhpVersion(),
-        ];
-    }
-
     public function getName(): string
     {
         return $this->name;

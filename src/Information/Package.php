@@ -61,17 +61,6 @@ class Package
         return $this->branches;
     }
 
-    public function getBranchesAsArray(): array
-    {
-        $branches = [];
-
-        foreach ($this->getBranches() as $branch) {
-            $branches[] = $branch->toArray();
-        }
-
-        return $branches;
-    }
-
     public function addBranch(Branch $branch): void
     {
         $this->branches[] = $branch;
