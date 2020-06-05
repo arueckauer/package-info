@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'auraphp',
+    ],
+    'ignore_repositories'      => [
+        'auraphp/bin',
+        'auraphp/Aura.Web_Project',
+        'auraphp/Aura.Cli_Project',
+        'auraphp/Aura.Framework_Project',
+        'auraphp/auraphp.github.com',
+        'auraphp/installer-default',
+        'auraphp/installer-system',
+    ],
+    'ignore_branches'          => [
+        'gh-pages',
+    ],
+    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'requirements'             => [
+        'php' => '7.2.0',
+    ],
+    'development_requirements' => [
+        'phpunit/phpunit' => '8.0.0',
+    ],
+];

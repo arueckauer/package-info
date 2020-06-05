@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'chubbyphp',
+    ],
+    'ignore_repositories'      => [
+        'chubbyphp/petstore-react',
+        'chubbyphp/petstore-vue',
+    ],
+    'ignore_branches'          => [],
+    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'requirements'             => [
+        'php' => '7.2.0',
+    ],
+    'development_requirements' => [
+        'infection/infection' => '0.16.0',
+        'phploc/phploc'       => '5.0.0',
+        'phpstan/phpstan'     => '0.12.0',
+        'phpunit/phpunit'     => '7.1.0',
+    ],
+];

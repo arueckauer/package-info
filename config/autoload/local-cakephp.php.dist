@@ -1,0 +1,45 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'cakephp',
+    ],
+    'ignore_repositories'      => [
+        'cakephp/api_generator',
+        'cakephp/cakephp-tmbundle',
+        'cakephp/old-cookbook',
+        'cakephp/old-bakery',
+        'cakephp/csfnavbar',
+        'cakephp/cakephp-netbeans',
+        'cakephp/CakeFest-2010-Workshop',
+        'cakephp/docs',
+        'cakephp/cakebot',
+        'cakephp/CakeFest-2012-Workshop',
+        'cakephp/bin.cakephp.org',
+        'cakephp/community.cakephp.org',
+        'cakephp/cakephp-api-docs',
+        'cakephp/bakery.cakephp.org',
+        'cakephp/code-of-conduct',
+        'cakephp/pear.cakephp.org',
+        'cakephp/ci.cakephp.org',
+        'cakephp/slackebot',
+        'cakephp/docs-theme',
+        'cakephp/cdn.cakephp.org',
+        'cakephp/sphinxtheme',
+        'cakephp/tutorials.cakephp.org',
+        'cakephp/docs-builder',
+        'cakephp/discord-slack-bridge',
+    ],
+    'ignore_branches'          => [],
+    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'requirements'             => [
+        'php' => '7.2.0',
+    ],
+    'development_requirements' => [
+        'cakephp/cakephp-codesniffer' => '4.0.0',
+        'phpunit/phpunit'             => '8.0.0',
+    ],
+];

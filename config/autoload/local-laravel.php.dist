@@ -1,0 +1,39 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'laravel',
+    ],
+    'ignore_repositories'      => [
+        'laravel/art',
+        'laravel/docs',
+        'laravel/settler',
+        'laravel/elixir',
+        'laravel/ideas',
+        'laravel/echo',
+        'laravel/nova-js',
+        'laravel/nova-docs',
+        'laravel/nova-issues',
+        'laravel/vapor-js',
+        'laravel/vapor-docs',
+        'laravel/vapor-cli',
+        'laravel/vapor-php-build',
+        'laravel/forge-docs',
+        'laravel/forge-database-backups',
+        'laravel/envoyer-docs',
+        'laravel/blog-contest-may-mayhem',
+        'laravel/spark-docs',
+        'laravel/lumen-docs',
+    ],
+    'ignore_branches'          => [],
+    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'requirements'             => [
+        'php' => '7.2.0',
+    ],
+    'development_requirements' => [
+        'phpunit/phpunit' => '8.0.0',
+    ],
+];

@@ -9,9 +9,9 @@ composer require arueckauer/package-info
 
 ## Configuration
 
-Copy `config\autoload\local.php.dist` to `config\autoload\local.php` and place your personal access token in `github_api_token`.
+The application comes with sample configurations for various PHP framework organizations. Copy one of the `config\autoload\local-*.dist` files to `config\autoload\local.php` and place your personal access token in `github_api_token`.
 
-The application is pre-configured with the packages of the Laminas organization. You can adjust the configuration according to your wishes.
+You can adjust the configuration according to your wishes.
 
 ### Configuration options
 

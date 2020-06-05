@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'slimphp',
+    ],
+    'ignore_repositories'      => [
+        'slimphp/Slim-Documentation',
+        'slimphp/Slim-Documentation-2.x',
+        'slimphp/Slim-Website',
+        'slimphp/Tutorial-First-Application',
+    ],
+    'ignore_branches'          => [],
+    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'requirements'             => [
+        'php' => '7.2.0',
+    ],
+    'development_requirements' => [
+        'phpstan/phpstan'           => '0.12.0',
+        'phpunit/phpunit'           => '7.1.0',
+        'squizlabs/php_codesniffer' => '3.5.0',
+    ],
+];

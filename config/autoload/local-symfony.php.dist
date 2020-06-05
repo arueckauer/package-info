@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'symfony',
+    ],
+    'ignore_repositories'      => [
+        'symfony/.github',
+        'symfony/apache-pack',
+        'symfony/binary-utils',
+        'symfony/cli',
+        'symfony/force-lowest',
+        'symfony/lts',
+        'symfony/marketing',
+        'symfony/orm-pack',
+        'symfony/recipes',
+        'symfony/recipes-contrib',
+        'symfony/symfony-docs',
+        'symfony/symfony1',
+        'symfony/symfony1-docs',
+        'symfony/symfony-hello-world',
+        'symfony/webpack-encore',
+        'symfony/webpack-encore-pack',
+    ],
+    'ignore_branches'          => [],
+    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'requirements'             => [
+        'php' => '7.2.0',
+    ],
+    'development_requirements' => [],
+];
