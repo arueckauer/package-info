@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PackageInfo\Command;
 
 use Github\Client;
+use Github\Exception\RuntimeException;
 use PackageInfo\Information\Package;
 use PackageInfo\Information\Repository\Branch;
+use PackageInfo\Information\Repository\File;
+use PackageInfo\Information\Repository\PullRequest;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,9 +19,16 @@ use function file_put_contents;
 use function in_array;
 use function serialize;
 use function sprintf;
+use function var_dump;
 
 class CacheBuildCommand extends Command
 {
+    public const OPTION_WITH_PULL_REQUESTS = 'with-pull-requests';
+    public const OPTION_WITH_PULL_REQUESTS_SHORT = 'wpr';
+    private const PULL_REQUEST_PARAMETERS = [
+        'state' => 'open',
+    ];
+
     private Client $client;
 
     private array $organizations;
@@ -48,7 +58,13 @@ class CacheBuildCommand extends Command
     public function configure(): void
     {
         $this->setName('cache:build')
-            ->setDescription('Caches package information for repositories of configured organization');
+            ->setDescription('Caches package information for repositories of configured organization')
+            ->addOption(
+                self::OPTION_WITH_PULL_REQUESTS,
+                self::OPTION_WITH_PULL_REQUESTS_SHORT,
+                null,
+                'Receives PRs aswell'
+            );
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
@@ -75,14 +91,15 @@ class CacheBuildCommand extends Command
                     continue;
                 }
 
-                $lastPackageName = null;
-                foreach ($this->client->repo()->branches($organization, $repository) as $branchArray) {
-                    if (in_array($branchArray['name'], $this->ignoreBranchNames, true)) {
-                        continue;
-                    }
+                $branches = $this->branches(
+                    $organization,
+                    $repository
+                );
+                $package->setBranches($branches);
 
-                    $branch = new Branch($organization, $repository, $branchArray['name']);
-                    $package->addBranch($branch);
+                if ($input->getOption(self::OPTION_WITH_PULL_REQUESTS)) {
+                    $pullRequests = $this->pullRequests($organization, $repository);
+                    $package->setPullRequests($pullRequests);
                 }
 
                 $packages[] = $package;
@@ -114,5 +131,70 @@ class CacheBuildCommand extends Command
         }
 
         return $repositories;
+    }
+
+    /**
+     * @psalm-return list<Branch>
+     */
+    private function branches(string $organization, string $repository): array
+    {
+        $branches = [];
+        foreach ($this->client->repo()->branches($organization, $repository) as $branchArray) {
+            if (in_array($branchArray['name'], $this->ignoreBranchNames, true)) {
+                continue;
+            }
+
+            $branches[] = new Branch($organization, $repository, $branchArray['name']);
+        }
+
+        return $branches;
+    }
+
+    /**
+     * @psalm-return list<PullRequest>
+     */
+    private function pullRequests(string $organization, string $repository): array
+    {
+        $pullRequestsFromGithub = $this->client
+            ->pullRequests()
+            ->all($organization, $repository, self::PULL_REQUEST_PARAMETERS);
+
+        $pullRequests = [];
+        foreach ($pullRequestsFromGithub as $pullRequest) {
+
+            $instance = new PullRequest(
+                $organization,
+                $repository,
+                    $pullRequest['number'],
+                $pullRequest['head']['label']
+            );
+
+            try {
+                $filesFromPullRequest = $this->client->pullRequests()->files(
+                    $instance->organization,
+                    $instance->repository,
+                    $instance->number
+                );
+            } catch (RuntimeException $exception) {
+                $filesFromPullRequest = [];
+            }
+
+            $files = [];
+            foreach ($filesFromPullRequest as $fileFromPullRequest) {
+                $files[] = new File($fileFromPullRequest['filename'], $fileFromPullRequest['raw_url']);
+            }
+
+            $instance = $instance->withFiles($files);
+
+            if (!$instance->hasComposerChanges()) {
+                continue;
+            }
+
+            $instance->resolveComposerDetails();
+
+            $pullRequests[] = $instance;
+        }
+
+        return $pullRequests;
     }
 }
