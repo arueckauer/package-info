@@ -76,8 +76,7 @@ class Requirement
         );
 
         $constraint    = $this->versionParser->parseConstraints($versionConstraint);
-        $lowerVersion  = $constraint->getLowerBound()->getVersion();
-        $isSupported   = Comparator::greaterThanOrEqualTo($lowerVersion, $minimumVersion);
+        $isSupported   = $constraint->matches($this->versionParser->parseConstraints($minimumVersion));
         $versionFormat = $isSupported === true ? 'info' : 'comment';
 
         return sprintf(
