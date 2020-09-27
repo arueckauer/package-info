@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PackageInfo\Information;
 
-use Github\Api\PullRequest;
 use PackageInfo\Information\Repository\Branch;
+use PackageInfo\Information\Repository\PullRequest;
 
 use function sprintf;
 

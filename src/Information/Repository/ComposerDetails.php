@@ -1,9 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PackageInfo\Information\Repository;
 
 use JsonException;
+
+use function file_get_contents;
+use function json_decode;
+
+use const JSON_THROW_ON_ERROR;
 
 final class ComposerDetails
 {
@@ -49,6 +55,46 @@ final class ComposerDetails
         }
 
         $this->developmentRequirements = $developmentRequirements;
-        $this->composerJsonPresent = $composerJsonPresent;
+        $this->composerJsonPresent     = $composerJsonPresent;
+    }
+
+    public function isComposerJsonPresent(): bool
+    {
+        return $this->composerJsonPresent;
+    }
+
+    public function getPhpVersion(): string
+    {
+        return $this->phpVersion;
+    }
+
+    public function getRequirements(): array
+    {
+        return $this->requirements;
+    }
+
+    public function getVersionConstraintOfRequirement(string $package): string
+    {
+        return $this->getRequirements()[$package];
+    }
+
+    public function hasRequirement(string $package): bool
+    {
+        return isset($this->getRequirements()[$package]);
+    }
+
+    public function getDevelopmentRequirements(): array
+    {
+        return $this->developmentRequirements;
+    }
+
+    public function getVersionConstraintOfDevelopmentRequirement(string $package): string
+    {
+        return $this->getDevelopmentRequirements()[$package];
+    }
+
+    public function hasDevelopmentRequirement(string $package): bool
+    {
+        return isset($this->getDevelopmentRequirements()[$package]);
     }
 }

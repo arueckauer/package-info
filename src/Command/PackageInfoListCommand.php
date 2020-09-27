@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_keys;
+use function array_pop;
 use function count;
 use function file_exists;
 use function file_get_contents;
@@ -58,26 +59,39 @@ class PackageInfoListCommand extends Command
         $rows = [];
 
         foreach ($packages as $key => $package) {
-            $lastPackageName = null;
             foreach ($package->getBranches() as $branch) {
-                if (0 !== $key && $lastPackageName !== $package->getRepository()) {
-                    $rows[] = new TableSeparator();
-                }
-
-                $requirements            = $this->requirement->parseRequirements($branch);
-                $developmentRequirements = $this->requirement->parseDevelopmentRequirements($branch);
+                $composerDetails         = $branch->composerDetails;
+                $requirements            = $this->requirement->parseRequirements($composerDetails);
+                $developmentRequirements = $this->requirement->parseDevelopmentRequirements($composerDetails);
 
                 $rows[] = [
                     'package'                  => $package->toString(),
-                    'composer-package-name'    => $branch->getComposerPackageName(),
-                    'branch'                   => $branch->getName(),
+                    'composer-package-name'    => $composerDetails->composerPackageName,
+                    'head'                     => $branch->getName(),
                     'requirements'             => implode("\n", $requirements),
                     'development-requirements' => implode("\n", $developmentRequirements),
                 ];
-
-                $lastPackageName = $package->getRepository();
             }
+
+            foreach ($package->getPullRequests() as $pullRequest) {
+                $composerDetails         = $pullRequest->composerDetails;
+                $requirements            = $this->requirement->parseRequirements($composerDetails);
+                $developmentRequirements = $this->requirement->parseDevelopmentRequirements($composerDetails);
+
+                $rows[] = [
+                    'package'                  => $package->toString(),
+                    'composer-package-name'    => $composerDetails->composerPackageName,
+                    'head'                     => $pullRequest->head,
+                    'requirements'             => implode("\n", $requirements),
+                    'development-requirements' => implode("\n", $developmentRequirements),
+                ];
+            }
+
+            $rows[] = new TableSeparator();
         }
+
+        // Remove last table separator
+        array_pop($rows);
 
         $table = new Table($output);
         $table

@@ -1,9 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PackageInfo\Information\Repository;
 
 use PackageInfo\Information\Exception\UnableToSerializeException;
+
+use function array_keys;
 use function get_class_vars;
 
 final class PullRequest
@@ -20,9 +23,7 @@ final class PullRequest
 
     private bool $resolved = false;
 
-    /**
-     * @var File[]
-     */
+    /** @var File[] */
     public array $files = [];
 
     public ComposerDetails $composerDetails;
@@ -30,9 +31,9 @@ final class PullRequest
     public function __construct(string $organization, string $repository, int $number, string $head)
     {
         $this->organization = $organization;
-        $this->repository = $repository;
-        $this->number = $number;
-        $this->head = $head;
+        $this->repository   = $repository;
+        $this->number       = $number;
+        $this->head         = $head;
     }
 
     public function hasComposerChanges(): bool
@@ -42,17 +43,17 @@ final class PullRequest
 
     public function __sleep()
     {
-        if (!$this->resolved) {
+        if (! $this->resolved) {
             throw UnableToSerializeException::fromUnresolvedPullRequest();
         }
 
-        return array_keys(get_class_vars(__CLASS__));
+        return array_keys(get_class_vars(self::class));
     }
 
     public function resolveComposerDetails(): void
     {
         $this->resolved = true;
-        $composerJson = $this->getComposerJsonFile();
+        $composerJson   = $this->getComposerJsonFile();
         if ($composerJson === null) {
             return;
         }
@@ -76,7 +77,7 @@ final class PullRequest
      */
     public function withFiles(array $files): self
     {
-        $instance = clone $this;
+        $instance        = clone $this;
         $instance->files = $files;
         return $instance;
     }

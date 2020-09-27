@@ -6,7 +6,7 @@ namespace PackageInfo\Information;
 
 use Composer\Semver\Comparator;
 use Composer\Semver\VersionParser;
-use PackageInfo\Information\Repository\Branch;
+use PackageInfo\Information\Repository\ComposerDetails;
 
 use function sprintf;
 
@@ -25,13 +25,13 @@ class Requirement
         $this->developmentRequirements = $developmentRequirements;
     }
 
-    public function parseRequirements(Branch $branch): array
+    public function parseRequirements(ComposerDetails $composerDetails): array
     {
         $requirements = [];
 
         foreach ($this->requirements as $requiredPackage => $lowestRequiredVersion) {
             $requirements[] = $this->parse(
-                $branch,
+                $composerDetails,
                 $requiredPackage,
                 $lowestRequiredVersion
             );
@@ -40,13 +40,13 @@ class Requirement
         return $requirements;
     }
 
-    public function parseDevelopmentRequirements(Branch $branch): array
+    public function parseDevelopmentRequirements(ComposerDetails $composerDetails): array
     {
         $requirements = [];
 
         foreach ($this->developmentRequirements as $requiredPackage => $lowestRequiredVersion) {
             $requirements[] = $this->parse(
-                $branch,
+                $composerDetails,
                 $requiredPackage,
                 $lowestRequiredVersion,
                 true
@@ -57,31 +57,28 @@ class Requirement
     }
 
     private function parse(
-        Branch $branch,
+        ComposerDetails $composerDetails,
         string $package,
         string $minimumVersion,
         bool $development = false
     ): string {
-        if (false === $development) {
-            $hasRequirementMethod    = 'hasRequirement';
-            $versionConstraintGetter = 'getVersionConstraintOfRequirement';
-        } else {
-            $hasRequirementMethod    = 'hasDevelopmentRequirement';
-            $versionConstraintGetter = 'getVersionConstraintOfDevelopmentRequirement';
-        }
-
-        if (! $branch->$hasRequirementMethod($package)) {
+        if (! $this->hasRequirement($composerDetails, $package, $development)) {
             return sprintf(
                 '%s: <error>n/a</error>',
                 $package
             );
         }
 
-        $versionConstraint = $branch->$versionConstraintGetter($package);
-        $constraint        = $this->versionParser->parseConstraints($versionConstraint);
-        $lowerVersion      = $constraint->getLowerBound()->getVersion();
-        $isSupported       = Comparator::greaterThanOrEqualTo($lowerVersion, $minimumVersion);
-        $versionFormat     = $isSupported === true ? 'info' : 'comment';
+        $versionConstraint = $this->versionConstraint(
+            $composerDetails,
+            $package,
+            $development
+        );
+
+        $constraint    = $this->versionParser->parseConstraints($versionConstraint);
+        $lowerVersion  = $constraint->getLowerBound()->getVersion();
+        $isSupported   = Comparator::greaterThanOrEqualTo($lowerVersion, $minimumVersion);
+        $versionFormat = $isSupported === true ? 'info' : 'comment';
 
         return sprintf(
             '%1$s: <%3$s>%2$s</%3$s>',
@@ -89,5 +86,23 @@ class Requirement
             $versionConstraint,
             $versionFormat
         );
+    }
+
+    private function hasRequirement(ComposerDetails $composerDetails, string $package, bool $development): bool
+    {
+        if (false === $development) {
+            return $composerDetails->hasRequirement($package);
+        }
+
+        return $composerDetails->hasDevelopmentRequirement($package);
+    }
+
+    private function versionConstraint(ComposerDetails $composerDetails, string $package, bool $development): string
+    {
+        if (false === $development) {
+            return $composerDetails->getVersionConstraintOfRequirement($package);
+        }
+
+        return $composerDetails->getVersionConstraintOfDevelopmentRequirement($package);
     }
 }

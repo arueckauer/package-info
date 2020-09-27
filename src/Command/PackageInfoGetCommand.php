@@ -7,6 +7,7 @@ namespace PackageInfo\Command;
 use PackageInfo\Command\Exception\CacheNotFoundException;
 use PackageInfo\Command\Exception\PackageNotFoundException;
 use PackageInfo\Information\Package;
+use PackageInfo\Information\Repository\ComposerDetails;
 use PackageInfo\Information\Requirement;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -74,16 +75,13 @@ class PackageInfoGetCommand extends Command
         $rows = [];
 
         foreach ($package->getBranches() as $branch) {
-            $requirements            = $this->requirement->parseRequirements($branch);
-            $developmentRequirements = $this->requirement->parseDevelopmentRequirements($branch);
+            $details = $branch->composerDetails;
+            $rows[]  = $this->row($package, $details, $branch->getName());
+        }
 
-            $rows[] = [
-                'package'                  => $package->toString(),
-                'composer-package-name'    => $branch->getComposerPackageName(),
-                'branch'                   => $branch->getName(),
-                'requirements'             => implode("\n", $requirements),
-                'development-requirements' => implode("\n", $developmentRequirements),
-            ];
+        foreach ($package->getPullRequests() as $pullRequest) {
+            $details = $pullRequest->composerDetails;
+            $rows[]  = $this->row($package, $details, $pullRequest->head);
         }
 
         $table = new Table($output);
@@ -93,5 +91,19 @@ class PackageInfoGetCommand extends Command
             ->render();
 
         return 0;
+    }
+
+    private function row(Package $package, ComposerDetails $details, string $head): array
+    {
+        $requirements            = $this->requirement->parseRequirements($details);
+        $developmentRequirements = $this->requirement->parseDevelopmentRequirements($details);
+
+        return [
+            'package'                  => $package->toString(),
+            'composer-package-name'    => $details->composerPackageName,
+            'head'                     => $head,
+            'requirements'             => implode("\n", $requirements),
+            'development-requirements' => implode("\n", $developmentRequirements),
+        ];
     }
 }

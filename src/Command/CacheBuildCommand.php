@@ -19,13 +19,12 @@ use function file_put_contents;
 use function in_array;
 use function serialize;
 use function sprintf;
-use function var_dump;
 
 class CacheBuildCommand extends Command
 {
-    public const OPTION_WITH_PULL_REQUESTS = 'with-pull-requests';
+    public const OPTION_WITH_PULL_REQUESTS       = 'with-pull-requests';
     public const OPTION_WITH_PULL_REQUESTS_SHORT = 'wpr';
-    private const PULL_REQUEST_PARAMETERS = [
+    private const PULL_REQUEST_PARAMETERS        = [
         'state' => 'open',
     ];
 
@@ -161,11 +160,10 @@ class CacheBuildCommand extends Command
 
         $pullRequests = [];
         foreach ($pullRequestsFromGithub as $pullRequest) {
-
             $instance = new PullRequest(
                 $organization,
                 $repository,
-                    $pullRequest['number'],
+                $pullRequest['number'],
                 $pullRequest['head']['label']
             );
 
@@ -186,7 +184,7 @@ class CacheBuildCommand extends Command
 
             $instance = $instance->withFiles($files);
 
-            if (!$instance->hasComposerChanges()) {
+            if (! $instance->hasComposerChanges()) {
                 continue;
             }
 
