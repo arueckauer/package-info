@@ -19,13 +19,18 @@ use function array_pop;
 use function count;
 use function file_exists;
 use function file_get_contents;
-use function implode;
+use function is_array;
+use function rtrim;
 use function sprintf;
 use function unserialize;
+
 use const PHP_EOL;
 
 final class PackageInfoListNonMatchingRequirementsCommand extends Command
 {
+    public const OPTION_PACKAGE_NAMES_ONLY       = 'package-names-only';
+    public const OPTION_PACKAGE_NAMES_ONLY_SHORT = 'o';
+
     private string $cacheFilePath;
 
     private Requirement $requirement;
@@ -41,7 +46,13 @@ final class PackageInfoListNonMatchingRequirementsCommand extends Command
     public function configure(): void
     {
         $this->setName('package-info:list-non-matching-requirements')
-            ->setDescription('List all package information');
+            ->setDescription('List all package information')
+            ->addOption(
+                self::OPTION_PACKAGE_NAMES_ONLY,
+                self::OPTION_PACKAGE_NAMES_ONLY_SHORT,
+                null,
+                'List only package names instead of a full table.'
+            );
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
@@ -54,23 +65,25 @@ final class PackageInfoListNonMatchingRequirementsCommand extends Command
         /*** @var Package[] $packages */
         $packages = unserialize($cacheContent, [false]);
 
-        $output->writeln(sprintf(
-            '<comment>Showing information for <info>%s</info> packages</comment>',
-            count($packages)
-        ));
+        if (! $input->getOption(self::OPTION_PACKAGE_NAMES_ONLY)) {
+            $output->writeln(sprintf(
+                '<comment>Showing information for <info>%s</info> packages</comment>',
+                count($packages)
+            ));
+        }
+
         $rows = [];
 
         foreach ($packages as $key => $package) {
             [$unmatchedRequirements, $unmatchedDevelopmentRequirements] = $this->unmatchedRequirements($package);
-
 
             if ($unmatchedRequirements === [] && $unmatchedDevelopmentRequirements === []) {
                 continue;
             }
 
             $rows[] = [
-                'package' => $package->toString(),
-                'requirements' => $this->requirementsToString($unmatchedRequirements),
+                'package'                  => $package->toString(),
+                'requirements'             => $this->requirementsToString($unmatchedRequirements),
                 'development requirements' => $this->requirementsToString($unmatchedDevelopmentRequirements),
             ];
 
@@ -79,6 +92,11 @@ final class PackageInfoListNonMatchingRequirementsCommand extends Command
 
         // Remove last table separator
         array_pop($rows);
+
+        if ($input->getOption(self::OPTION_PACKAGE_NAMES_ONLY)) {
+            $output->writeln($this->renderPackagesOnly($rows));
+            return 0;
+        }
 
         $table = new Table($output);
         $table
@@ -132,5 +150,19 @@ final class PackageInfoListNonMatchingRequirementsCommand extends Command
         }
 
         return rtrim($requirements);
+    }
+
+    private function renderPackagesOnly(array $rows): string
+    {
+        $packages = "";
+        foreach ($rows as $row) {
+            if (! is_array($row) || ! isset($row['package'])) {
+                continue;
+            }
+
+            $packages .= $row['package'] . " ";
+        }
+
+        return rtrim($packages);
     }
 }
