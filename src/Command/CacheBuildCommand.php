@@ -23,7 +23,7 @@ use function sprintf;
 class CacheBuildCommand extends Command
 {
     public const OPTION_WITH_PULL_REQUESTS       = 'with-pull-requests';
-    public const OPTION_WITH_PULL_REQUESTS_SHORT = 'wpr';
+    public const OPTION_WITH_PULL_REQUESTS_SHORT = 'p';
     private const PULL_REQUEST_PARAMETERS        = [
         'state' => 'open',
     ];
