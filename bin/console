@@ -4,6 +4,7 @@
 use PackageInfo\Command\CacheBuildCommand;
 use PackageInfo\Command\PackageInfoGetCommand;
 use PackageInfo\Command\PackageInfoListCommand;
+use PackageInfo\Command\PackageInfoListNonMatchingRequirementsCommand;
 use PackageVersions\Versions;
 use Symfony\Component\Console\Application;
 
@@ -19,6 +20,7 @@ call_user_func(static function() {
         $container->get(CacheBuildCommand::class),
         $container->get(PackageInfoGetCommand::class),
         $container->get(PackageInfoListCommand::class),
+        $container->get(PackageInfoListNonMatchingRequirementsCommand::class),
     ]);
 
     $application->run();

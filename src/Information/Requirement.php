@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PackageInfo\Information;
 
-use Composer\Semver\Comparator;
 use Composer\Semver\VersionParser;
 use PackageInfo\Information\Repository\ComposerDetails;
 
@@ -40,22 +39,6 @@ class Requirement
         return $requirements;
     }
 
-    public function parseDevelopmentRequirements(ComposerDetails $composerDetails): array
-    {
-        $requirements = [];
-
-        foreach ($this->developmentRequirements as $requiredPackage => $lowestRequiredVersion) {
-            $requirements[] = $this->parse(
-                $composerDetails,
-                $requiredPackage,
-                $lowestRequiredVersion,
-                true
-            );
-        }
-
-        return $requirements;
-    }
-
     private function parse(
         ComposerDetails $composerDetails,
         string $package,
@@ -75,8 +58,11 @@ class Requirement
             $development
         );
 
-        $constraint    = $this->versionParser->parseConstraints($versionConstraint);
-        $isSupported   = $constraint->matches($this->versionParser->parseConstraints($minimumVersion));
+        $isSupported = $this->minimumVersionSupported(
+            $versionConstraint,
+            $minimumVersion
+        );
+
         $versionFormat = $isSupported === true ? 'info' : 'comment';
 
         return sprintf(
@@ -103,5 +89,98 @@ class Requirement
         }
 
         return $composerDetails->getVersionConstraintOfDevelopmentRequirement($package);
+    }
+
+    private function minimumVersionSupported(
+        string $versionConstraint,
+        string $version
+    ): bool {
+        $constraint = $this->versionParser->parseConstraints($versionConstraint);
+
+        return $constraint->matches($this->versionParser->parseConstraints($version));
+    }
+
+    public function unmatchedRequirements(ComposerDetails $composerDetails): array
+    {
+        $unmatchedRequirements = [];
+        foreach ($this->requirements as $requiredPackage => $lowestRequiredVersion) {
+            if (! $this->hasRequirement($composerDetails, $requiredPackage, false)) {
+                $unmatchedRequirements[$requiredPackage] = $lowestRequiredVersion;
+                continue;
+            }
+
+            $versionConstraint = $this->versionConstraint(
+                $composerDetails,
+                $requiredPackage,
+                false
+            );
+
+            if (
+                ! $this->minimumVersionSupported(
+                    $versionConstraint,
+                    $lowestRequiredVersion
+                )
+            ) {
+                $unmatchedRequirements[$requiredPackage] = $lowestRequiredVersion;
+                continue;
+            }
+        }
+
+        return $unmatchedRequirements;
+    }
+
+    public function ummatchedDevelopmentRequirements(ComposerDetails $composerDetails): array
+    {
+        $unmatchedRequirements = [];
+        foreach ($this->developmentRequirements as $requiredPackage => $lowestRequiredVersion) {
+            if (! $this->hasRequirement($composerDetails, $requiredPackage, true)) {
+                $unmatchedRequirements[$requiredPackage] = $lowestRequiredVersion;
+                continue;
+            }
+
+            $versionConstraint = $this->versionConstraint(
+                $composerDetails,
+                $requiredPackage,
+                true
+            );
+
+            if (
+                ! $this->minimumVersionSupported(
+                    $versionConstraint,
+                    $lowestRequiredVersion
+                )
+            ) {
+                $unmatchedRequirements[$requiredPackage] = $lowestRequiredVersion;
+                continue;
+            }
+        }
+
+        return $unmatchedRequirements;
+    }
+
+    public function parseDevelopmentRequirements(ComposerDetails $composerDetails): array
+    {
+        $requirements = [];
+
+        foreach ($this->developmentRequirements as $requiredPackage => $lowestRequiredVersion) {
+            $requirements[] = $this->parse(
+                $composerDetails,
+                $requiredPackage,
+                $lowestRequiredVersion,
+                true
+            );
+        }
+
+        return $requirements;
+    }
+
+    public function requirements(): array
+    {
+        return $this->requirements;
+    }
+
+    public function developmentRequirements(): array
+    {
+        return $this->developmentRequirements;
     }
 }

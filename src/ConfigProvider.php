@@ -11,6 +11,8 @@ use PackageInfo\Command\PackageInfoGetCommand;
 use PackageInfo\Command\PackageInfoGetCommandFactory;
 use PackageInfo\Command\PackageInfoListCommand;
 use PackageInfo\Command\PackageInfoListCommandFactory;
+use PackageInfo\Command\PackageInfoListNonMatchingRequirementsCommand;
+use PackageInfo\Command\PackageInfoListNonMatchingRequirementsCommandFactory;
 use PackageInfo\Information\Requirement;
 use PackageInfo\Information\RequirementFactory;
 
@@ -25,7 +27,9 @@ class ConfigProvider
                     CacheBuildCommand::class      => CacheBuildCommandFactory::class,
                     PackageInfoGetCommand::class  => PackageInfoGetCommandFactory::class,
                     PackageInfoListCommand::class => PackageInfoListCommandFactory::class,
-                    Requirement::class            => RequirementFactory::class,
+                    PackageInfoListNonMatchingRequirementsCommand::class
+                        => PackageInfoListNonMatchingRequirementsCommandFactory::class,
+                    Requirement::class => RequirementFactory::class,
                 ],
             ],
         ];
