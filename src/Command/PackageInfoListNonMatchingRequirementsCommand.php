@@ -6,6 +6,7 @@ namespace PackageInfo\Command;
 
 use PackageInfo\Command\Exception\CacheNotFoundException;
 use PackageInfo\Information\Package;
+use PackageInfo\Information\Repository\ComposerDetails;
 use PackageInfo\Information\Requirement;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -13,7 +14,7 @@ use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use function array_diff_key;
+use function array_intersect_key;
 use function array_keys;
 use function array_pop;
 use function count;
@@ -95,12 +96,13 @@ final class PackageInfoListNonMatchingRequirementsCommand extends Command
 
         if ($input->getOption(self::OPTION_PACKAGE_NAMES_ONLY)) {
             $output->writeln($this->renderPackagesOnly($rows));
+
             return 0;
         }
 
         $table = new Table($output);
         $table
-            ->setHeaders(array_keys($rows[0]))
+            ->setHeaders(array_keys($rows[0] ?? []))
             ->setRows($rows)
             ->render();
 
@@ -111,35 +113,66 @@ final class PackageInfoListNonMatchingRequirementsCommand extends Command
     {
         // First, assume all as unmatched
         $unmatchedRequirements            = $this->requirement->requirements();
-        $ummatchedDevelopmentRequirements = $this->requirement->developmentRequirements();
+        $unmatchedDevelopmentRequirements = $this->requirement->developmentRequirements();
 
         foreach ($package->getBranches() as $branch) {
-            $composerDetails                           = $branch->composerDetails;
-            $unmatchedRequirementsForBranch            = $this->requirement->unmatchedRequirements($composerDetails);
-            $ummatchedDevelopmentRequirementsForBranch = $this->requirement->ummatchedDevelopmentRequirements($composerDetails);
+            $composerDetails = $branch->composerDetails;
+            [
+                $unmatchedRequirements,
+                $unmatchedDevelopmentRequirements,
+            ]                = $this->detectUnmatchedRequirements(
+                $composerDetails,
+                $unmatchedRequirements,
+                $unmatchedDevelopmentRequirements
+            );
 
-            $unmatchedRequirements            = array_diff_key($unmatchedRequirementsForBranch, $unmatchedRequirements);
-            $ummatchedDevelopmentRequirements = array_diff_key($ummatchedDevelopmentRequirementsForBranch, $ummatchedDevelopmentRequirements);
-
-            if ($unmatchedRequirements === [] && $unmatchedRequirementsForBranch === []) {
+            if ($unmatchedRequirements === [] && $unmatchedDevelopmentRequirements === []) {
                 return [[], []];
             }
         }
 
         foreach ($package->getPullRequests() as $pullRequest) {
-            $composerDetails                           = $pullRequest->composerDetails;
-            $unmatchedRequirementsForBranch            = $this->requirement->unmatchedRequirements($composerDetails);
-            $ummatchedDevelopmentRequirementsForBranch = $this->requirement->ummatchedDevelopmentRequirements($composerDetails);
+            $composerDetails = $pullRequest->composerDetails;
 
-            $unmatchedRequirements            = array_diff_key($unmatchedRequirementsForBranch, $unmatchedRequirements);
-            $ummatchedDevelopmentRequirements = array_diff_key($ummatchedDevelopmentRequirementsForBranch, $ummatchedDevelopmentRequirements);
+            [
+                $unmatchedRequirements,
+                $unmatchedDevelopmentRequirements,
+            ] = $this->detectUnmatchedRequirements(
+                $composerDetails,
+                $unmatchedRequirements,
+                $unmatchedDevelopmentRequirements
+            );
 
-            if ($unmatchedRequirements && $ummatchedDevelopmentRequirements) {
+            if ($unmatchedRequirements === [] && $unmatchedDevelopmentRequirements === []) {
                 return [[], []];
             }
         }
 
-        return [$unmatchedRequirements, $ummatchedDevelopmentRequirements];
+        return [$unmatchedRequirements, $unmatchedDevelopmentRequirements];
+    }
+
+    private function detectUnmatchedRequirements(
+        ComposerDetails $composerDetails,
+        array $unmatchedRequirements,
+        array $unmatchedDevelopmentRequirements
+    ) {
+        if ($unmatchedRequirements !== []) {
+            $unmatchedRequirementsForBranch = $this->requirement->unmatchedRequirements($composerDetails);
+            $unmatchedRequirements          = array_intersect_key(
+                $unmatchedRequirementsForBranch,
+                $unmatchedRequirements
+            );
+        }
+
+        if ($unmatchedDevelopmentRequirements !== []) {
+            $unmatchedDevelopmentRequirementsForBranch = $this->requirement->ummatchedDevelopmentRequirements($composerDetails);
+            $unmatchedDevelopmentRequirements          = array_intersect_key(
+                $unmatchedDevelopmentRequirements,
+                $unmatchedDevelopmentRequirementsForBranch
+            );
+        }
+
+        return [$unmatchedRequirements, $unmatchedDevelopmentRequirements];
     }
 
     private function requirementsToString(array $unmatchedRequirements): string
