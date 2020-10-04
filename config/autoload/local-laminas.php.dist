@@ -17,6 +17,8 @@ return [
         'laminas/technical-steering-committee',
         'laminas/tutorials',
         'laminas/twitter-automation',
+        'laminas/getlaminas.org',
+        'laminas/laminas.dev',
         'laminas-api-tools/.github',
         'mezzio/.github',
         'mezzio/mezzio.dev',
