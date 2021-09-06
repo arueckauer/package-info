@@ -7,10 +7,10 @@ use PackageInfo\Command\PackageInfoListCommand;
 use PackageVersions\Versions;
 use Symfony\Component\Console\Application;
 
-require __DIR__ . '/../vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 call_user_func(static function() {
-    $container = require __DIR__ . '/../config/container.php';
+    $container = require dirname(__DIR__) . '/config/container.php';
 
     $version = strstr(Versions::getVersion('arueckauer/package-info'), '@', true);
     $application = new Application('arueckauer/package-info', $version);
