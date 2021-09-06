@@ -34,7 +34,7 @@ return [
         'cakephp/discord-slack-bridge',
     ],
     'ignore_branches'          => [],
-    'cache_file_path'          => __DIR__ . '/../../data/packages.cache',
+    'cache_file_path'          => dirname(__DIR__, 2) . '/data/packages.cache',
     'requirements'             => [
         'php' => '7.2.0',
     ],
