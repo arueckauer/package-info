@@ -15,7 +15,7 @@ class GithubClientFactory
         $client->authenticate(
             $container->get('config')['github_api_token'],
             null,
-            Client::AUTH_HTTP_TOKEN
+            Client::AUTH_ACCESS_TOKEN
         );
 
         return $client;
