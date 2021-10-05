@@ -79,9 +79,12 @@ class PackageInfoListCommand extends Command
             }
         }
 
+        /** @psalm-var array<int, string> $firstRow */
+        $firstRow = $rows[0];
+
         $table = new Table($output);
         $table
-            ->setHeaders(array_keys($rows[0]))
+            ->setHeaders(array_keys($firstRow))
             ->setRows($rows)
             ->render();
 
