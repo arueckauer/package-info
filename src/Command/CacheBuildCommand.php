@@ -65,7 +65,7 @@ class CacheBuildCommand extends Command
 
             $progressBar = new ProgressBar($output);
 
-            foreach ($progressBar->iterate($repositories) as $key => $repository) {
+            foreach ($progressBar->iterate($repositories) as $repository) {
                 $package = new Package(
                     $organization,
                     $repository
