@@ -22,7 +22,6 @@ class ConfigProviderTest extends TestCase
         $configProvider = new ConfigProvider();
         $config         = $configProvider();
 
-        $this->assertIsArray($config);
         $this->assertArrayHasKey('dependencies', $config);
         $this->assertIsArray($config['dependencies']);
         $this->assertArrayHasKey('factories', $config['dependencies']);
