@@ -75,7 +75,6 @@ class CacheBuildCommand extends Command
                     continue;
                 }
 
-                $lastPackageName = null;
                 foreach ($this->client->repo()->branches($organization, $repository) as $branchArray) {
                     if (in_array($branchArray['name'], $this->ignoreBranchNames, true)) {
                         continue;
