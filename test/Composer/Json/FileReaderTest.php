@@ -16,7 +16,7 @@ class FileReaderTest extends TestCase
     /**
      * @covers \PackageInfo\Composer\Json\FileReader::__invoke
      */
-    public function test___invoke(): void
+    public function test__invoke(): void
     {
         $expected = [
             'name'        => 'millennial-falcon/hyperdrive',

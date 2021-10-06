@@ -37,7 +37,7 @@ class UrlComposerTest extends TestCase
      * @covers \PackageInfo\Composer\Json\UrlComposer::__invoke
      * @dataProvider urls
      */
-    public function test___invoke(
+    public function test__invoke(
         string $expected,
         string $owner,
         string $repository,
