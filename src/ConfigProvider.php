@@ -13,6 +13,8 @@ use PackageInfo\Command\PackageInfoListCommand;
 use PackageInfo\Command\PackageInfoListCommandFactory;
 use PackageInfo\Information\Requirement;
 use PackageInfo\Information\RequirementFactory;
+use PackageInfo\Requirement\Version\Check;
+use PackageInfo\Requirement\Version\CheckFactory;
 
 class ConfigProvider
 {
@@ -21,6 +23,7 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
+                    Check::class                  => CheckFactory::class,
                     Client::class                 => GithubClientFactory::class,
                     CacheBuildCommand::class      => CacheBuildCommandFactory::class,
                     PackageInfoGetCommand::class  => PackageInfoGetCommandFactory::class,
