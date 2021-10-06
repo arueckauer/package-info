@@ -1,7 +1,12 @@
 {
     "name": "arueckauer/package-info",
     "type": "project",
-    "description": "Verifying requirements of composer packages of a GitHub organization",
+    "description": "Verifying composer packages requirements of GitHub organizations",
+    "keywords": [
+        "composer",
+        "github",
+        "github-api"
+    ],
     "homepage": "https://github.com/arueckauer/package-info",
     "license": "BSD-3-Clause",
     "authors": [
