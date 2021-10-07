@@ -5,24 +5,34 @@ declare(strict_types=1);
 namespace PackageInfo\Output\Table;
 
 use PackageInfo\Repository\Head;
-use PackageInfo\Requirement;
+use PackageInfo\Requirement\Checker;
+use PackageInfo\Requirement\Renderer;
 
 use function implode;
 use function var_export;
 
 class Row
 {
-    private Requirement $requirement;
+    private Checker $checker;
+    private Renderer $renderer;
 
-    public function __construct(Requirement $requirement)
+    public function __construct(Checker $checker, Renderer $renderer)
     {
-        $this->requirement = $requirement;
+        $this->checker  = $checker;
+        $this->renderer = $renderer;
     }
 
     public function __invoke(string $packageName, Head $head): array
     {
-        $requirements            = $this->requirement->parseRequirements($head);
-        $developmentRequirements = $this->requirement->parseDevelopmentRequirements($head);
+        $requirements = [];
+        foreach ($this->checker->checkRequirements($head) as $result) {
+            $requirements[] = ($this->renderer)($result);
+        }
+
+        $developmentRequirements = [];
+        foreach ($this->checker->checkDevelopmentRequirements($head) as $result) {
+            $developmentRequirements[] = ($this->renderer)($result);
+        }
 
         return [
             'Organization/Repository' => $packageName,

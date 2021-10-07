@@ -6,7 +6,9 @@ namespace PackageInfoTest\Output\Table;
 
 use PackageInfo\Output\Table\Row;
 use PackageInfo\Repository\Head;
-use PackageInfo\Requirement;
+use PackageInfo\Requirement\Check\Result;
+use PackageInfo\Requirement\Checker;
+use PackageInfo\Requirement\Renderer;
 use PHPUnit\Framework\TestCase;
 
 class RowTest extends TestCase
@@ -22,23 +24,41 @@ class RowTest extends TestCase
             'Head Type'               => 'branch',
             'Head Name'               => 'main',
             'composer.json present'   => 'true',
-            'Requirements'            => 'millennial-falcon/hyperdrive:^1.0',
-            'Dev Requirements'        => "starship/builder:^7.5\ndroid/build:^9.8",
+            'Requirements'            => 'millennial-falcon/hyperdrive: <info>^1.1</info>',
+            'Dev Requirements'        => "starship/builder: <info>~7.6.3</info>\ndroid/build: <info>9.9.9</info>",
         ];
 
-        $requirement = $this->createMock(Requirement::class);
+        $checker = $this->createMock(Checker::class);
 
-        $requirement
+        $resultA                    = new Result();
+        $resultA->requirementName   = 'millennial-falcon/hyperdrive';
+        $resultA->hasRequirement    = true;
+        $resultA->versionConstraint = '^1.1';
+        $resultA->isSupported       = true;
+
+        $checker
             ->expects(self::once())
-            ->method('parseRequirements')
-            ->willReturn(['millennial-falcon/hyperdrive:^1.0']);
+            ->method('checkRequirements')
+            ->willReturn([$resultA]);
 
-        $requirement
+        $resultB                    = new Result();
+        $resultB->requirementName   = 'starship/builder';
+        $resultB->hasRequirement    = true;
+        $resultB->versionConstraint = '~7.6.3';
+        $resultB->isSupported       = true;
+
+        $resultC                    = new Result();
+        $resultC->requirementName   = 'droid/build';
+        $resultC->hasRequirement    = true;
+        $resultC->versionConstraint = '9.9.9';
+        $resultC->isSupported       = true;
+
+        $checker
             ->expects(self::once())
-            ->method('parseDevelopmentRequirements')
-            ->willReturn(['starship/builder:^7.5', 'droid/build:^9.8']);
+            ->method('checkDevelopmentRequirements')
+            ->willReturn([$resultB, $resultC]);
 
-        $row = new Row($requirement);
+        $row = new Row($checker, new Renderer());
 
         $head                          = new Head();
         $head->packageName             = 'millennial-falcon/ship';
