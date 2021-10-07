@@ -11,8 +11,6 @@ use PackageInfo\Command\PackageInfoGetCommand;
 use PackageInfo\Command\PackageInfoGetCommandFactory;
 use PackageInfo\Command\PackageInfoListCommand;
 use PackageInfo\Command\PackageInfoListCommandFactory;
-use PackageInfo\Information\Requirement;
-use PackageInfo\Information\RequirementFactory;
 use PackageInfo\Output\Table\Row;
 use PackageInfo\Output\Table\RowFactory;
 use PackageInfo\PackageContainer\Cache;

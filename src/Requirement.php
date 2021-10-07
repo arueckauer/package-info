@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PackageInfo\Information;
+namespace PackageInfo;
 
 use PackageInfo\Repository\Head;
 use PackageInfo\Requirement\Version\Check;
