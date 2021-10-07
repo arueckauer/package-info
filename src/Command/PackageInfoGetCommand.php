@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PackageInfo\Command;
 
-use PackageInfo\Command\Exception\CacheNotFoundException;
 use PackageInfo\Command\Exception\PackageNotFoundException;
-use PackageInfo\Information\Package;
-use PackageInfo\Information\Requirement;
+use PackageInfo\Output\Table\Row;
+use PackageInfo\PackageContainer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,39 +14,30 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_keys;
-use function file_exists;
-use function file_get_contents;
-use function implode;
 use function sprintf;
-use function unserialize;
 
 class PackageInfoGetCommand extends Command
 {
-    private string $cacheFilePath;
+    private PackageContainer $packageContainer;
+    private Row $row;
 
-    private Requirement $requirement;
-
-    public function __construct(string $cacheFilePath, Requirement $requirement)
+    public function __construct(PackageContainer $packageContainer, Row $row)
     {
-        $this->cacheFilePath = $cacheFilePath;
-        $this->requirement   = $requirement;
+        $this->packageContainer = $packageContainer;
+        $this->row              = $row;
 
         parent::__construct();
     }
 
     public function configure(): void
     {
-        $this->setName('package-info:get')
-            ->setDescription('List all package information for given package')
-            ->addArgument('package-name', InputArgument::REQUIRED, 'Name of the package (vendor/project)');
+        $this->setName('package-info:get');
+        $this->setDescription('List all package information for given package');
+        $this->addArgument('package-name', InputArgument::REQUIRED, 'Name of the package (vendor/project)');
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (! file_exists($this->cacheFilePath)) {
-            throw CacheNotFoundException::byFilename($this->cacheFilePath);
-        }
-
         $packageName = $input->getArgument('package-name');
 
         $output->writeln(sprintf(
@@ -55,35 +45,15 @@ class PackageInfoGetCommand extends Command
             $packageName
         ));
 
-        $cacheContent = file_get_contents($this->cacheFilePath);
-        /*** @var Package[] $packages */
-        $packages = unserialize($cacheContent, [false]);
-
-        $foundPackage = false;
-        foreach ($packages as $package) {
-            if ($package->toString() === $packageName) {
-                $foundPackage = true;
-                break;
-            }
-        }
-
-        if (! isset($package) || false === $foundPackage) {
+        if (! $this->packageContainer->has($packageName)) {
             throw PackageNotFoundException::byPackage($packageName);
         }
 
-        $rows = [];
+        $package = $this->packageContainer->get($packageName);
+        $rows    = [];
 
-        foreach ($package->getBranches() as $branch) {
-            $requirements            = $this->requirement->parseRequirements($branch);
-            $developmentRequirements = $this->requirement->parseDevelopmentRequirements($branch);
-
-            $rows[] = [
-                'package'                  => $package->toString(),
-                'composer-package-name'    => $branch->getComposerPackageName(),
-                'branch'                   => $branch->getName(),
-                'requirements'             => implode("\n", $requirements),
-                'development-requirements' => implode("\n", $developmentRequirements),
-            ];
+        foreach ($package->getHeads() as $head) {
+            $rows[] = ($this->row)($packageName, $head);
         }
 
         $table = new Table($output);
