@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PackageInfoTest\Requirement\Version;
 
 use Composer\Semver\VersionParser;
-use PackageInfo\Requirement\Version\Check;
+use PackageInfo\Requirement\Version\Checker;
 use PHPUnit\Framework\TestCase;
 
-class CheckTest extends TestCase
+class CheckerTest extends TestCase
 {
     public static function checks(): array
     {
@@ -22,12 +22,12 @@ class CheckTest extends TestCase
     }
 
     /**
-     * @covers \PackageInfo\Requirement\Version\Check::__invoke
+     * @covers \PackageInfo\Requirement\Version\Checker::__invoke
      * @dataProvider checks
      */
     public function test__invoke(bool $expected, string $minimumVersion, string $constraints): void
     {
-        $check = new Check(new VersionParser());
+        $check = new Checker(new VersionParser());
         self::assertSame($expected, $check($minimumVersion, $constraints));
     }
 }

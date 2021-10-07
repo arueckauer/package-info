@@ -7,11 +7,11 @@ namespace PackageInfo\Requirement\Version;
 use Composer\Semver\VersionParser;
 use Psr\Container\ContainerInterface;
 
-class CheckFactory
+class CheckerFactory
 {
-    public function __invoke(ContainerInterface $container): Check
+    public function __invoke(ContainerInterface $container): Checker
     {
-        return new Check(
+        return new Checker(
             new VersionParser()
         );
     }

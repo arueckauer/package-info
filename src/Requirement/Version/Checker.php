@@ -7,7 +7,7 @@ namespace PackageInfo\Requirement\Version;
 use Composer\Semver\Comparator;
 use Composer\Semver\VersionParser;
 
-class Check
+class Checker
 {
     private VersionParser $versionParser;
 
