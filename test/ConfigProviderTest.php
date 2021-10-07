@@ -9,7 +9,11 @@ use PackageInfo\Command\CacheBuildCommand;
 use PackageInfo\Command\PackageInfoGetCommand;
 use PackageInfo\Command\PackageInfoListCommand;
 use PackageInfo\ConfigProvider;
-use PackageInfo\Information\Requirement;
+use PackageInfo\Output\Table\Row;
+use PackageInfo\PackageContainer;
+use PackageInfo\PackageContainer\Cache;
+use PackageInfo\Requirement;
+use PackageInfo\Requirement\Version\Check;
 use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
@@ -26,10 +30,14 @@ class ConfigProviderTest extends TestCase
         $this->assertIsArray($config['dependencies']);
         $this->assertArrayHasKey('factories', $config['dependencies']);
         $this->assertIsArray($config['dependencies']['factories']);
+        $this->assertArrayHasKey(Cache::class, $config['dependencies']['factories']);
+        $this->assertArrayHasKey(Check::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(Client::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(CacheBuildCommand::class, $config['dependencies']['factories']);
+        $this->assertArrayHasKey(PackageContainer::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(PackageInfoGetCommand::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(PackageInfoListCommand::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(Requirement::class, $config['dependencies']['factories']);
+        $this->assertArrayHasKey(Row::class, $config['dependencies']['factories']);
     }
 }
