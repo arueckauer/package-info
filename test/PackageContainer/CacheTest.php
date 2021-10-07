@@ -10,6 +10,9 @@ use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Cache;
 use PHPUnit\Framework\TestCase;
 
+use function dirname;
+use function unlink;
+
 class CacheTest extends TestCase
 {
     /**
@@ -66,10 +69,15 @@ class CacheTest extends TestCase
      */
     public function test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file(): void
     {
+        $filePath = dirname(__DIR__) . '/TestAsset/cache.dat';
+
         self::assertEquals(
             new PackageContainer(),
-            (new Cache('file-does-not-exist'))->getPackageContainer()
+            (new Cache($filePath))->getPackageContainer()
         );
+
+        self::assertFileExists($filePath);
+        unlink($filePath);
     }
 
     /**
