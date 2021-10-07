@@ -13,6 +13,8 @@ use PackageInfo\Command\PackageInfoListCommand;
 use PackageInfo\Command\PackageInfoListCommandFactory;
 use PackageInfo\Information\Requirement;
 use PackageInfo\Information\RequirementFactory;
+use PackageInfo\Output\Table\Row;
+use PackageInfo\Output\Table\RowFactory;
 use PackageInfo\PackageContainer\Cache;
 use PackageInfo\PackageContainer\CacheFactory;
 use PackageInfo\Requirement\Version\Check;
@@ -33,6 +35,7 @@ class ConfigProvider
                     PackageInfoGetCommand::class  => PackageInfoGetCommandFactory::class,
                     PackageInfoListCommand::class => PackageInfoListCommandFactory::class,
                     Requirement::class            => RequirementFactory::class,
+                    Row::class                    => RowFactory::class,
                 ],
             ],
         ];
