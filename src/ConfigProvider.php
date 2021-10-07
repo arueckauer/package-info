@@ -29,6 +29,7 @@ class ConfigProvider
                     Check::class                  => CheckFactory::class,
                     Client::class                 => GithubClientFactory::class,
                     CacheBuildCommand::class      => CacheBuildCommandFactory::class,
+                    PackageContainer::class       => PackageContainerFactory::class,
                     PackageInfoGetCommand::class  => PackageInfoGetCommandFactory::class,
                     PackageInfoListCommand::class => PackageInfoListCommandFactory::class,
                     Requirement::class            => RequirementFactory::class,
