@@ -4,34 +4,34 @@ declare(strict_types=1);
 
 namespace PackageInfo\Information;
 
-use Composer\Semver\Comparator;
-use Composer\Semver\VersionParser;
-use PackageInfo\Information\Repository\Branch;
+use PackageInfo\Repository\Head;
+use PackageInfo\Requirement\Version\Check;
 
 use function sprintf;
 
 class Requirement
 {
-    private VersionParser $versionParser;
-
+    private Check $check;
     private array $requirements;
-
     private array $developmentRequirements;
 
-    public function __construct(VersionParser $versionParser, array $requirements, array $developmentRequirements)
-    {
-        $this->versionParser           = $versionParser;
+    public function __construct(
+        Check $check,
+        array $requirements,
+        array $developmentRequirements
+    ) {
+        $this->check                   = $check;
         $this->requirements            = $requirements;
         $this->developmentRequirements = $developmentRequirements;
     }
 
-    public function parseRequirements(Branch $branch): array
+    public function parseRequirements(Head $head): array
     {
         $requirements = [];
 
         foreach ($this->requirements as $requiredPackage => $lowestRequiredVersion) {
-            $requirements[] = $this->parse(
-                $branch,
+            $requirements[] = $this->parseRequirement(
+                $head,
                 $requiredPackage,
                 $lowestRequiredVersion
             );
@@ -40,47 +40,59 @@ class Requirement
         return $requirements;
     }
 
-    public function parseDevelopmentRequirements(Branch $branch): array
+    public function parseDevelopmentRequirements(Head $head): array
     {
         $requirements = [];
 
         foreach ($this->developmentRequirements as $requiredPackage => $lowestRequiredVersion) {
-            $requirements[] = $this->parse(
-                $branch,
+            $requirements[] = $this->parseDevelopmentRequirement(
+                $head,
                 $requiredPackage,
-                $lowestRequiredVersion,
-                true
+                $lowestRequiredVersion
             );
         }
 
         return $requirements;
     }
 
-    private function parse(
-        Branch $branch,
+    private function parseRequirement(
+        Head $head,
         string $package,
-        string $minimumVersion,
-        bool $development = false
+        string $minimumVersion
     ): string {
-        if (false === $development) {
-            $hasRequirementMethod    = 'hasRequirement';
-            $versionConstraintGetter = 'getVersionConstraintOfRequirement';
-        } else {
-            $hasRequirementMethod    = 'hasDevelopmentRequirement';
-            $versionConstraintGetter = 'getVersionConstraintOfDevelopmentRequirement';
-        }
-
-        if (! $branch->$hasRequirementMethod($package)) {
+        if (! $head->hasRequirement($package)) {
             return sprintf(
                 '%s: <error>n/a</error>',
                 $package
             );
         }
 
-        $versionConstraint = $branch->$versionConstraintGetter($package);
-        $constraint        = $this->versionParser->parseConstraints($versionConstraint);
-        $lowerVersion      = $constraint->getLowerBound()->getVersion();
-        $isSupported       = Comparator::greaterThanOrEqualTo($lowerVersion, $minimumVersion);
+        $versionConstraint = $head->getVersionConstraintOfRequirement($package);
+        $isSupported       = ($this->check)($minimumVersion, $versionConstraint);
+        $versionFormat     = $isSupported === true ? 'info' : 'comment';
+
+        return sprintf(
+            '%1$s: <%3$s>%2$s</%3$s>',
+            $package,
+            $versionConstraint,
+            $versionFormat
+        );
+    }
+
+    private function parseDevelopmentRequirement(
+        Head $head,
+        string $package,
+        string $minimumVersion
+    ): string {
+        if (! $head->hasDevelopmentRequirement($package)) {
+            return sprintf(
+                '%s: <error>n/a</error>',
+                $package
+            );
+        }
+
+        $versionConstraint = $head->getVersionConstraintOfDevelopmentRequirement($package);
+        $isSupported       = ($this->check)($minimumVersion, $versionConstraint);
         $versionFormat     = $isSupported === true ? 'info' : 'comment';
 
         return sprintf(

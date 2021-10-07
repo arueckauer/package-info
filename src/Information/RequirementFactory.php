@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\Information;
 
-use Composer\Semver\VersionParser;
+use PackageInfo\Requirement\Version\Check;
 use Psr\Container\ContainerInterface;
 
 class RequirementFactory
@@ -14,7 +14,7 @@ class RequirementFactory
         $config = $container->get('config');
 
         return new Requirement(
-            new VersionParser(),
+            $container->get(Check::class),
             $config['requirements'],
             $config['development_requirements']
         );
