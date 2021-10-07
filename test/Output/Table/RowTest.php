@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PackageInfoTest\Output\Table;
 
-use PackageInfo\Information\Requirement;
 use PackageInfo\Output\Table\Row;
 use PackageInfo\Repository\Head;
+use PackageInfo\Requirement;
 use PHPUnit\Framework\TestCase;
 
 class RowTest extends TestCase

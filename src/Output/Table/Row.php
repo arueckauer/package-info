@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PackageInfo\Output\Table;
 
-use PackageInfo\Information\Requirement;
 use PackageInfo\Repository\Head;
+use PackageInfo\Requirement;
 
 use function implode;
 use function var_export;
