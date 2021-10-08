@@ -14,9 +14,9 @@ class BuilderFactory
     public function __invoke(ContainerInterface $container): Builder
     {
         return new Builder(
-            new UrlComposer(),
-            new FileReader(),
-            new MetaReader()
+            $container->get(UrlComposer::class),
+            $container->get(FileReader::class),
+            $container->get(MetaReader::class)
         );
     }
 }

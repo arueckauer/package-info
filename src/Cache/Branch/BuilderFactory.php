@@ -17,9 +17,9 @@ class BuilderFactory
 
         return new Builder(
             $config['ignore_branches'],
-            new UrlComposer(),
-            new FileReader(),
-            new MetaReader()
+            $container->get(UrlComposer::class),
+            $container->get(FileReader::class),
+            $container->get(MetaReader::class)
         );
     }
 }
