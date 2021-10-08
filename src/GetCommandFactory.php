@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PackageInfo\Command;
+namespace PackageInfo;
 
 use PackageInfo\Output\Table\Row;
-use PackageInfo\PackageContainer;
 use Psr\Container\ContainerInterface;
 
-class PackageInfoListCommandFactory
+class GetCommandFactory
 {
-    public function __invoke(ContainerInterface $container): PackageInfoListCommand
+    public function __invoke(ContainerInterface $container): GetCommand
     {
-        return new PackageInfoListCommand(
+        return new GetCommand(
             $container->get(PackageContainer::class),
             $container->get(Row::class)
         );

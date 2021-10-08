@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PackageInfo\Command\Exception;
+namespace PackageInfo\Exception;
 
 use RuntimeException;
 

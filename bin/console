@@ -2,8 +2,8 @@
 <?php
 
 use PackageInfo\Cache\BuildCommand;
-use PackageInfo\Command\PackageInfoGetCommand;
-use PackageInfo\Command\PackageInfoListCommand;
+use PackageInfo\GetCommand;
+use PackageInfo\ListCommand;
 use PackageVersions\Versions;
 use Symfony\Component\Console\Application;
 
@@ -17,8 +17,8 @@ call_user_func(static function() {
 
     $application->addCommands([
         $container->get(BuildCommand::class),
-        $container->get(PackageInfoGetCommand::class),
-        $container->get(PackageInfoListCommand::class),
+        $container->get(GetCommand::class),
+        $container->get(ListCommand::class),
     ]);
 
     $application->run();

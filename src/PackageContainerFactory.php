@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo;
 
-use PackageInfo\Command\Exception\CacheNotFoundException;
+use PackageInfo\Exception\CacheNotFoundException;
 use Psr\Container\ContainerInterface;
 
 use function file_exists;

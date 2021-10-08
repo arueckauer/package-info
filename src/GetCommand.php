@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PackageInfo\Command;
+namespace PackageInfo;
 
-use PackageInfo\Command\Exception\PackageNotFoundException;
+use PackageInfo\Exception\PackageNotFoundException;
 use PackageInfo\Output\Table\Row;
-use PackageInfo\PackageContainer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function array_keys;
 use function sprintf;
 
-class PackageInfoGetCommand extends Command
+class GetCommand extends Command
 {
     private PackageContainer $packageContainer;
     private Row $row;
@@ -31,7 +30,7 @@ class PackageInfoGetCommand extends Command
 
     public function configure(): void
     {
-        $this->setName('package-info:get');
+        $this->setName('get');
         $this->setDescription('List all package information for given package');
         $this->addArgument('package-name', InputArgument::REQUIRED, 'Name of the package (vendor/project)');
     }

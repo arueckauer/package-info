@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PackageInfo\Command;
+namespace PackageInfo;
 
 use PackageInfo\Output\Table\Row;
-use PackageInfo\PackageContainer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -16,7 +15,7 @@ use function array_keys;
 use function count;
 use function sprintf;
 
-class PackageInfoListCommand extends Command
+class ListCommand extends Command
 {
     private PackageContainer $packageContainer;
     private Row $row;
