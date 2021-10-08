@@ -16,6 +16,7 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
+                    AllCommand::class                  => AllCommandFactory::class,
                     Cache\Branch\Builder::class        => Cache\Branch\BuilderFactory::class,
                     Cache\BuildCommand::class          => Cache\BuildCommandFactory::class,
                     Cache\Builder::class               => Cache\BuilderFactory::class,
@@ -26,7 +27,6 @@ class ConfigProvider
                     Composer\Json\MetaReader::class    => MetaReaderFactory::class,
                     Composer\Json\UrlComposer::class   => UrlComposerFactory::class,
                     GetCommand::class                  => GetCommandFactory::class,
-                    ListCommand::class                 => CommandFactory::class,
                     Output\Table\Row::class            => Output\Table\RowFactory::class,
                     PackageContainer::class            => PackageContainerFactory::class,
                     PackageContainer\Cache::class      => PackageContainer\CacheFactory::class,

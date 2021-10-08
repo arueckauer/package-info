@@ -7,11 +7,11 @@ namespace PackageInfo;
 use PackageInfo\Output\Table\Row;
 use Psr\Container\ContainerInterface;
 
-class CommandFactory
+class AllCommandFactory
 {
-    public function __invoke(ContainerInterface $container): ListCommand
+    public function __invoke(ContainerInterface $container): AllCommand
     {
-        return new ListCommand(
+        return new AllCommand(
             $container->get(PackageContainer::class),
             $container->get(Row::class)
         );

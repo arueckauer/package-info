@@ -33,17 +33,17 @@ There are three commands available.
 To not repeatedly fetch all information from GitHub, package information is cached. To build the cache, execute
 
 ```bash
-php ./bin/console cache:build
+php ./vendor/bin/package-info cache:build
 ```
 
 ### 2. Show information for a single package
 
 ```bash
-php ./bin/console package-info:get <package-name>
+php ./vendor/bin/package-info get <package-name>
 ```
 
 ### 3. Show information for all packages
 
 ```bash
-php ./bin/console package-info:list
+php ./vendor/bin/package-info list
 ```

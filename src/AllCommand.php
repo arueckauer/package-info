@@ -15,7 +15,7 @@ use function array_keys;
 use function count;
 use function sprintf;
 
-class ListCommand extends Command
+class AllCommand extends Command
 {
     private PackageContainer $packageContainer;
     private Row $row;
@@ -30,8 +30,8 @@ class ListCommand extends Command
 
     public function configure(): void
     {
-        $this->setName('package-info:list');
-        $this->setDescription('List all package information');
+        $this->setName('all');
+        $this->setDescription('Lists all package information');
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int

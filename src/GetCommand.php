@@ -31,7 +31,7 @@ class GetCommand extends Command
     public function configure(): void
     {
         $this->setName('get');
-        $this->setDescription('List all package information for given package');
+        $this->setDescription('Lists all package information for given package');
         $this->addArgument('package-name', InputArgument::REQUIRED, 'Name of the package (vendor/project)');
     }
 

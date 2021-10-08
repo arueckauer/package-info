@@ -53,6 +53,9 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "bin": [
+        "bin/package-info"
+    ],
     "scripts": {
         "cs-check": "phpcs",
         "cs-fix": "phpcbf"
