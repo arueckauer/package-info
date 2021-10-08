@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\Requirement;
 
+use PackageInfo\Requirement\Version\Checker as VersionChecker;
 use Psr\Container\ContainerInterface;
 
 class CheckerFactory
@@ -13,7 +14,7 @@ class CheckerFactory
         $config = $container->get('config');
 
         return new Checker(
-            $container->get(Checker::class),
+            $container->get(VersionChecker::class),
             $config['requirements'],
             $config['development_requirements']
         );
