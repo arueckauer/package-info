@@ -21,6 +21,7 @@ class ConfigProvider
                     PackageContainer::class               => PackageContainerFactory::class,
                     PackageContainer\Cache::class         => PackageContainer\CacheFactory::class,
                     Requirement\Checker::class            => Requirement\CheckerFactory::class,
+                    Requirement\Renderer::class           => Requirement\RendererFactory::class,
                     Requirement\Version\Checker::class    => Requirement\Version\CheckerFactory::class,
                 ],
             ],
