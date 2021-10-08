@@ -16,12 +16,12 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
-                    Client::class                         => GithubClientFactory::class,
-                    Cache\Builder::class                  => Cache\BuilderFactory::class,
                     Cache\Branch\Builder::class           => Cache\Branch\BuilderFactory::class,
+                    Cache\BuildCommand::class             => Cache\BuildCommandFactory::class,
+                    Cache\Builder::class                  => Cache\BuilderFactory::class,
                     Cache\PullRequest\Builder::class      => Cache\PullRequest\BuilderFactory::class,
                     Cache\Release\Builder::class          => Cache\Release\BuilderFactory::class,
-                    Command\CacheBuildCommand::class      => Command\CacheBuildCommandFactory::class,
+                    Client::class                         => GithubClientFactory::class,
                     Command\PackageInfoGetCommand::class  => Command\PackageInfoGetCommandFactory::class,
                     Command\PackageInfoListCommand::class => Command\PackageInfoListCommandFactory::class,
                     Composer\Json\FileReader::class       => FileReaderFactory::class,

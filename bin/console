@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use PackageInfo\Command\CacheBuildCommand;
+use PackageInfo\Cache\BuildCommand;
 use PackageInfo\Command\PackageInfoGetCommand;
 use PackageInfo\Command\PackageInfoListCommand;
 use PackageVersions\Versions;
@@ -16,7 +16,7 @@ call_user_func(static function() {
     $application = new Application('arueckauer/package-info', $version);
 
     $application->addCommands([
-        $container->get(CacheBuildCommand::class),
+        $container->get(BuildCommand::class),
         $container->get(PackageInfoGetCommand::class),
         $container->get(PackageInfoListCommand::class),
     ]);

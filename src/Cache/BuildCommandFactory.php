@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PackageInfo\Command;
+namespace PackageInfo\Cache;
 
-use PackageInfo\Cache\Builder;
 use Psr\Container\ContainerInterface;
 
-class CacheBuildCommandFactory
+class BuildCommandFactory
 {
-    public function __invoke(ContainerInterface $container): CacheBuildCommand
+    public function __invoke(ContainerInterface $container): BuildCommand
     {
         $config = $container->get('config');
 
-        return new CacheBuildCommand(
+        return new BuildCommand(
             $config['organizations'],
             $container->get(Builder::class)
         );

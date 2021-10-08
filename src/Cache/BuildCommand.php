@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace PackageInfo\Command;
+namespace PackageInfo\Cache;
 
-use PackageInfo\Cache\Builder;
 use PackageInfo\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar as SymfonyProgressBar;
@@ -14,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use function assert;
 
-class CacheBuildCommand extends Command
+class BuildCommand extends Command
 {
     private Builder $builder;
     private array $organizations;
