@@ -7,7 +7,16 @@ use PackageInfo\AllCommand;
 use PackageVersions\Versions;
 use Symfony\Component\Console\Application;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+if (file_exists($autoloader = dirname(__DIR__, 3) . '/autoload.php')) {
+    require $autoloader;
+} elseif (file_exists($autoloader = dirname(__DIR__) . '/vendor/autoload.php')) {
+    require $autoloader;
+} elseif (file_exists($autoloader = dirname(__DIR__) . '/autoload.php')) {
+    require $autoloader;
+} else {
+    fwrite(STDERR, 'Cannot locate autoloader. Please run "composer install".' . PHP_EOL);
+    exit(1);
+}
 
 call_user_func(static function() {
     $container = require dirname(__DIR__) . '/config/container.php';
