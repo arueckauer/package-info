@@ -23,7 +23,7 @@
         "composer/semver": "^3.0",
         "guzzlehttp/guzzle": "^7.3",
         "knplabs/github-api": "^3.3",
-        "laminas/laminas-config-aggregator": "^1.6",
+        "laminas/laminas-config-aggregator": "^1.7",
         "laminas/laminas-servicemanager": "^3.10",
         "laminas/laminas-stdlib": "^3.6",
         "mezzio/mezzio": "^3.8",
