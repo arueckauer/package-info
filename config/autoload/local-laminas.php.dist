@@ -25,6 +25,7 @@ return [
         'laminas/laminas-continuous-integration-action',
         'laminas/laminas-continuous-integration-container',
         'laminas/laminas-servicemanager-migration',
+        'laminas/laminas.dev',
         'laminas/laminas.github.io',
         'laminas/technical-steering-committee',
         'laminas/tutorials',
