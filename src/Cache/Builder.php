@@ -12,8 +12,8 @@ use PackageInfo\Console\Helper\ProgressBar;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer\Cache;
 use Symfony\Component\Console\Helper\ProgressBar as SymfonyProgressBar;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\ConsoleSectionOutput;
-use Symfony\Component\Console\Output\OutputInterface;
 
 use function count;
 use function in_array;
@@ -47,7 +47,7 @@ class Builder
         $this->pullRequestBuilder = $pullRequestBuilder;
     }
 
-    public function __invoke(OutputInterface $output, string $organization): void
+    public function __invoke(ConsoleOutputInterface $output, string $organization): void
     {
         if (
             null === $this->sectionMain
