@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.4 || ~8.0.0",
         "ext-json": "*",
-        "composer/semver": "^3.0",
+        "composer/semver": "^3.2",
         "guzzlehttp/guzzle": "^7.4",
         "knplabs/github-api": "^3.4",
         "laminas/laminas-config-aggregator": "^1.7",
