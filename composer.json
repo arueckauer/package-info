@@ -36,7 +36,7 @@
         "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "^4.10"
+        "vimeo/psalm": "~4.15.0"
     },
     "config": {
         "sort-packages": true
