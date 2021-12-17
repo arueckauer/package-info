@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\PackageContainer;
 
+use Exception;
 use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Exception\CacheFileNotWritableException;
 
@@ -35,11 +36,14 @@ class Cache
         return $this->packageContainer;
     }
 
+    /**
+     * @throws Exception
+     */
     public function write(): void
     {
         $result = @file_put_contents(
             $this->cacheFilePath,
-            $this->packageContainer->serialize()
+            (string) $this->packageContainer->serialize()
         );
 
         if (false === $result) {
