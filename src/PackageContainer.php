@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo;
 
+use Exception;
 use Serializable;
 
 use function array_key_exists;
@@ -27,6 +28,19 @@ class PackageContainer implements Serializable
         foreach ($packages as $package) {
             $this->add($package);
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function __serialize(): array
+    {
+        return ['data' => $this->serialize()];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->unserialize($data[0]);
     }
 
     public function has(string $name): bool

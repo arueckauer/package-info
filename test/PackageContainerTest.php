@@ -105,7 +105,7 @@ class PackageContainerTest extends TestCase
         );
 
         $containerB = new PackageContainer();
-        $containerB->unserialize($containerA->serialize());
+        $containerB->unserialize((string) $containerA->serialize());
 
         self::assertEquals(
             $containerA,
