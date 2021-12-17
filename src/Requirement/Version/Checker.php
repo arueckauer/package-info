@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PackageInfo\Requirement\Version;
 
-use Composer\Semver\Comparator;
 use Composer\Semver\VersionParser;
 
 class Checker
@@ -18,9 +17,9 @@ class Checker
 
     public function __invoke(string $minimumVersion, string $constraints): bool
     {
-        $constraint   = $this->versionParser->parseConstraints($constraints);
-        $lowerVersion = $constraint->getLowerBound()->getVersion();
+        $actualConstraint   = $this->versionParser->parseConstraints($constraints);
+        $requiredConstraint = $this->versionParser->parseConstraints($minimumVersion);
 
-        return Comparator::greaterThanOrEqualTo($lowerVersion, $minimumVersion);
+        return $actualConstraint->matches($requiredConstraint);
     }
 }
