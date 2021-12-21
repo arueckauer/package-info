@@ -1,9 +1,12 @@
 #!/usr/bin/env php
 <?php
 
-use PackageInfo\Cache\BuildCommand;
-use PackageInfo\GetCommand;
+declare(strict_types=1);
+
 use PackageInfo\AllCommand;
+use PackageInfo\Cache\BuildCommand;
+use PackageInfo\CheckCommand;
+use PackageInfo\GetCommand;
 use PackageVersions\Versions;
 use Symfony\Component\Console\Application;
 
@@ -18,14 +21,15 @@ if (file_exists($autoloader = dirname(__DIR__, 3) . '/autoload.php')) {
     exit(1);
 }
 
-call_user_func(static function() {
+call_user_func(static function () {
     $container = require dirname(__DIR__) . '/config/container.php';
 
-    $version = strstr(Versions::getVersion('arueckauer/package-info'), '@', true);
+    $version     = strstr(Versions::getVersion('arueckauer/package-info'), '@', true);
     $application = new Application('arueckauer/package-info', $version);
 
     $application->addCommands([
         $container->get(BuildCommand::class),
+        $container->get(CheckCommand::class),
         $container->get(GetCommand::class),
         $container->get(AllCommand::class),
     ]);
