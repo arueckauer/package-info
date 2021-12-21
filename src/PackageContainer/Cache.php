@@ -26,6 +26,9 @@ class Cache
         $this->read();
     }
 
+    /**
+     * @throws Exception
+     */
     public function __destruct()
     {
         $this->write();

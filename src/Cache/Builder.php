@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\Cache;
 
+use Exception;
 use Github\Client;
 use PackageInfo\Cache\Branch\Builder as BranchBuilder;
 use PackageInfo\Cache\PullRequest\Builder as PullRequestBuilder;
@@ -47,6 +48,9 @@ class Builder
         $this->pullRequestBuilder = $pullRequestBuilder;
     }
 
+    /**
+     * @throws Exception
+     */
     public function __invoke(ConsoleOutputInterface $output, string $organization): void
     {
         if (

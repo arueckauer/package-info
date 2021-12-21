@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\Cache;
 
+use Exception;
 use PackageInfo\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar as SymfonyProgressBar;
@@ -32,6 +33,9 @@ class BuildCommand extends Command
         $this->setDescription('Caches package information for repositories of configured organization(s)');
     }
 
+    /**
+     * @throws Exception
+     */
     public function execute(InputInterface $input, OutputInterface $output): int
     {
         assert($output instanceof ConsoleOutputInterface);
