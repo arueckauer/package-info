@@ -22,6 +22,7 @@ class ConfigProvider
                     Cache\Builder::class               => Cache\BuilderFactory::class,
                     Cache\PullRequest\Builder::class   => Cache\PullRequest\BuilderFactory::class,
                     Cache\Release\Builder::class       => Cache\Release\BuilderFactory::class,
+                    CheckCommand::class                => CheckCommandFactory::class,
                     Client::class                      => GithubClientFactory::class,
                     Composer\Json\FileReader::class    => FileReaderFactory::class,
                     Composer\Json\MetaReader::class    => MetaReaderFactory::class,
