@@ -6,9 +6,6 @@ namespace PackageInfoTest\Output\Table;
 
 use PackageInfo\Output\Table\Row;
 use PackageInfo\Repository\Head;
-use PackageInfo\Requirement\Check\Result;
-use PackageInfo\Requirement\Checker;
-use PackageInfo\Requirement\Renderer;
 use PHPUnit\Framework\TestCase;
 
 class RowTest extends TestCase
@@ -24,41 +21,9 @@ class RowTest extends TestCase
             'Head Type'               => 'branch',
             'Head Name'               => 'main',
             'composer.json present'   => 'true',
-            'Requirements'            => 'millennial-falcon/hyperdrive: <info>^1.1</info>',
-            'Dev Requirements'        => "starship/builder: <info>~7.6.3</info>\ndroid/build: <info>9.9.9</info>",
         ];
 
-        $checker = $this->createMock(Checker::class);
-
-        $resultA                    = new Result();
-        $resultA->requirementName   = 'millennial-falcon/hyperdrive';
-        $resultA->hasRequirement    = true;
-        $resultA->versionConstraint = '^1.1';
-        $resultA->isSupported       = true;
-
-        $checker
-            ->expects(self::once())
-            ->method('checkRequirements')
-            ->willReturn([$resultA]);
-
-        $resultB                    = new Result();
-        $resultB->requirementName   = 'starship/builder';
-        $resultB->hasRequirement    = true;
-        $resultB->versionConstraint = '~7.6.3';
-        $resultB->isSupported       = true;
-
-        $resultC                    = new Result();
-        $resultC->requirementName   = 'droid/build';
-        $resultC->hasRequirement    = true;
-        $resultC->versionConstraint = '9.9.9';
-        $resultC->isSupported       = true;
-
-        $checker
-            ->expects(self::once())
-            ->method('checkDevelopmentRequirements')
-            ->willReturn([$resultB, $resultC]);
-
-        $row = new Row($checker, new Renderer());
+        $row = new Row();
 
         $head                          = new Head();
         $head->packageName             = 'millennial-falcon/ship';
