@@ -10,9 +10,10 @@ use PackageInfo\Requirement\Version\Checker as VersionChecker;
 
 class Checker
 {
+    public array $requirements;
+    public array $developmentRequirements;
+
     private VersionChecker $checker;
-    private array $requirements;
-    private array $developmentRequirements;
 
     public function __construct(
         VersionChecker $checker,
