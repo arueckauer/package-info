@@ -41,13 +41,4 @@ return [
         'gh-pages',
     ],
     'cache_file_path'          => dirname(__DIR__, 2) . '/data/packages.cache',
-    'requirements'             => [
-        'php' => '7.2.0',
-    ],
-    'development_requirements' => [
-        'laminas/laminas-coding-standard' => '2.0.0',
-        'phpstan/phpstan'                 => '0.12.0',
-        'phpunit/phpunit'                 => '7.1.0',
-        'vimeo/psalm'                     => '3.11.0',
-    ],
 ];
