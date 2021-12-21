@@ -30,22 +30,22 @@ class ConfigProviderTest extends TestCase
         $configProvider = new ConfigProvider();
         $config         = $configProvider();
 
-        $this->assertArrayHasKey('dependencies', $config);
-        $this->assertIsArray($config['dependencies']);
-        $this->assertArrayHasKey('factories', $config['dependencies']);
-        $this->assertIsArray($config['dependencies']['factories']);
-        $this->assertArrayHasKey(BranchBuilder::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(BuildCommand::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(Builder::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(Cache::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(Checker::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(Client::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(GetCommand::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(PackageContainer::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(PullRequestBuilder::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(ReleaseBuilder::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(Renderer::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(Row::class, $config['dependencies']['factories']);
-        $this->assertArrayHasKey(VersionChecker::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey('dependencies', $config);
+        self::assertIsArray($config['dependencies']);
+        self::assertArrayHasKey('factories', $config['dependencies']);
+        self::assertIsArray($config['dependencies']['factories']);
+        self::assertArrayHasKey(BranchBuilder::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(BuildCommand::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(Builder::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(Cache::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(Checker::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(Client::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(GetCommand::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(PackageContainer::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(PullRequestBuilder::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(ReleaseBuilder::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(Renderer::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(Row::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey(VersionChecker::class, $config['dependencies']['factories']);
     }
 }
