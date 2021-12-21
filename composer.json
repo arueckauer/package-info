@@ -54,7 +54,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "bin": [
-        "bin/package-info"
+        "bin/console"
     ],
     "scripts": {
         "cs-check": "phpcs",
