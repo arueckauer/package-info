@@ -7,10 +7,16 @@ namespace PackageInfo\Cache\Release;
 use PackageInfo\Composer\Json\FileReader;
 use PackageInfo\Composer\Json\MetaReader;
 use PackageInfo\Composer\Json\UrlComposer;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class BuilderFactory
 {
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     */
     public function __invoke(ContainerInterface $container): Builder
     {
         return new Builder(

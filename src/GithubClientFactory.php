@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace PackageInfo;
 
 use Github\Client;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class GithubClientFactory
 {
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function __invoke(ContainerInterface $container): Client
     {
         $client = new Client();

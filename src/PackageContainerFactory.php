@@ -4,13 +4,19 @@ declare(strict_types=1);
 
 namespace PackageInfo;
 
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 use function file_exists;
 use function file_get_contents;
 
 class PackageContainerFactory
 {
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function __invoke(ContainerInterface $container): PackageContainer
     {
         $packageContainer = new PackageContainer();
