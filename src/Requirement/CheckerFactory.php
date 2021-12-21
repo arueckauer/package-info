@@ -17,12 +17,8 @@ class CheckerFactory
      */
     public function __invoke(ContainerInterface $container): Checker
     {
-        $config = $container->get('config');
-
         return new Checker(
-            $container->get(VersionChecker::class),
-            $config['requirements'],
-            $config['development_requirements']
+            $container->get(VersionChecker::class)
         );
     }
 }

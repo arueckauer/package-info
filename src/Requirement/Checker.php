@@ -16,13 +16,9 @@ class Checker
     private VersionChecker $checker;
 
     public function __construct(
-        VersionChecker $checker,
-        array $requirements,
-        array $developmentRequirements
+        VersionChecker $checker
     ) {
-        $this->checker                 = $checker;
-        $this->requirements            = $requirements;
-        $this->developmentRequirements = $developmentRequirements;
+        $this->checker = $checker;
     }
 
     /**
