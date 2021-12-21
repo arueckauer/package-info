@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo;
 
+use Github\AuthMethod;
 use Github\Client;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -21,7 +22,7 @@ class GithubClientFactory
         $client->authenticate(
             $container->get('config')['github_api_token'],
             null,
-            Client::AUTH_ACCESS_TOKEN
+            AuthMethod::ACCESS_TOKEN
         );
 
         return $client;
