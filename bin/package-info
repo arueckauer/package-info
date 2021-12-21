@@ -3,7 +3,6 @@
 
 declare(strict_types=1);
 
-use PackageInfo\AllCommand;
 use PackageInfo\Cache\BuildCommand;
 use PackageInfo\CheckCommand;
 use PackageInfo\GetCommand;
@@ -31,7 +30,6 @@ call_user_func(static function () {
         $container->get(BuildCommand::class),
         $container->get(CheckCommand::class),
         $container->get(GetCommand::class),
-        $container->get(AllCommand::class),
     ]);
 
     $application->run();

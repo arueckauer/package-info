@@ -16,7 +16,6 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
-                    AllCommand::class                  => AllCommandFactory::class,
                     Cache\Branch\Builder::class        => Cache\Branch\BuilderFactory::class,
                     Cache\BuildCommand::class          => Cache\BuildCommandFactory::class,
                     Cache\Builder::class               => Cache\BuilderFactory::class,

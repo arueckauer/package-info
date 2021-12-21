@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PackageInfoTest;
 
 use Github\Client;
-use PackageInfo\AllCommand;
 use PackageInfo\Cache\Branch\Builder as BranchBuilder;
 use PackageInfo\Cache\BuildCommand;
 use PackageInfo\Cache\Builder;
@@ -35,7 +34,6 @@ class ConfigProviderTest extends TestCase
         $this->assertIsArray($config['dependencies']);
         $this->assertArrayHasKey('factories', $config['dependencies']);
         $this->assertIsArray($config['dependencies']['factories']);
-        $this->assertArrayHasKey(AllCommand::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(BranchBuilder::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(BuildCommand::class, $config['dependencies']['factories']);
         $this->assertArrayHasKey(Builder::class, $config['dependencies']['factories']);
