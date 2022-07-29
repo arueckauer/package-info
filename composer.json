@@ -29,7 +29,7 @@
         "mezzio/mezzio": "^3.8",
         "mezzio/mezzio-helpers": "^5.7",
         "ocramius/package-versions": "^2.1",
-        "symfony/console": "^5.4"
+        "symfony/console": "5.4.11"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.3.0",
