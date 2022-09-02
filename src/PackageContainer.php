@@ -21,9 +21,7 @@ class PackageContainer implements Serializable
 
     public function __construct(Package ...$packages)
     {
-        usort($packages, static function (Package $a, Package $b): int {
-            return $a->toString() <=> $b->toString();
-        });
+        usort($packages, static fn(Package $a, Package $b): int => $a->toString() <=> $b->toString());
 
         foreach ($packages as $package) {
             $this->add($package);

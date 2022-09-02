@@ -18,6 +18,7 @@ use function count;
 use function explode;
 use function implode;
 use function in_array;
+use function is_countable;
 use function sprintf;
 
 class CheckCommand extends Command
@@ -107,7 +108,7 @@ class CheckCommand extends Command
             count($packages)
         ));
 
-        $headTypeCount   = count($headType);
+        $headTypeCount   = is_countable($headType) ? count($headType) : 0;
         $rows            = [];
         $lastPackageName = null;
 
