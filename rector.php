@@ -11,6 +11,8 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/test',
     ]);
 
+    $rectorConfig->disableParallel();
+
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_74,
     ]);
