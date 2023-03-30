@@ -1,14 +1,13 @@
 {
     "name": "arueckauer/package-info",
-    "type": "project",
     "description": "Verifying composer packages requirements of GitHub organizations",
+    "license": "BSD-3-Clause",
+    "type": "project",
     "keywords": [
         "composer",
         "github",
         "github-api"
     ],
-    "homepage": "https://github.com/arueckauer/package-info",
-    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Andi Rückauer",
@@ -17,6 +16,7 @@
             "role": "Project Lead"
         }
     ],
+    "homepage": "https://github.com/arueckauer/package-info",
     "require": {
         "php": "^7.4 || ~8.0.0 || ~8.1.0",
         "ext-json": "*",
@@ -39,12 +39,8 @@
         "roave/security-advisories": "dev-latest",
         "vimeo/psalm": "~4.30.0"
     },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
-    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "PackageInfo\\": "src"
@@ -55,11 +51,15 @@
             "PackageInfoTest\\": "test"
         }
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
     "bin": [
         "bin/console"
     ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
     "scripts": {
         "cs-check": "phpcs",
         "cs-fix": "phpcbf"
