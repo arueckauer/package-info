@@ -20,4 +20,7 @@
     <rule ref="PSR1.Methods.CamelCapsMethodName">
         <exclude-pattern>test/*Test.php</exclude-pattern>
     </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingAnyTypeHint">
+        <exclude-pattern>src/PackageContainer.php</exclude-pattern>
+    </rule>
 </ruleset>
