@@ -8,8 +8,6 @@ use Exception;
 use Serializable;
 
 use function array_key_exists;
-use function assert;
-use function is_string;
 use function serialize;
 use function unserialize;
 use function usort;
@@ -66,17 +64,12 @@ class PackageContainer implements Serializable
         return serialize($this->data);
     }
 
-    /**
-     * @param string $data
-     */
     public function unserialize($data): void
     {
-        assert(is_string($data));
-
         if ('' === $data) {
             return;
         }
 
-        $this->data = unserialize($data, [Package::class]);
+        $this->data = unserialize($data, ['allowed_classes' => [Package::class]]);
     }
 }
