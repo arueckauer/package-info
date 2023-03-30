@@ -77,6 +77,6 @@ class PackageContainer implements Serializable
             return;
         }
 
-        $this->data = unserialize($data, [Package::class]);
+        $this->data = unserialize($data, ['allowed_classes' => [Package::class]]);
     }
 }
