@@ -14,13 +14,11 @@ use function file_put_contents;
 
 class Cache
 {
-    private string $cacheFilePath;
+    private readonly PackageContainer $packageContainer;
 
-    private PackageContainer $packageContainer;
-
-    public function __construct(string $cacheFilePath)
-    {
-        $this->cacheFilePath    = $cacheFilePath;
+    public function __construct(
+        private readonly string $cacheFilePath,
+    ) {
         $this->packageContainer = new PackageContainer();
 
         $this->read();

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PackageInfoTest\Composer\Json;
 
 use PackageInfo\Composer\Json\MetaReader;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(MetaReader::class)]
 class MetaReaderTest extends TestCase
 {
     private static array $composer = [
@@ -20,9 +22,6 @@ class MetaReaderTest extends TestCase
         ],
     ];
 
-    /**
-     * @covers \PackageInfo\Composer\Json\MetaReader::getPackageName
-     */
     public function test_getPackageName(): void
     {
         $metaReader = new MetaReader();
@@ -34,9 +33,6 @@ class MetaReaderTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\Composer\Json\MetaReader::isComposerJsonPresent
-     */
     public function test_isComposerJsonPresent(): void
     {
         $metaReader = new MetaReader();
@@ -47,9 +43,6 @@ class MetaReaderTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\Composer\Json\MetaReader::getRequirements
-     */
     public function test_getRequirements(): void
     {
         $expected   = [
@@ -64,9 +57,6 @@ class MetaReaderTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\Composer\Json\MetaReader::getDevelopmentRequirements
-     */
     public function test_getDevelopmentRequirements(): void
     {
         $expected = [

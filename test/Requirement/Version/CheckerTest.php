@@ -6,8 +6,11 @@ namespace PackageInfoTest\Requirement\Version;
 
 use Composer\Semver\VersionParser;
 use PackageInfo\Requirement\Version\Checker;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Checker::class)]
 class CheckerTest extends TestCase
 {
     public static function checks(): array
@@ -28,10 +31,7 @@ class CheckerTest extends TestCase
         ];
     }
 
-    /**
-     * @covers \PackageInfo\Requirement\Version\Checker::__invoke
-     * @dataProvider checks
-     */
+    #[DataProvider('checks')]
     public function test__invoke(bool $expected, string $minimumVersion, string $constraints): void
     {
         $check = new Checker(new VersionParser());

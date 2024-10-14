@@ -16,14 +16,10 @@ use function assert;
 
 class BuildCommand extends Command
 {
-    private Builder $builder;
-    private array $organizations;
-
-    public function __construct(array $organizations, Builder $builder)
-    {
-        $this->builder       = $builder;
-        $this->organizations = $organizations;
-
+    public function __construct(
+        private readonly array $organizations,
+        private readonly Builder $builder,
+    ) {
         parent::__construct();
     }
 

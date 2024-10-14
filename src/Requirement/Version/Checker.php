@@ -8,11 +8,9 @@ use Composer\Semver\VersionParser;
 
 class Checker
 {
-    private VersionParser $versionParser;
-
-    public function __construct(VersionParser $versionParser)
-    {
-        $this->versionParser = $versionParser;
+    public function __construct(
+        private readonly VersionParser $versionParser,
+    ) {
     }
 
     public function __invoke(string $minimumVersion, string $constraints): bool

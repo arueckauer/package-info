@@ -6,16 +6,15 @@ namespace PackageInfoTest\Composer\Json;
 
 use org\bovigo\vfs\vfsStream;
 use PackageInfo\Composer\Json\FileReader;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function dirname;
 use function file_get_contents;
 
+#[CoversClass(FileReader::class)]
 class FileReaderTest extends TestCase
 {
-    /**
-     * @covers \PackageInfo\Composer\Json\FileReader::__invoke
-     */
     public function test__invoke(): void
     {
         $expected = [

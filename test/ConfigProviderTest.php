@@ -21,13 +21,12 @@ use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Cache;
 use PackageInfo\Requirement\Checker;
 use PackageInfo\Requirement\Version\Checker as VersionChecker;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(ConfigProvider::class)]
 class ConfigProviderTest extends TestCase
 {
-    /**
-     * @covers \PackageInfo\ConfigProvider
-     */
     public function testInvoke(): void
     {
         $configProvider = new ConfigProvider();

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace PackageInfoTest\Repository;
 
 use PackageInfo\Repository\Head;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Head::class)]
 class HeadTest extends TestCase
 {
-    /**
-     * @covers \PackageInfo\Repository\Head::hasRequirement
-     */
     public function test_hasRequirement(): void
     {
         $head                                               = new Head();
@@ -21,9 +20,6 @@ class HeadTest extends TestCase
         self::assertFalse($head->hasRequirement('b-wing/hyperdrive'));
     }
 
-    /**
-     * @covers \PackageInfo\Repository\Head::getVersionConstraintOfRequirement
-     */
     public function test_getVersionConstraintOfRequirement(): void
     {
         $head                                               = new Head();
@@ -32,9 +28,6 @@ class HeadTest extends TestCase
         self::assertSame('^1.0', $head->getVersionConstraintOfRequirement('millennial-falcon/hyperdrive'));
     }
 
-    /**
-     * @covers \PackageInfo\Repository\Head::hasDevelopmentRequirement
-     */
     public function test_hasDevelopmentRequirement(): void
     {
         $head                                   = new Head();
@@ -44,9 +37,6 @@ class HeadTest extends TestCase
         self::assertFalse($head->hasRequirement('droid/builder'));
     }
 
-    /**
-     * @covers \PackageInfo\Repository\Head::getVersionConstraintOfDevelopmentRequirement
-     */
     public function test_getVersionConstraintOfDevelopmentRequirement(): void
     {
         $head                                   = new Head();

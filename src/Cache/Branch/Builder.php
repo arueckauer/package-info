@@ -16,25 +16,15 @@ use function in_array;
 
 class Builder
 {
-    /** @var string[] */
-    private array $ignoreBranchNames;
-    private UrlComposer $urlComposer;
-    private FileReader $fileReader;
-    private MetaReader $reader;
-
     /**
      * @param string[] $ignoreBranchNames
      */
     public function __construct(
-        array $ignoreBranchNames,
-        UrlComposer $urlComposer,
-        FileReader $fileReader,
-        MetaReader $reader
+        private readonly array $ignoreBranchNames,
+        private readonly UrlComposer $urlComposer,
+        private readonly FileReader $fileReader,
+        private readonly MetaReader $reader,
     ) {
-        $this->ignoreBranchNames = $ignoreBranchNames;
-        $this->urlComposer       = $urlComposer;
-        $this->fileReader        = $fileReader;
-        $this->reader            = $reader;
     }
 
     public function __invoke(

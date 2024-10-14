@@ -19,7 +19,7 @@ class FileReader
         if (false !== $composerJson) {
             try {
                 return json_decode($composerJson, true, 512, JSON_THROW_ON_ERROR);
-            } catch (JsonException $exception) {
+            } catch (JsonException) {
             }
         }
 

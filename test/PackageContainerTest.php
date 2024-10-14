@@ -6,13 +6,12 @@ namespace PackageInfoTest;
 
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(PackageContainer::class)]
 class PackageContainerTest extends TestCase
 {
-    /**
-     * @covers \PackageInfo\PackageContainer::has
-     */
     public function test_has(): void
     {
         $package   = new Package('millennial-falcon', 'hyperdrive');
@@ -22,9 +21,6 @@ class PackageContainerTest extends TestCase
         self::assertFalse($container->has('tie-fighter/hyperdrive'));
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer::get
-     */
     public function test_get(): void
     {
         $package   = new Package('millennial-falcon', 'hyperdrive');
@@ -36,9 +32,6 @@ class PackageContainerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer::get
-     */
     public function test_add(): void
     {
         $package   = new Package('millennial-falcon', 'hyperdrive');
@@ -51,9 +44,6 @@ class PackageContainerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer::all
-     */
     public function test_all(): void
     {
         $package   = new Package('millennial-falcon', 'hyperdrive');
@@ -65,9 +55,6 @@ class PackageContainerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer::all
-     */
     public function test_all_is_sorted_by_name(): void
     {
         $packageA = new Package('millennial-falcon', 'hyperdrive');
@@ -92,10 +79,6 @@ class PackageContainerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer::serialize
-     * @covers \PackageInfo\PackageContainer::unserialize
-     */
     public function test_serialize_and_unserialize(): void
     {
         $containerA = new PackageContainer(
