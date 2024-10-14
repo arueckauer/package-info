@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PackageInfo;
 
 use Exception;
+use PackageInfo\Repository\Head;
 use Serializable;
 
 use function array_key_exists;
@@ -71,6 +72,6 @@ class PackageContainer implements Serializable
             return;
         }
 
-        $this->data = unserialize($data, ['allowed_classes' => [Package::class]]);
+        $this->data = unserialize($data, ['allowed_classes' => [Package::class, Head::class]]);
     }
 }
