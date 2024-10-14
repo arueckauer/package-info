@@ -7,6 +7,8 @@
          requireCoverageMetadata="true"
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"
+         displayDetailsOnPhpunitDeprecations="true"
+         failOnPhpunitDeprecation="true"
          failOnRisky="true"
          failOnWarning="true"
          colors="true">
@@ -16,9 +18,9 @@
         </testsuite>
     </testsuites>
 
-    <coverage>
+    <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">
         <include>
-            <directory suffix=".php">src</directory>
+            <directory>src</directory>
         </include>
-    </coverage>
+    </source>
 </phpunit>
