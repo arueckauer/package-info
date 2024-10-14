@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PackageInfoTest\Composer\Json;
 
 use PackageInfo\Composer\Json\UrlComposer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(UrlComposer::class)]
 class UrlComposerTest extends TestCase
 {
     public static function urls(): array
@@ -33,10 +36,7 @@ class UrlComposerTest extends TestCase
         ];
     }
 
-    /**
-     * @covers \PackageInfo\Composer\Json\UrlComposer::__invoke
-     * @dataProvider urls
-     */
+    #[DataProvider('urls')]
     public function test__invoke(
         string $expected,
         string $owner,

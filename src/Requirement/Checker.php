@@ -13,12 +13,9 @@ class Checker
     public array $requirements;
     public array $developmentRequirements;
 
-    private VersionChecker $checker;
-
     public function __construct(
-        VersionChecker $checker
+        private readonly VersionChecker $checker,
     ) {
-        $this->checker = $checker;
     }
 
     /**

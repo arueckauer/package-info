@@ -6,13 +6,12 @@ namespace PackageInfoTest\Output\Table;
 
 use PackageInfo\Output\Table\Row;
 use PackageInfo\Repository\Head;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Row::class)]
 class RowTest extends TestCase
 {
-    /**
-     * @covers \PackageInfo\Output\Table\Row::__invoke
-     */
     public function test___invoke(): void
     {
         $expected = [

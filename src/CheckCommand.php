@@ -23,14 +23,10 @@ use function sprintf;
 
 class CheckCommand extends Command
 {
-    private PackageContainer $packageContainer;
-    private Checker $checker;
-
-    public function __construct(PackageContainer $packageContainer, Checker $checker)
-    {
-        $this->packageContainer = $packageContainer;
-        $this->checker          = $checker;
-
+    public function __construct(
+        private readonly PackageContainer $packageContainer,
+        private readonly Checker $checker,
+    ) {
         parent::__construct();
     }
 
@@ -88,14 +84,14 @@ class CheckCommand extends Command
 
         if (null !== $require) {
             $checkRequirement                          = true;
-            [$requiredPackage, $lowestRequiredVersion] = explode(':', $require);
+            [$requiredPackage, $lowestRequiredVersion] = explode(':', (string) $require);
             $this->checker->requirements               = [$requiredPackage => $lowestRequiredVersion];
             $this->checker->developmentRequirements    = [];
 
             $checkMessage = sprintf('for requirement <info>%s</info> ', $require);
         } else {
             $checkRequirement                          = false;
-            [$requiredPackage, $lowestRequiredVersion] = explode(':', $requireDev);
+            [$requiredPackage, $lowestRequiredVersion] = explode(':', (string) $requireDev);
             $this->checker->requirements               = [];
             $this->checker->developmentRequirements    = [$requiredPackage => $lowestRequiredVersion];
 

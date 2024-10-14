@@ -16,24 +16,17 @@ use function explode;
 
 class Builder
 {
-    private UrlComposer $urlComposer;
-    private FileReader $fileReader;
-    private MetaReader $reader;
-
     public function __construct(
-        UrlComposer $urlComposer,
-        FileReader $fileReader,
-        MetaReader $reader
+        private readonly UrlComposer $urlComposer,
+        private readonly FileReader $fileReader,
+        private readonly MetaReader $reader,
     ) {
-        $this->urlComposer = $urlComposer;
-        $this->fileReader  = $fileReader;
-        $this->reader      = $reader;
     }
 
     public function __invoke(
         Package $package,
         array $pullRequest,
-        ProgressBar $progressBarPullRequests
+        ProgressBar $progressBarPullRequests,
     ): void {
         $progressBarPullRequests->setMessage($pullRequest['head']['repo']['full_name'] ?? '');
         $progressBarPullRequests->advance();
@@ -45,7 +38,7 @@ class Builder
             return;
         }
 
-        [$headOwner, $headRepository] = explode('/', $pullRequest['head']['repo']['full_name']);
+        [$headOwner, $headRepository] = explode('/', (string) $pullRequest['head']['repo']['full_name']);
 
         $url = ($this->urlComposer)($headOwner, $headRepository, $pullRequest['head']['ref']);
         $this->reader->setComposer(($this->fileReader)($url));

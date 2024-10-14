@@ -8,13 +8,12 @@ use org\bovigo\vfs\vfsStream;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Cache;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Cache::class)]
 class CacheTest extends TestCase
 {
-    /**
-     * @covers \PackageInfo\PackageContainer\Cache::__destruct
-     */
     public function test__desctruct_writes_cache(): void
     {
         $root      = vfsStream::setup();
@@ -32,9 +31,6 @@ class CacheTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer\Cache::getPackageContainer
-     */
     public function test_getPackageContainer(): void
     {
         $packageA = new Package('millennial-falcon', 'hyperdrive');
@@ -61,9 +57,6 @@ class CacheTest extends TestCase
         );
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer\Cache::getPackageContainer
-     */
     public function test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file(): void
     {
         $home = vfsStream::setup('home');
@@ -79,9 +72,6 @@ class CacheTest extends TestCase
         self::assertFileExists($filePath);
     }
 
-    /**
-     * @covers \PackageInfo\PackageContainer\Cache::write
-     */
     public function test_write(): void
     {
         $root      = vfsStream::setup();

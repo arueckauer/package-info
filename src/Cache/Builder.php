@@ -22,30 +22,17 @@ use function sprintf;
 
 class Builder
 {
-    private Client $client;
-    private array $ignoreRepositories;
-    private Cache $cache;
-    private BranchBuilder $branchBuilder;
-    private ReleaseBuilder $releaseBuilder;
-    private PullRequestBuilder $pullRequestBuilder;
-
     private ?ConsoleSectionOutput $sectionMain  = null;
     private ?ConsoleSectionOutput $sectionHeads = null;
 
     public function __construct(
-        Client $client,
-        array $ignoreRepositories,
-        Cache $cache,
-        BranchBuilder $branchBuilder,
-        ReleaseBuilder $releaseBuilder,
-        PullRequestBuilder $pullRequestBuilder
+        private readonly Client $client,
+        private readonly array $ignoreRepositories,
+        private readonly Cache $cache,
+        private readonly BranchBuilder $branchBuilder,
+        private readonly ReleaseBuilder $releaseBuilder,
+        private readonly PullRequestBuilder $pullRequestBuilder,
     ) {
-        $this->client             = $client;
-        $this->ignoreRepositories = $ignoreRepositories;
-        $this->cache              = $cache;
-        $this->branchBuilder      = $branchBuilder;
-        $this->releaseBuilder     = $releaseBuilder;
-        $this->pullRequestBuilder = $pullRequestBuilder;
     }
 
     /**

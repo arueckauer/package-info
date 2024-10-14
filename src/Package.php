@@ -10,21 +10,15 @@ use function sprintf;
 
 class Package
 {
-    public string $organization;
-
-    public string $repository;
-
     /** @var Head[] */
     private array $heads;
 
     public function __construct(
-        string $username,
-        string $repository,
+        public string $organization,
+        public string $repository,
         Head ...$heads
     ) {
-        $this->organization = $username;
-        $this->repository   = $repository;
-        $this->heads        = $heads;
+        $this->heads = $heads;
     }
 
     public function toString(): string

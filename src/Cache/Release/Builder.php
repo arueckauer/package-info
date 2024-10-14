@@ -14,18 +14,11 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 class Builder
 {
-    private UrlComposer $urlComposer;
-    private FileReader $fileReader;
-    private MetaReader $reader;
-
     public function __construct(
-        UrlComposer $urlComposer,
-        FileReader $fileReader,
-        MetaReader $reader
+        private readonly UrlComposer $urlComposer,
+        private readonly FileReader $fileReader,
+        private readonly MetaReader $reader,
     ) {
-        $this->urlComposer = $urlComposer;
-        $this->fileReader  = $fileReader;
-        $this->reader      = $reader;
     }
 
     public function __invoke(

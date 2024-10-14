@@ -17,8 +17,9 @@ class PackageContainer implements Serializable
     /** @var Package[] */
     private array $data = [];
 
-    public function __construct(Package ...$packages)
-    {
+    public function __construct(
+        Package ...$packages,
+    ) {
         usort($packages, static fn(Package $a, Package $b): int => $a->toString() <=> $b->toString());
 
         foreach ($packages as $package) {

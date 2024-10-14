@@ -17,14 +17,10 @@ use function sprintf;
 
 class GetCommand extends Command
 {
-    private PackageContainer $packageContainer;
-    private Row $row;
-
-    public function __construct(PackageContainer $packageContainer, Row $row)
-    {
-        $this->packageContainer = $packageContainer;
-        $this->row              = $row;
-
+    public function __construct(
+        private readonly PackageContainer $packageContainer,
+        private readonly Row $row,
+    ) {
         parent::__construct();
     }
 
