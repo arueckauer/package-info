@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PackageInfo\Repository;
 
-class Head
+readonly class Head
 {
-    public string $packageName            = '';
-    public string $headType               = '';
-    public string $headName               = '';
-    public bool $composerJsonPresent      = false;
-    public array $requirements            = [];
-    public array $developmentRequirements = [];
+    public function __construct(
+        public string $packageName,
+        public string $headType,
+        public string $headName,
+        public bool $composerJsonPresent,
+        public array $requirements,
+        public array $developmentRequirements,
+    ) {
+    }
 
     public function hasRequirement(string $package): bool
     {

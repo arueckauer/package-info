@@ -32,13 +32,14 @@ class Builder
         $url = ($this->urlComposer)($package->organization, $package->repository, $release['tag_name']);
         $this->reader->setComposer(($this->fileReader)($url));
 
-        $head                          = new Head();
-        $head->packageName             = $this->reader->getPackageName();
-        $head->headType                = Type::RELEASE;
-        $head->headName                = $release['tag_name'];
-        $head->composerJsonPresent     = $this->reader->isComposerJsonPresent();
-        $head->requirements            = $this->reader->getRequirements();
-        $head->developmentRequirements = $this->reader->getDevelopmentRequirements();
+        $head = new Head(
+            $this->reader->getPackageName(),
+            Type::RELEASE,
+            $release['tag_name'],
+            $this->reader->isComposerJsonPresent(),
+            $this->reader->getRequirements(),
+            $this->reader->getDevelopmentRequirements(),
+        );
 
         $package->addHead($head);
     }
