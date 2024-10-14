@@ -55,19 +55,19 @@ Examples:
 To check which repositories are supporting PHP 8.1, run the following command.
 
 ```bash
-php bin/console check check -r php:^8.1
+php bin/console check -r php:^8.1
 ```
 
 The results of the previous command include branches and pull requests. To check only releases, run the following command.
 
 ```bash
-php bin/console check check -r php:^8.1 -t release
+php bin/console check -r php:^8.1 -t release
 ```
 
 To include only repositories of a specific organization, run the following command.
 
 ```bash
-php bin/console check check -r php:^8.1 -vendor mezzio
+php bin/console check -r php:^8.1 -vendor mezzio
 ```
 
 For a complete list of options, execute the following command.
