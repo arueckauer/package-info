@@ -18,7 +18,7 @@ The application comes with sample configurations for various PHP framework organ
 
 Place your personal access token in `github_api_token` and provide a `cache_file_path`.
 
-**Configuration options**
+### Configuration options
 
 - `github_api_token` Your personal access tokens (see GitHub / Settings / [Developer settings](https://github.com/settings/tokens))
 - `organizations` An array of organization names whose repositories will be checked.
@@ -30,7 +30,7 @@ Place your personal access token in `github_api_token` and provide a `cache_file
 
 There are three commands available.
 
-**Build cache**
+### Build cache
 
 This will be the first step. To not repeatedly fetch all information from GitHub, package information is cached. To build the cache, execute the following command. Depending on the size of the organization, this may take a while.
 
@@ -38,7 +38,7 @@ This will be the first step. To not repeatedly fetch all information from GitHub
 php bin/console cache:build
 ```
 
-**Show information for a single package**
+### Show information for a single package
 
 This command shows information such as available heads (branches, releases and pull requests) for a single package.
 
@@ -46,7 +46,7 @@ This command shows information such as available heads (branches, releases and p
 php bin/console get <package-name>
 ```
 
-**Check requirements**
+### Check requirements
 
 The check command performs the actual check against given requirements.
 
