@@ -43,13 +43,14 @@ class Builder
         $url = ($this->urlComposer)($headOwner, $headRepository, $pullRequest['head']['ref']);
         $this->reader->setComposer(($this->fileReader)($url));
 
-        $head                          = new Head();
-        $head->packageName             = $this->reader->getPackageName();
-        $head->headType                = Type::PULL_REQUEST;
-        $head->headName                = $pullRequest['head']['ref'];
-        $head->composerJsonPresent     = $this->reader->isComposerJsonPresent();
-        $head->requirements            = $this->reader->getRequirements();
-        $head->developmentRequirements = $this->reader->getDevelopmentRequirements();
+        $head = new Head(
+            $this->reader->getPackageName(),
+            Type::PULL_REQUEST,
+            $pullRequest['head']['ref'],
+            $this->reader->isComposerJsonPresent(),
+            $this->reader->getRequirements(),
+            $this->reader->getDevelopmentRequirements(),
+        );
 
         $package->addHead($head);
     }

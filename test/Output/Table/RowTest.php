@@ -24,18 +24,19 @@ class RowTest extends TestCase
 
         $row = new Row();
 
-        $head                          = new Head();
-        $head->packageName             = 'millennial-falcon/ship';
-        $head->headType                = 'branch';
-        $head->headName                = 'main';
-        $head->composerJsonPresent     = true;
-        $head->requirements            = [
-            'millennial-falcon/hyperdrive' => '^1.0',
-        ];
-        $head->developmentRequirements = [
-            'starship/builder' => '^7.5',
-            'droid/build'      => '^9.8',
-        ];
+        $head = new Head(
+            'millennial-falcon/ship',
+            'branch',
+            'main',
+            true,
+            [
+                'millennial-falcon/hyperdrive' => '^1.0',
+            ],
+            [
+                'starship/builder' => '^7.5',
+                'droid/build'      => '^9.8',
+            ],
+        );
 
         self::assertSame(
             $expected,

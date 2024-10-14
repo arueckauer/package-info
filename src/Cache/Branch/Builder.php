@@ -42,13 +42,14 @@ class Builder
             $url = ($this->urlComposer)($package->organization, $package->repository, $branch['name']);
             $this->reader->setComposer(($this->fileReader)($url));
 
-            $head                          = new Head();
-            $head->packageName             = $this->reader->getPackageName();
-            $head->headType                = Type::BRANCH;
-            $head->headName                = $branch['name'];
-            $head->composerJsonPresent     = $this->reader->isComposerJsonPresent();
-            $head->requirements            = $this->reader->getRequirements();
-            $head->developmentRequirements = $this->reader->getDevelopmentRequirements();
+            $head = new Head(
+                $this->reader->getPackageName(),
+                Type::BRANCH,
+                $branch['name'],
+                $this->reader->isComposerJsonPresent(),
+                $this->reader->getRequirements(),
+                $this->reader->getDevelopmentRequirements(),
+            );
 
             $package->addHead($head);
     }
