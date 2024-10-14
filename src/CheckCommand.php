@@ -125,7 +125,7 @@ class CheckCommand extends Command
 
                 foreach ($results as $result) {
                     if ($result->hasRequirement && $result->isSupported) {
-                        $greenHeads[] = sprintf('%s [%s]', $head->headName, $result->versionConstraint);
+                        $greenHeads[] = sprintf('%s [%s]', $head->headName, (string) $result->versionConstraint);
                     }
                 }
             }

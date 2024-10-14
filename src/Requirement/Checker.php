@@ -59,22 +59,24 @@ class Checker
         string $package,
         string $minimumVersion
     ): Result {
-        $result                  = new Result();
-        $result->requirementName = $package;
-
         if (! $head->hasRequirement($package)) {
-            $result->hasRequirement = false;
-            return $result;
+            return new Result(
+                $package,
+                null,
+                false,
+                false
+            );
         }
 
         $versionConstraint = $head->getVersionConstraintOfRequirement($package);
         $isSupported       = ($this->checker)($minimumVersion, $versionConstraint);
 
-        $result->hasRequirement    = true;
-        $result->versionConstraint = $versionConstraint;
-        $result->isSupported       = $isSupported;
-
-        return $result;
+        return new Result(
+            $package,
+            $versionConstraint,
+            true,
+            $isSupported
+        );
     }
 
     private function checkDevelopmentRequirement(
@@ -82,20 +84,23 @@ class Checker
         string $package,
         string $minimumVersion
     ): Result {
-        $result                  = new Result();
-        $result->requirementName = $package;
         if (! $head->hasDevelopmentRequirement($package)) {
-            $result->hasRequirement = false;
-            return $result;
+            return new Result(
+                $package,
+                null,
+                false,
+                false
+            );
         }
 
         $versionConstraint = $head->getVersionConstraintOfDevelopmentRequirement($package);
         $isSupported       = ($this->checker)($minimumVersion, $versionConstraint);
 
-        $result->hasRequirement    = true;
-        $result->versionConstraint = $versionConstraint;
-        $result->isSupported       = $isSupported;
-
-        return $result;
+        return new Result(
+            $package,
+            $versionConstraint,
+            true,
+            $isSupported
+        );
     }
 }
