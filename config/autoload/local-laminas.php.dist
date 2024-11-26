@@ -6,16 +6,9 @@ return [
     'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
     'organizations'            => [
         'laminas',
-        'laminas-api-tools',
         'mezzio',
     ],
     'ignore_repositories'      => [
-        'laminas-api-tools/.github',
-        'laminas-api-tools/api-tools-admin-ui',
-        'laminas-api-tools/api-tools.getlaminas.org',
-        'laminas-api-tools/documentation',
-        'laminas-api-tools/repo-template',
-        'laminas-api-tools/statuslib-example',
         'laminas/.github',
         'laminas/automatic-releases',
         'laminas/documentation',
