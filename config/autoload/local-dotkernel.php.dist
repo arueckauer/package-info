@@ -1,0 +1,41 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'github_api_token'         => 'PLACE_YOUR_TOKEN_HERE',
+    'organizations'            => [
+        'dotkernel',
+    ],
+    'ignore_repositories'      => [
+        'dotkernel/dot-authentication-service',
+        'dotkernel/dot-authentication-web',
+        'dotkernel/dot-console',
+        'dotkernel/dot-controller-plugin-authentication',
+        'dotkernel/dot-controller-plugin-authorization',
+        'dotkernel/dot-controller-plugin-flashmessenger',
+        'dotkernel/dot-controller-plugin-forms',
+        'dotkernel/dot-controller-plugin-mail',
+        'dotkernel/dot-controller-plugin-session',
+        'dotkernel/dot-doctrine-metadata',
+        'dotkernel/dot-filter',
+        'dotkernel/dot-hydrator',
+        'dotkernel/dot-inputfilter',
+        'dotkernel/dot-mapper',
+        'dotkernel/dot-paginator',
+        'dotkernel/dot-queue',
+        'dotkernel/dot-user',
+        'dotkernel/dot-validator',
+        'dotkernel/dotkernel',
+        'dotkernel/mezzio-hal',
+        'dotkernel/plugin-mail-transporter',
+        'dotkernel/presentation',
+        'dotkernel/template',
+        'dotkernel/template-expressive',
+        'dotkernel/zend',
+        'dotkernel/zend-expressive-hal',
+        'dotkernel/zf1',
+    ],
+    'ignore_branches'          => [],
+    'cache_file_path'          => dirname(__DIR__, 2) . '/data/packages.cache',
+];
