@@ -27,7 +27,7 @@ class Builder
         Package $package,
         array $pullRequest,
         ProgressBar $progressBarPullRequests,
-    ): void {
+    ): Package {
         $progressBarPullRequests->setMessage($pullRequest['head']['repo']['full_name'] ?? '');
         $progressBarPullRequests->advance();
 
@@ -35,7 +35,7 @@ class Builder
             && null !== $pullRequest['head']['repo']['full_name'];
 
         if (! $pullRequestExists) {
-            return;
+            return $package;
         }
 
         [$headOwner, $headRepository] = explode('/', (string) $pullRequest['head']['repo']['full_name']);
@@ -52,6 +52,6 @@ class Builder
             $this->reader->getDevelopmentRequirements(),
         );
 
-        $package->addHead($head);
+        return $package->withHead($head);
     }
 }
