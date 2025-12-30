@@ -25,7 +25,7 @@ class Builder
         Package $package,
         array $release,
         ProgressBar $progressBarReleases
-    ): void {
+    ): Package {
         $progressBarReleases->setMessage($release['tag_name']);
         $progressBarReleases->advance();
 
@@ -41,6 +41,6 @@ class Builder
             $this->reader->getDevelopmentRequirements(),
         );
 
-        $package->addHead($head);
+        return $package->withHead($head);
     }
 }
