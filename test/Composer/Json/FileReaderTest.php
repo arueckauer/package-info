@@ -9,8 +9,10 @@ use PackageInfo\Composer\Json\FileReader;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+use function assert;
 use function dirname;
 use function file_get_contents;
+use function is_string;
 
 #[CoversClass(FileReader::class)]
 final class FileReaderTest extends TestCase
@@ -28,10 +30,13 @@ final class FileReaderTest extends TestCase
             ],
         ];
 
+        $content = file_get_contents(dirname(__DIR__, 2) . '/TestAsset/composer.json');
+        assert(is_string($content));
+
         $root         = vfsStream::setup();
         $composerJson = vfsStream::newFile('composer.json')
             ->at($root)
-            ->setContent(file_get_contents(dirname(__DIR__, 2) . '/TestAsset/composer.json'));
+            ->setContent($content);
 
         self::assertSame(
             $expected,
