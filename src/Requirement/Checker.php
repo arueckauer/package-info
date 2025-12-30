@@ -8,7 +8,7 @@ use PackageInfo\Repository\Head;
 use PackageInfo\Requirement\Check\Result;
 use PackageInfo\Requirement\Version\Checker as VersionChecker;
 
-class Checker
+final class Checker
 {
     public array $requirements;
     public array $developmentRequirements;

@@ -6,7 +6,7 @@ namespace PackageInfo\Composer\Json;
 
 use Psr\Container\ContainerInterface;
 
-class UrlComposerFactory
+final readonly class UrlComposerFactory
 {
     public function __invoke(ContainerInterface $container): UrlComposer
     {

@@ -6,7 +6,7 @@ namespace PackageInfo\Composer\Json;
 
 use function sprintf;
 
-class UrlComposer
+final readonly class UrlComposer
 {
     public function __invoke(string $owner, string $repository, string $head): string
     {

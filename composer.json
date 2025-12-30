@@ -18,26 +18,27 @@
     ],
     "homepage": "https://github.com/arueckauer/package-info",
     "require": {
-        "php": "~8.2.0 || ~8.3.0",
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-json": "*",
-        "composer/semver": "^3.4.3",
-        "guzzlehttp/guzzle": "^7.9.2",
-        "knplabs/github-api": "^3.15",
-        "laminas/laminas-config-aggregator": "^1.15",
-        "laminas/laminas-servicemanager": "^3.22.1",
-        "laminas/laminas-stdlib": "^3.19",
-        "mezzio/mezzio": "^3.19.1",
-        "mezzio/mezzio-helpers": "^5.16",
-        "ocramius/package-versions": "^2.9",
-        "symfony/console": "^5.4.44"
+        "composer/semver": "^3.4.4",
+        "guzzlehttp/guzzle": "^7.10.0",
+        "knplabs/github-api": "^3.16",
+        "laminas/laminas-config-aggregator": "^1.19",
+        "laminas/laminas-servicemanager": "^3.22 || ^4.5",
+        "laminas/laminas-stdlib": "^3.21",
+        "mezzio/mezzio": "^3.26.0",
+        "mezzio/mezzio-helpers": "^5.20",
+        "ocramius/package-versions": "^2.11",
+        "symfony/console": "^6.0 || ^7.4.1"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "~2.48.2",
         "laminas/laminas-coding-standard": "~3.1.0",
         "mikey179/vfsstream": "~1.6.12",
-        "phpunit/phpunit": "~10.5.36",
-        "rector/rector": "~1.2.7",
+        "phpunit/phpunit": "~10.5.60",
+        "rector/rector": "~1.2.10",
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "~6.13.0"
+        "vimeo/psalm": "~6.14.3"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -57,6 +58,7 @@
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
             "php-http/discovery": true
         },
         "sort-packages": true

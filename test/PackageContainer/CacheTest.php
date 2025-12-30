@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfoTest\PackageContainer;
 
+use Exception;
 use org\bovigo\vfs\vfsStream;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
@@ -12,17 +13,17 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Cache::class)]
-class CacheTest extends TestCase
+final class CacheTest extends TestCase
 {
-    public function test__desctruct_writes_cache(): void
+    public function test__destruct_writes_cache(): void
     {
         $root      = vfsStream::setup();
         $cacheFile = vfsStream::newFile('test-cache-file')
             ->at($root)
             ->setContent('');
 
-        $cache = new Cache($cacheFile->url());
-        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive'));
+        $cache = $this->cache($cacheFile->url());
+        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         unset($cache);
 
         self::assertNotSame(
@@ -33,9 +34,9 @@ class CacheTest extends TestCase
 
     public function test_getPackageContainer(): void
     {
-        $packageA = new Package('millennial-falcon', 'hyperdrive');
-        $packageB = new Package('x-wing', 'hyperdrive');
-        $packageC = new Package('b-wing', 'hyperdrive');
+        $packageA = new Package('millennial-falcon', 'hyperdrive', false);
+        $packageB = new Package('x-wing', 'hyperdrive', false);
+        $packageC = new Package('b-wing', 'hyperdrive', true);
 
         $expected = new PackageContainer(
             $packageA,
@@ -44,7 +45,7 @@ class CacheTest extends TestCase
         );
 
         // phpcs:ignore
-        $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":3:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":3:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":3:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:5:"heads";a:0:{}}}';
+        $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:1;s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}}';
 
         $root      = vfsStream::setup();
         $cacheFile = vfsStream::newFile('test-cache-file')
@@ -53,7 +54,7 @@ class CacheTest extends TestCase
 
         self::assertEquals(
             $expected,
-            (new Cache($cacheFile->url()))->getPackageContainer()
+            ($this->cache($cacheFile->url()))->getPackageContainer()
         );
     }
 
@@ -65,13 +66,16 @@ class CacheTest extends TestCase
 
         self::assertEquals(
             new PackageContainer(),
-            (new Cache($filePath))->getPackageContainer()
+            ($this->cache($filePath))->getPackageContainer()
         );
 
         self::assertTrue($home->hasChild('cache.dat'));
         self::assertFileExists($filePath);
     }
 
+    /**
+     * @throws Exception
+     */
     public function test_write(): void
     {
         $root      = vfsStream::setup();
@@ -79,13 +83,18 @@ class CacheTest extends TestCase
             ->at($root)
             ->setContent('');
 
-        $cache = new Cache($cacheFile->url());
-        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive'));
+        $cache = $this->cache($cacheFile->url());
+        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         $cache->write();
 
         self::assertNotSame(
             '',
             $cacheFile->getContent()
         );
+    }
+
+    private function cache(string $cacheFilePath): Cache
+    {
+        return new Cache(new PackageContainer(), $cacheFilePath);
     }
 }

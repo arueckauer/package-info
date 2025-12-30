@@ -12,12 +12,12 @@ use PackageInfo\Repository\Head;
 use PackageInfo\Repository\Head\Type;
 use Symfony\Component\Console\Helper\ProgressBar;
 
-class Builder
+final readonly class Builder
 {
     public function __construct(
-        private readonly UrlComposer $urlComposer,
-        private readonly FileReader $fileReader,
-        private readonly MetaReader $reader,
+        private UrlComposer $urlComposer,
+        private FileReader $fileReader,
+        private MetaReader $reader,
     ) {
     }
 
@@ -25,7 +25,7 @@ class Builder
         Package $package,
         array $release,
         ProgressBar $progressBarReleases
-    ): void {
+    ): Package {
         $progressBarReleases->setMessage($release['tag_name']);
         $progressBarReleases->advance();
 
@@ -34,13 +34,13 @@ class Builder
 
         $head = new Head(
             $this->reader->getPackageName(),
-            Type::RELEASE,
+            Type::Release->value,
             $release['tag_name'],
             $this->reader->isComposerJsonPresent(),
             $this->reader->getRequirements(),
             $this->reader->getDevelopmentRequirements(),
         );
 
-        $package->addHead($head);
+        return $package->withHead($head);
     }
 }

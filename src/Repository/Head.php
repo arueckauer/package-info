@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\Repository;
 
-readonly class Head
+final readonly class Head
 {
     public function __construct(
         public string $packageName,

@@ -6,7 +6,7 @@ namespace PackageInfo\Output\Table;
 
 use Psr\Container\ContainerInterface;
 
-class RowFactory
+final readonly class RowFactory
 {
     public function __invoke(ContainerInterface $container): Row
     {

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PackageInfo\PackageContainer;
 
+use PackageInfo\PackageContainer;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class CacheFactory
+final class CacheFactory
 {
     /**
      * @throws ContainerExceptionInterface
@@ -17,7 +18,8 @@ class CacheFactory
     public function __invoke(ContainerInterface $container): Cache
     {
         return new Cache(
-            $container->get('config')['cache_file_path']
+            new PackageContainer(),
+            $container->get('config')['cache_file_path'],
         );
     }
 }

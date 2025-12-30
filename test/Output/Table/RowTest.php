@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Row::class)]
-class RowTest extends TestCase
+final class RowTest extends TestCase
 {
     public function test___invoke(): void
     {

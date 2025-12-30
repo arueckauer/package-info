@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(UrlComposer::class)]
-class UrlComposerTest extends TestCase
+final class UrlComposerTest extends TestCase
 {
     public static function urls(): array
     {

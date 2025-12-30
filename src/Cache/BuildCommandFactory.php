@@ -8,7 +8,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class BuildCommandFactory
+final readonly class BuildCommandFactory
 {
     /**
      * @throws ContainerExceptionInterface

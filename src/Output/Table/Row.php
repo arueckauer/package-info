@@ -8,7 +8,7 @@ use PackageInfo\Repository\Head;
 
 use function var_export;
 
-class Row
+final readonly class Row
 {
     public function __invoke(string $packageName, Head $head): array
     {

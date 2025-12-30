@@ -10,7 +10,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class GithubClientFactory
+final readonly class GithubClientFactory
 {
     /**
      * @throws ContainerExceptionInterface

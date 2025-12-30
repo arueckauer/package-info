@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Checker::class)]
-class CheckerTest extends TestCase
+final class CheckerTest extends TestCase
 {
     public static function checks(): array
     {

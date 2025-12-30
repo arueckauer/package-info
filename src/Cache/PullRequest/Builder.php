@@ -14,12 +14,12 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 use function explode;
 
-class Builder
+final readonly class Builder
 {
     public function __construct(
-        private readonly UrlComposer $urlComposer,
-        private readonly FileReader $fileReader,
-        private readonly MetaReader $reader,
+        private UrlComposer $urlComposer,
+        private FileReader $fileReader,
+        private MetaReader $reader,
     ) {
     }
 
@@ -27,7 +27,7 @@ class Builder
         Package $package,
         array $pullRequest,
         ProgressBar $progressBarPullRequests,
-    ): void {
+    ): Package {
         $progressBarPullRequests->setMessage($pullRequest['head']['repo']['full_name'] ?? '');
         $progressBarPullRequests->advance();
 
@@ -35,7 +35,7 @@ class Builder
             && null !== $pullRequest['head']['repo']['full_name'];
 
         if (! $pullRequestExists) {
-            return;
+            return $package;
         }
 
         [$headOwner, $headRepository] = explode('/', (string) $pullRequest['head']['repo']['full_name']);
@@ -45,13 +45,13 @@ class Builder
 
         $head = new Head(
             $this->reader->getPackageName(),
-            Type::PULL_REQUEST,
+            Type::PullRequest->value,
             $pullRequest['head']['ref'],
             $this->reader->isComposerJsonPresent(),
             $this->reader->getRequirements(),
             $this->reader->getDevelopmentRequirements(),
         );
 
-        $package->addHead($head);
+        return $package->withHead($head);
     }
 }

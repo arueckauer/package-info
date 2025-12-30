@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PackageInfo;
 
 use LogicException;
+use Override;
 use PackageInfo\Requirement\Checker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -21,7 +22,7 @@ use function in_array;
 use function is_countable;
 use function sprintf;
 
-class CheckCommand extends Command
+final class CheckCommand extends Command
 {
     public function __construct(
         private readonly PackageContainer $packageContainer,
@@ -30,6 +31,7 @@ class CheckCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     public function configure(): void
     {
         $this->setName('check');
@@ -59,14 +61,22 @@ class CheckCommand extends Command
             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
             'branch, pull-request and/or release'
         );
+        $this->addOption(
+            'include-archived',
+            'a',
+            InputOption::VALUE_NONE,
+            'Include archived repositories'
+        );
     }
 
+    #[Override]
     public function execute(InputInterface $input, OutputInterface $output): int
     {
         $require    = $input->getOption('require');
         $requireDev = $input->getOption('require-dev');
         $vendor     = $input->getOption('vendor');
         $headType   = $input->getOption('head-type');
+        $archived   = $input->getOption('include-archived');
 
         if (
             null === $require
@@ -113,8 +123,12 @@ class CheckCommand extends Command
                 continue;
             }
 
+            if (! $archived && $package->isArchived) {
+                continue;
+            }
+
             $greenHeads = [];
-            foreach ($package->getHeads() as $head) {
+            foreach ($package->heads as $head) {
                 if ($headTypeCount > 0 && ! in_array($head->headType, $headType, true)) {
                     continue;
                 }
@@ -135,9 +149,13 @@ class CheckCommand extends Command
             }
             $lastPackageName = $package->toString();
 
-            $format = count($greenHeads) > 0 ? '<info>%s</info>' : '<comment>%s</comment>';
+            $format = count($greenHeads) > 0 ? '<info>%s%s</info>' : '<comment>%s%s</comment>';
             $rows[] = [
-                'package'     => sprintf($format, $package->toString()),
+                'package'     => sprintf(
+                    $format,
+                    $package->toString(),
+                    $package->isArchived ? ' (archived)' : ''
+                ),
                 'green-heads' => implode("\n", $greenHeads),
             ];
         }

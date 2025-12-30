@@ -8,10 +8,12 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
+use function assert;
 use function file_exists;
 use function file_get_contents;
+use function is_string;
 
-class PackageContainerFactory
+final readonly class PackageContainerFactory
 {
     /**
      * @throws ContainerExceptionInterface
@@ -24,6 +26,8 @@ class PackageContainerFactory
         $cacheFilePath = $container->get('config')['cache_file_path'] ?? '';
         if (file_exists($cacheFilePath)) {
             $cacheContent = file_get_contents($cacheFilePath);
+            assert(is_string($cacheContent));
+
             $packageContainer->unserialize($cacheContent);
         }
 

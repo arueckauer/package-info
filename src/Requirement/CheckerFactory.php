@@ -9,7 +9,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class CheckerFactory
+final class CheckerFactory
 {
     /**
      * @throws ContainerExceptionInterface

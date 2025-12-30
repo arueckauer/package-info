@@ -11,7 +11,7 @@ use function json_decode;
 
 use const JSON_THROW_ON_ERROR;
 
-class FileReader
+final readonly class FileReader
 {
     public function __invoke(string $composerJsonPath): array
     {

@@ -6,7 +6,7 @@ namespace PackageInfo\Composer\Json;
 
 use function count;
 
-class MetaReader
+final class MetaReader
 {
     private array $composer = [];
 
