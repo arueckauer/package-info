@@ -79,6 +79,9 @@ final class PackageContainerTest extends TestCase
         );
     }
 
+    /**
+     * @throws \Exception
+     */
     public function test_serialize_and_unserialize(): void
     {
         $containerA = new PackageContainer(

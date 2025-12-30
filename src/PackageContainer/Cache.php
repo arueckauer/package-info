@@ -14,7 +14,6 @@ use function file_put_contents;
 
 final readonly class Cache
 {
-
     public function __construct(
         private PackageContainer $packageContainer,
         private string $cacheFilePath,
