@@ -67,7 +67,7 @@ php bin/console check -r php:^8.5 -t release
 To include only repositories of a specific organization, run the following command.
 
 ```bash
-php bin/console check -r php:^8.5 -vendor mezzio
+php bin/console check -r php:^8.5 --vendor mezzio
 ```
 
 For a complete list of options, execute the following command.
