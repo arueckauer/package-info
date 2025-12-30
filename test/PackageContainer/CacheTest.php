@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfoTest\PackageContainer;
 
+use Exception;
 use org\bovigo\vfs\vfsStream;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
@@ -14,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Cache::class)]
 final class CacheTest extends TestCase
 {
-    public function test__desctruct_writes_cache(): void
+    public function test__destruct_writes_cache(): void
     {
         $root      = vfsStream::setup();
         $cacheFile = vfsStream::newFile('test-cache-file')
@@ -72,6 +73,9 @@ final class CacheTest extends TestCase
         self::assertFileExists($filePath);
     }
 
+    /**
+     * @throws Exception
+     */
     public function test_write(): void
     {
         $root      = vfsStream::setup();
