@@ -44,7 +44,7 @@ final readonly class Builder
 
         $head = new Head(
             $this->reader->getPackageName(),
-            Type::BRANCH,
+            Type::Branch->value,
             $branch['name'],
             $this->reader->isComposerJsonPresent(),
             $this->reader->getRequirements(),

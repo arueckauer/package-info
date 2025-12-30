@@ -45,7 +45,7 @@ final readonly class Builder
 
         $head = new Head(
             $this->reader->getPackageName(),
-            Type::PULL_REQUEST,
+            Type::PullRequest->value,
             $pullRequest['head']['ref'],
             $this->reader->isComposerJsonPresent(),
             $this->reader->getRequirements(),

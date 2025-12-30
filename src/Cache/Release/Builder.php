@@ -34,7 +34,7 @@ final readonly class Builder
 
         $head = new Head(
             $this->reader->getPackageName(),
-            Type::RELEASE,
+            Type::Release->value,
             $release['tag_name'],
             $this->reader->isComposerJsonPresent(),
             $this->reader->getRequirements(),
