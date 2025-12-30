@@ -20,25 +20,25 @@
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-json": "*",
-        "composer/semver": "^3.4.3",
-        "guzzlehttp/guzzle": "^7.9.2",
+        "composer/semver": "^3.4.4",
+        "guzzlehttp/guzzle": "^7.10.0",
         "knplabs/github-api": "^3.16",
-        "laminas/laminas-config-aggregator": "^1.17",
-        "laminas/laminas-servicemanager": "^3.22 || ^4.3",
-        "laminas/laminas-stdlib": "^3.20",
-        "mezzio/mezzio": "^3.20.1",
-        "mezzio/mezzio-helpers": "^5.17",
-        "ocramius/package-versions": "^2.9",
-        "symfony/console": "^5.4.47"
+        "laminas/laminas-config-aggregator": "^1.19",
+        "laminas/laminas-servicemanager": "^3.22 || ^4.5",
+        "laminas/laminas-stdlib": "^3.21",
+        "mezzio/mezzio": "^3.26.0",
+        "mezzio/mezzio-helpers": "^5.20",
+        "ocramius/package-versions": "^2.11",
+        "symfony/console": "^6.0 || ^7.4.1"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "~2.44.0",
         "laminas/laminas-coding-standard": "~3.0.1",
         "mikey179/vfsstream": "~1.6.12",
-        "phpunit/phpunit": "~10.5.38",
+        "phpunit/phpunit": "~10.5.60",
         "rector/rector": "~1.2.10",
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "~6.13.0"
+        "vimeo/psalm": "~6.13.1"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
