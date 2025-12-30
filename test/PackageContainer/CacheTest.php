@@ -21,7 +21,7 @@ final class CacheTest extends TestCase
             ->at($root)
             ->setContent('');
 
-        $cache = new Cache($cacheFile->url());
+        $cache = $this->cache($cacheFile->url());
         $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         unset($cache);
 
@@ -53,7 +53,7 @@ final class CacheTest extends TestCase
 
         self::assertEquals(
             $expected,
-            (new Cache($cacheFile->url()))->getPackageContainer()
+            ($this->cache($cacheFile->url()))->getPackageContainer()
         );
     }
 
@@ -65,7 +65,7 @@ final class CacheTest extends TestCase
 
         self::assertEquals(
             new PackageContainer(),
-            (new Cache($filePath))->getPackageContainer()
+            ($this->cache($filePath))->getPackageContainer()
         );
 
         self::assertTrue($home->hasChild('cache.dat'));
@@ -79,7 +79,7 @@ final class CacheTest extends TestCase
             ->at($root)
             ->setContent('');
 
-        $cache = new Cache($cacheFile->url());
+        $cache = $this->cache($cacheFile->url());
         $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         $cache->write();
 
@@ -87,5 +87,10 @@ final class CacheTest extends TestCase
             '',
             $cacheFile->getContent()
         );
+    }
+
+    private function cache(string $cacheFilePath): Cache
+    {
+        return new Cache(new PackageContainer(), $cacheFilePath);
     }
 }
