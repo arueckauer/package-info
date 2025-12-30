@@ -8,9 +8,11 @@ use Exception;
 use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Exception\CacheFileNotWritableException;
 
+use function assert;
 use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
+use function is_string;
 
 final readonly class Cache
 {
@@ -55,6 +57,9 @@ final readonly class Cache
             return;
         }
 
-        $this->packageContainer->unserialize(file_get_contents($this->cacheFilePath));
+        $cacheContent = file_get_contents($this->cacheFilePath);
+        assert(is_string($cacheContent));
+
+        $this->packageContainer->unserialize($cacheContent);
     }
 }
