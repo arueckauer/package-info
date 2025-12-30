@@ -8,14 +8,15 @@ use PackageInfo\Repository\Head;
 
 use function sprintf;
 
-class Package
+readonly class Package
 {
     /** @var Head[] */
-    private array $heads;
+    public array $heads;
 
     public function __construct(
         public string $organization,
         public string $repository,
+        public bool $isArchived,
         Head ...$heads
     ) {
         $this->heads = $heads;
@@ -30,13 +31,16 @@ class Package
         );
     }
 
-    public function addHead(Head $head): void
+    public function withHead(Head $head): self
     {
-        $this->heads[] = $head;
-    }
+        $heads   = $this->heads;
+        $heads[] = $head;
 
-    public function getHeads(): array
-    {
-        return $this->heads;
+        return new self(
+            $this->organization,
+            $this->repository,
+            $this->isArchived,
+            ...$heads
+        );
     }
 }

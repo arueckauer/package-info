@@ -22,7 +22,7 @@ class CacheTest extends TestCase
             ->setContent('');
 
         $cache = new Cache($cacheFile->url());
-        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive'));
+        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         unset($cache);
 
         self::assertNotSame(
@@ -33,9 +33,9 @@ class CacheTest extends TestCase
 
     public function test_getPackageContainer(): void
     {
-        $packageA = new Package('millennial-falcon', 'hyperdrive');
-        $packageB = new Package('x-wing', 'hyperdrive');
-        $packageC = new Package('b-wing', 'hyperdrive');
+        $packageA = new Package('millennial-falcon', 'hyperdrive', false);
+        $packageB = new Package('x-wing', 'hyperdrive', false);
+        $packageC = new Package('b-wing', 'hyperdrive', true);
 
         $expected = new PackageContainer(
             $packageA,
@@ -44,7 +44,7 @@ class CacheTest extends TestCase
         );
 
         // phpcs:ignore
-        $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":3:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":3:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":3:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:5:"heads";a:0:{}}}';
+        $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:1;s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}}';
 
         $root      = vfsStream::setup();
         $cacheFile = vfsStream::newFile('test-cache-file')
@@ -80,7 +80,7 @@ class CacheTest extends TestCase
             ->setContent('');
 
         $cache = new Cache($cacheFile->url());
-        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive'));
+        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         $cache->write();
 
         self::assertNotSame(

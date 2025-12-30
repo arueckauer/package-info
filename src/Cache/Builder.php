@@ -53,19 +53,14 @@ class Builder
             $organization
         ));
 
-        $repositories = $this->repositories($organization);
+        $packages = $this->repositoriesAsPackages($organization);
 
         $progressBar = new SymfonyProgressBar($this->sectionMain);
         $progressBar->setFormat(ProgressBar::FORMAT_MAIN);
         $progressBar->setMessage('');
-        $progressBar->setMaxSteps(count($repositories));
+        $progressBar->setMaxSteps(count($packages));
 
-        foreach ($repositories as $repository) {
-            $package = new Package(
-                $organization,
-                $repository
-            );
-
+        foreach ($packages as $package) {
             $progressBar->setMessage($package->toString());
             $progressBar->advance();
 
@@ -81,7 +76,7 @@ class Builder
                 $progressBarBranches->setMaxSteps(count($branches));
 
                 foreach ($branches as $branch) {
-                    ($this->branchBuilder)($package, $branch, $progressBarBranches);
+                    $package = ($this->branchBuilder)($package, $branch, $progressBarBranches);
                 }
 
                 $this->sectionHeads->clear();
@@ -95,7 +90,7 @@ class Builder
                 $progressBarReleases->setMaxSteps(count($releases));
 
                 foreach ($releases as $release) {
-                    ($this->releaseBuilder)($package, $release, $progressBarReleases);
+                    $package = ($this->releaseBuilder)($package, $release, $progressBarReleases);
                 }
                 $this->sectionHeads->clear();
             }
@@ -107,7 +102,7 @@ class Builder
                 $progressBarPullRequests->setMaxSteps(count($releases));
 
                 foreach ($pullRequests as $pullRequest) {
-                    ($this->pullRequestBuilder)($package, $pullRequest, $progressBarPullRequests);
+                    $package = ($this->pullRequestBuilder)($package, $pullRequest, $progressBarPullRequests);
                 }
                 $this->sectionHeads->clear();
             }
@@ -123,10 +118,13 @@ class Builder
         $this->cache->write();
     }
 
-    private function repositories(string $org): array
+    /**
+     * @psalm-return array<Package>
+     */
+    public function repositoriesAsPackages(string $org): array
     {
-        $repositories = [];
-        $page         = 1;
+        $packages = [];
+        $page     = 1;
         while (true) {
             $repos = $this->client->organization()->repositories($org, 'all', $page);
             ++$page;
@@ -136,10 +134,14 @@ class Builder
             }
 
             foreach ($repos as $repo) {
-                $repositories[] = $repo['name'];
+                $packages[] = new Package(
+                    $org,
+                    $repo['name'],
+                    $repo['archived'],
+                );
             }
         }
 
-        return $repositories;
+        return $packages;
     }
 }
