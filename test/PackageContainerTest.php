@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfoTest;
 
+use Exception;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -80,7 +81,7 @@ final class PackageContainerTest extends TestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function test_serialize_and_unserialize(): void
     {
