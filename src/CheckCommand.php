@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PackageInfo;
 
 use LogicException;
+use Override;
 use PackageInfo\Requirement\Checker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -30,6 +31,7 @@ final class CheckCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     public function configure(): void
     {
         $this->setName('check');
@@ -67,6 +69,7 @@ final class CheckCommand extends Command
         );
     }
 
+    #[Override]
     public function execute(InputInterface $input, OutputInterface $output): int
     {
         $require    = $input->getOption('require');

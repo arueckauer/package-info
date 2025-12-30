@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PackageInfo\Cache;
 
 use Exception;
+use Override;
 use PackageInfo\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar as SymfonyProgressBar;
@@ -23,6 +24,7 @@ final class BuildCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     public function configure(): void
     {
         $this->setName('cache:build');
@@ -32,6 +34,7 @@ final class BuildCommand extends Command
     /**
      * @throws Exception
      */
+    #[Override]
     public function execute(InputInterface $input, OutputInterface $output): int
     {
         assert($output instanceof ConsoleOutputInterface);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PackageInfo;
 
 use Exception;
+use Override;
 use PackageInfo\Repository\Head;
 use Serializable;
 
@@ -61,11 +62,13 @@ final class PackageContainer implements Serializable
         return $this->data;
     }
 
+    #[Override]
     public function serialize(): ?string
     {
         return serialize($this->data);
     }
 
+    #[Override]
     public function unserialize($data): void
     {
         if ('' === $data) {
