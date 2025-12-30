@@ -25,7 +25,7 @@ final class MetaReaderTest extends TestCase
     public function test_getPackageName(): void
     {
         $metaReader = new MetaReader();
-        $metaReader->setComposer(static::$composer);
+        $metaReader->setComposer(self::$composer);
 
         self::assertEquals(
             'millennial-falcon/hyperdrive',
@@ -36,7 +36,7 @@ final class MetaReaderTest extends TestCase
     public function test_isComposerJsonPresent(): void
     {
         $metaReader = new MetaReader();
-        $metaReader->setComposer(static::$composer);
+        $metaReader->setComposer(self::$composer);
 
         self::assertTrue(
             $metaReader->isComposerJsonPresent()
@@ -49,7 +49,7 @@ final class MetaReaderTest extends TestCase
             'php' => '^7.3 || ~8.0.0 || ~8.1.0',
         ];
         $metaReader = new MetaReader();
-        $metaReader->setComposer(static::$composer);
+        $metaReader->setComposer(self::$composer);
 
         self::assertEquals(
             $expected,
@@ -65,7 +65,7 @@ final class MetaReaderTest extends TestCase
         ];
 
         $metaReader = new MetaReader();
-        $metaReader->setComposer(static::$composer);
+        $metaReader->setComposer(self::$composer);
 
         self::assertEquals(
             $expected,
