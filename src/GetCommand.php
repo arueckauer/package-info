@@ -47,7 +47,7 @@ class GetCommand extends Command
         $package = $this->packageContainer->get($packageName);
         $rows    = [];
 
-        foreach ($package->getHeads() as $head) {
+        foreach ($package->heads as $head) {
             $rows[] = ($this->row)($packageName, $head);
         }
 
