@@ -47,6 +47,8 @@ return [
         'laminas/technical-steering-committee',
         'laminas/tutorials',
         'laminas/twitter-automation',
+        'laminas/workflow-automatic-releases',
+        'laminas/laminas-continuous-integration',
         'mezzio/.github',
         'mezzio/mezzio-aurarouter',
         'mezzio/mezzio.dev',
