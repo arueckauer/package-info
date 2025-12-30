@@ -59,6 +59,12 @@ class CheckCommand extends Command
             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
             'branch, pull-request and/or release'
         );
+        $this->addOption(
+            'include-archived',
+            'a',
+            InputOption::VALUE_NONE,
+            'Include archived repositories'
+        );
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
@@ -67,6 +73,7 @@ class CheckCommand extends Command
         $requireDev = $input->getOption('require-dev');
         $vendor     = $input->getOption('vendor');
         $headType   = $input->getOption('head-type');
+        $archived   = $input->getOption('include-archived');
 
         if (
             null === $require
@@ -113,8 +120,12 @@ class CheckCommand extends Command
                 continue;
             }
 
+            if (! $archived && $package->isArchived) {
+                continue;
+            }
+
             $greenHeads = [];
-            foreach ($package->getHeads() as $head) {
+            foreach ($package->heads as $head) {
                 if ($headTypeCount > 0 && ! in_array($head->headType, $headType, true)) {
                     continue;
                 }
@@ -135,9 +146,13 @@ class CheckCommand extends Command
             }
             $lastPackageName = $package->toString();
 
-            $format = count($greenHeads) > 0 ? '<info>%s</info>' : '<comment>%s</comment>';
+            $format = count($greenHeads) > 0 ? '<info>%s%s</info>' : '<comment>%s%s</comment>';
             $rows[] = [
-                'package'     => sprintf($format, $package->toString()),
+                'package'     => sprintf(
+                    $format,
+                    $package->toString(),
+                    $package->isArchived ? ' (archived)' : ''
+                ),
                 'green-heads' => implode("\n", $greenHeads),
             ];
         }
