@@ -13,7 +13,7 @@ use function dirname;
 use function file_get_contents;
 
 #[CoversClass(FileReader::class)]
-class FileReaderTest extends TestCase
+final class FileReaderTest extends TestCase
 {
     public function test__invoke(): void
     {

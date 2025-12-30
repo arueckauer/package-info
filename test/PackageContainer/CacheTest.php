@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Cache::class)]
-class CacheTest extends TestCase
+final class CacheTest extends TestCase
 {
     public function test__desctruct_writes_cache(): void
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\Console\Helper;
 
-class ProgressBar
+final class ProgressBar
 {
     public const FORMAT_MAIN          = 'format_main';
     public const FORMAT_BRANCHES      = 'format_branches';

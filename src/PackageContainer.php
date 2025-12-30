@@ -13,7 +13,7 @@ use function serialize;
 use function unserialize;
 use function usort;
 
-class PackageContainer implements Serializable
+final class PackageContainer implements Serializable
 {
     /** @var Package[] */
     private array $data = [];

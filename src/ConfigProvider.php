@@ -9,7 +9,7 @@ use PackageInfo\Composer\Json\FileReaderFactory;
 use PackageInfo\Composer\Json\MetaReaderFactory;
 use PackageInfo\Composer\Json\UrlComposerFactory;
 
-class ConfigProvider
+final readonly class ConfigProvider
 {
     public function __invoke(): array
     {

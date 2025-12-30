@@ -6,10 +6,10 @@ namespace PackageInfo\Requirement\Version;
 
 use Composer\Semver\VersionParser;
 
-class Checker
+final readonly class Checker
 {
     public function __construct(
-        private readonly VersionParser $versionParser,
+        private VersionParser $versionParser,
     ) {
     }
 

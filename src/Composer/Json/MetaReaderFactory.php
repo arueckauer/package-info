@@ -6,7 +6,7 @@ namespace PackageInfo\Composer\Json;
 
 use Psr\Container\ContainerInterface;
 
-class MetaReaderFactory
+final readonly class MetaReaderFactory
 {
     public function __invoke(ContainerInterface $container): MetaReader
     {

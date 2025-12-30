@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Head::class)]
-class HeadTest extends TestCase
+final class HeadTest extends TestCase
 {
     public function test_hasRequirement(): void
     {

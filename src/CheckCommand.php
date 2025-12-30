@@ -21,7 +21,7 @@ use function in_array;
 use function is_countable;
 use function sprintf;
 
-class CheckCommand extends Command
+final class CheckCommand extends Command
 {
     public function __construct(
         private readonly PackageContainer $packageContainer,

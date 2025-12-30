@@ -13,7 +13,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class BuilderFactory
+final readonly class BuilderFactory
 {
     /**
      * @throws NotFoundExceptionInterface

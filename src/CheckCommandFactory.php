@@ -9,7 +9,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class CheckCommandFactory
+final readonly class CheckCommandFactory
 {
     /**
      * @throws ContainerExceptionInterface

@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use function assert;
 
-class BuildCommand extends Command
+final class BuildCommand extends Command
 {
     public function __construct(
         private readonly array $organizations,

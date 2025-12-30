@@ -8,7 +8,7 @@ use PackageInfo\Repository\Head;
 
 use function sprintf;
 
-readonly class Package
+final readonly class Package
 {
     /** @var Head[] */
     public array $heads;

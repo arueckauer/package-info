@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Package::class)]
-class PackageTest extends TestCase
+final class PackageTest extends TestCase
 {
     public function test_toString(): void
     {

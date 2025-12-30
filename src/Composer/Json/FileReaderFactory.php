@@ -6,7 +6,7 @@ namespace PackageInfo\Composer\Json;
 
 use Psr\Container\ContainerInterface;
 
-class FileReaderFactory
+final readonly class FileReaderFactory
 {
     public function __invoke(ContainerInterface $container): FileReader
     {

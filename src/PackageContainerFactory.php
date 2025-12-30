@@ -11,7 +11,7 @@ use Psr\Container\NotFoundExceptionInterface;
 use function file_exists;
 use function file_get_contents;
 
-class PackageContainerFactory
+final readonly class PackageContainerFactory
 {
     /**
      * @throws ContainerExceptionInterface

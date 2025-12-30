@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function array_keys;
 use function sprintf;
 
-class GetCommand extends Command
+final class GetCommand extends Command
 {
     public function __construct(
         private readonly PackageContainer $packageContainer,

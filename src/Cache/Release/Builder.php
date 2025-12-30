@@ -12,12 +12,12 @@ use PackageInfo\Repository\Head;
 use PackageInfo\Repository\Head\Type;
 use Symfony\Component\Console\Helper\ProgressBar;
 
-class Builder
+final readonly class Builder
 {
     public function __construct(
-        private readonly UrlComposer $urlComposer,
-        private readonly FileReader $fileReader,
-        private readonly MetaReader $reader,
+        private UrlComposer $urlComposer,
+        private FileReader $fileReader,
+        private MetaReader $reader,
     ) {
     }
 

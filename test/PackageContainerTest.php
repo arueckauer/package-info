@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(PackageContainer::class)]
-class PackageContainerTest extends TestCase
+final class PackageContainerTest extends TestCase
 {
     public function test_has(): void
     {

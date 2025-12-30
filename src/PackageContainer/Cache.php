@@ -12,15 +12,13 @@ use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
 
-class Cache
+final readonly class Cache
 {
-    private readonly PackageContainer $packageContainer;
 
     public function __construct(
-        private readonly string $cacheFilePath,
+        private PackageContainer $packageContainer,
+        private string $cacheFilePath,
     ) {
-        $this->packageContainer = new PackageContainer();
-
         $this->read();
     }
 

@@ -20,7 +20,7 @@ use function count;
 use function in_array;
 use function sprintf;
 
-class Builder
+final class Builder
 {
     private ?ConsoleSectionOutput $sectionMain  = null;
     private ?ConsoleSectionOutput $sectionHeads = null;

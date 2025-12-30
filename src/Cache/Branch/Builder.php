@@ -14,16 +14,16 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 use function in_array;
 
-class Builder
+final readonly class Builder
 {
     /**
      * @param string[] $ignoreBranchNames
      */
     public function __construct(
-        private readonly array $ignoreBranchNames,
-        private readonly UrlComposer $urlComposer,
-        private readonly FileReader $fileReader,
-        private readonly MetaReader $reader,
+        private array $ignoreBranchNames,
+        private UrlComposer $urlComposer,
+        private FileReader $fileReader,
+        private MetaReader $reader,
     ) {
     }
 

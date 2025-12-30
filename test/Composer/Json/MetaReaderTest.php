@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(MetaReader::class)]
-class MetaReaderTest extends TestCase
+final class MetaReaderTest extends TestCase
 {
     private static array $composer = [
         'name'        => 'millennial-falcon/hyperdrive',
