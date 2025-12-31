@@ -29,7 +29,7 @@
         "mezzio/mezzio": "^3.26.0",
         "mezzio/mezzio-helpers": "^5.20",
         "ocramius/package-versions": "^2.11",
-        "symfony/console": "^6.0 || ^7.4.1"
+        "symfony/console": "^8.0.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "~2.48.2",
