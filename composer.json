@@ -21,7 +21,7 @@
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-json": "*",
         "composer/semver": "^3.4.4",
-        "guzzlehttp/guzzle": "^7.10.0",
+        "guzzlehttp/guzzle": "^8.0.0",
         "knplabs/github-api": "^3.16",
         "laminas/laminas-config-aggregator": "^1.19",
         "laminas/laminas-servicemanager": "^3.22 || ^4.5",
