@@ -379,12 +379,6 @@ message = 'Could not infer a precise return type for function `PackageInfo\Compo
 count = 1
 
 [[issues]]
-file = "src/Composer/Json/FileReaderFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
-count = 1
-
-[[issues]]
 file = "src/Composer/Json/MetaReader.php"
 code = "invalid-iterator"
 message = "The expression provided to `foreach` is not iterable. It resolved to type `mixed`, which is not iterable."
@@ -400,18 +394,6 @@ count = 4
 file = "src/Composer/Json/MetaReader.php"
 code = "mixed-return-statement"
 message = 'Could not infer a precise return type for function `PackageInfo\Composer\Json\MetaReader::getPackageName`. Saw type `nonnull`.'
-count = 1
-
-[[issues]]
-file = "src/Composer/Json/MetaReaderFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
-count = 1
-
-[[issues]]
-file = "src/Composer/Json/UrlComposerFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
 count = 1
 
 [[issues]]
@@ -448,12 +430,6 @@ count = 1
 file = "src/GithubClientFactory.php"
 code = "mixed-array-access"
 message = "Unsafe array access on type `mixed`."
-count = 1
-
-[[issues]]
-file = "src/Output/Table/RowFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
 count = 1
 
 [[issues]]
@@ -544,12 +520,6 @@ count = 2
 file = "src/Requirement/CheckerFactory.php"
 code = "mixed-argument"
 message = 'Invalid argument type for argument #1 of `PackageInfo\Requirement\Checker::__construct`: expected `PackageInfo\Requirement\Version\Checker`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Requirement/Version/CheckerFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
 count = 1
 
 [[issues]]

@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace PackageInfo\Output\Table;
 
-use Psr\Container\ContainerInterface;
-
 final readonly class RowFactory
 {
-    public function __invoke(ContainerInterface $container): Row
+    public function __invoke(): Row
     {
         return new Row();
     }
