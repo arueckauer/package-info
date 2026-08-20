@@ -32,6 +32,7 @@
         "symfony/console": "^6.0 || ^7.4.1"
     },
     "require-dev": {
+        "carthage-software/mago": "1.47.2",
         "ergebnis/composer-normalize": "~2.52.0",
         "laminas/laminas-coding-standard": "~3.1.0",
         "mikey179/vfsstream": "~1.6.12",
@@ -62,9 +63,5 @@
             "php-http/discovery": true
         },
         "sort-packages": true
-    },
-    "scripts": {
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf"
     }
 }

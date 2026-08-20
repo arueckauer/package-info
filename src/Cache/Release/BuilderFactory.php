@@ -22,7 +22,7 @@ final class BuilderFactory
         return new Builder(
             $container->get(UrlComposer::class),
             $container->get(FileReader::class),
-            $container->get(MetaReader::class)
+            $container->get(MetaReader::class),
         );
     }
 }

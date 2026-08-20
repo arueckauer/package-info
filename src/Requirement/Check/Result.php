@@ -11,6 +11,5 @@ final readonly class Result
         public ?string $versionConstraint,
         public bool $hasRequirement,
         public bool $isSupported,
-    ) {
-    }
+    ) {}
 }

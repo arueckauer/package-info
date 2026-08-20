@@ -12,13 +12,13 @@ use PHPUnit\Framework\TestCase;
 final class MetaReaderTest extends TestCase
 {
     private static array $composer = [
-        'name'        => 'millennial-falcon/hyperdrive',
-        'require'     => [
+        'name' => 'millennial-falcon/hyperdrive',
+        'require' => [
             'php' => '^7.3 || ~8.0.0 || ~8.1.0',
         ],
         'require-dev' => [
             'laminas/laminas-coding-standard' => '~2.3.0',
-            'phpunit/phpunit'                 => '^9.5.10',
+            'phpunit/phpunit' => '^9.5.10',
         ],
     ];
 
@@ -27,10 +27,7 @@ final class MetaReaderTest extends TestCase
         $metaReader = new MetaReader();
         $metaReader->setComposer(self::$composer);
 
-        self::assertEquals(
-            'millennial-falcon/hyperdrive',
-            $metaReader->getPackageName()
-        );
+        static::assertSame('millennial-falcon/hyperdrive', $metaReader->getPackageName());
     }
 
     public function test_isComposerJsonPresent(): void
@@ -38,38 +35,30 @@ final class MetaReaderTest extends TestCase
         $metaReader = new MetaReader();
         $metaReader->setComposer(self::$composer);
 
-        self::assertTrue(
-            $metaReader->isComposerJsonPresent()
-        );
+        static::assertTrue($metaReader->isComposerJsonPresent());
     }
 
     public function test_getRequirements(): void
     {
-        $expected   = [
+        $expected = [
             'php' => '^7.3 || ~8.0.0 || ~8.1.0',
         ];
         $metaReader = new MetaReader();
         $metaReader->setComposer(self::$composer);
 
-        self::assertEquals(
-            $expected,
-            $metaReader->getRequirements()
-        );
+        static::assertEquals($expected, $metaReader->getRequirements());
     }
 
     public function test_getDevelopmentRequirements(): void
     {
         $expected = [
             'laminas/laminas-coding-standard' => '~2.3.0',
-            'phpunit/phpunit'                 => '^9.5.10',
+            'phpunit/phpunit' => '^9.5.10',
         ];
 
         $metaReader = new MetaReader();
         $metaReader->setComposer(self::$composer);
 
-        self::assertEquals(
-            $expected,
-            $metaReader->getDevelopmentRequirements()
-        );
+        static::assertEquals($expected, $metaReader->getDevelopmentRequirements());
     }
 }

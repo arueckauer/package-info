@@ -17,9 +17,6 @@ final readonly class CheckCommandFactory
      */
     public function __invoke(ContainerInterface $container): CheckCommand
     {
-        return new CheckCommand(
-            $container->get(PackageContainer::class),
-            $container->get(Checker::class)
-        );
+        return new CheckCommand($container->get(PackageContainer::class), $container->get(Checker::class));
     }
 }

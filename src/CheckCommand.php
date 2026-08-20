@@ -37,85 +37,57 @@ final class CheckCommand extends Command
         $this->setName('check');
         $this->setDescription('Check all package information against given requirement');
 
-        $this->addOption(
-            'require',
-            'r',
-            InputOption::VALUE_OPTIONAL,
-            'Requirement, e.g. `php:8.0`'
-        );
+        $this->addOption('require', 'r', InputOption::VALUE_OPTIONAL, 'Requirement, e.g. `php:8.0`');
         $this->addOption(
             'require-dev',
             'd',
             InputOption::VALUE_OPTIONAL,
-            'Development requirement, e.g. `vimeo/psalm:4.11`'
+            'Development requirement, e.g. `vimeo/psalm:4.11`',
         );
-        $this->addOption(
-            'vendor',
-            null,
-            InputOption::VALUE_OPTIONAL,
-            'Filter vendor name, e.g. `mezzio`'
-        );
+        $this->addOption('vendor', null, InputOption::VALUE_OPTIONAL, 'Filter vendor name, e.g. `mezzio`');
         $this->addOption(
             'head-type',
             't',
             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-            'branch, pull-request and/or release'
+            'branch, pull-request and/or release',
         );
-        $this->addOption(
-            'include-archived',
-            'a',
-            InputOption::VALUE_NONE,
-            'Include archived repositories'
-        );
+        $this->addOption('include-archived', 'a', InputOption::VALUE_NONE, 'Include archived repositories');
     }
 
     #[Override]
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        $require    = $input->getOption('require');
+        $require = $input->getOption('require');
         $requireDev = $input->getOption('require-dev');
-        $vendor     = $input->getOption('vendor');
-        $headType   = $input->getOption('head-type');
-        $archived   = $input->getOption('include-archived');
+        $vendor = $input->getOption('vendor');
+        $headType = $input->getOption('head-type');
+        $archived = $input->getOption('include-archived');
 
-        if (
-            null === $require
-            && null === $requireDev
-        ) {
+        if (null === $require && null === $requireDev) {
             throw new LogicException('Either option "require" or "require-dev" must be provided.');
         }
 
-        if (
-            null !== $require
-            && null !== $requireDev
-        ) {
+        if (null !== $require && null !== $requireDev) {
             throw new LogicException('Only one option "require" or "require-dev" must be provided.');
         }
 
-        if (null !== $require) {
-            $checkRequirement                          = true;
-            [$requiredPackage, $lowestRequiredVersion] = explode(':', (string) $require);
-            $this->checker->requirements               = [$requiredPackage => $lowestRequiredVersion];
-            $this->checker->developmentRequirements    = [];
+        $checkRequirement = null !== $require;
+        [$requiredPackage, $lowestRequiredVersion] = explode(':', (string) ($require ?? $requireDev));
 
-            $checkMessage = sprintf('for requirement <info>%s</info> ', $require);
-        } else {
-            $checkRequirement                          = false;
-            [$requiredPackage, $lowestRequiredVersion] = explode(':', (string) $requireDev);
-            $this->checker->requirements               = [];
-            $this->checker->developmentRequirements    = [$requiredPackage => $lowestRequiredVersion];
-
-            $checkMessage = sprintf('for development requirement <info>%s</info> ', $requireDev);
-        }
+        $this->checker->requirements = $checkRequirement ? [$requiredPackage => $lowestRequiredVersion] : [];
+        $this->checker->developmentRequirements = $checkRequirement ? [] : [$requiredPackage => $lowestRequiredVersion];
+        $checkMessage = $checkRequirement
+            ? sprintf('for requirement <info>%s</info> ', $require)
+            : sprintf('for development requirement <info>%s</info> ', $requireDev);
 
         $packages = $this->packageContainer->all();
         $output->writeln(sprintf(
             '<comment>Checking <info>%s</info> packages</comment> ' . $checkMessage,
-            count($packages)
+            count($packages),
         ));
 
-        $headTypeCount   = is_countable($headType) ? count($headType) : 0;
-        $rows            = [];
+        $headTypeCount = is_countable($headType) ? count($headType) : 0;
+        $rows = [];
         $lastPackageName = null;
 
         foreach ($packages as $package) {
@@ -123,13 +95,13 @@ final class CheckCommand extends Command
                 continue;
             }
 
-            if (! $archived && $package->isArchived) {
+            if (!$archived && $package->isArchived) {
                 continue;
             }
 
             $greenHeads = [];
             foreach ($package->heads as $head) {
-                if ($headTypeCount > 0 && ! in_array($head->headType, $headType, true)) {
+                if ($headTypeCount > 0 && !in_array($head->headType, $headType, true)) {
                     continue;
                 }
 
@@ -138,9 +110,11 @@ final class CheckCommand extends Command
                     : $this->checker->checkDevelopmentRequirements($head);
 
                 foreach ($results as $result) {
-                    if ($result->hasRequirement && $result->isSupported) {
-                        $greenHeads[] = sprintf('%s [%s]', $head->headName, (string) $result->versionConstraint);
+                    if (!($result->hasRequirement && $result->isSupported)) {
+                        continue;
                     }
+
+                    $greenHeads[] = sprintf('%s [%s]', $head->headName, (string) $result->versionConstraint);
                 }
             }
 
@@ -151,11 +125,7 @@ final class CheckCommand extends Command
 
             $format = count($greenHeads) > 0 ? '<info>%s%s</info>' : '<comment>%s%s</comment>';
             $rows[] = [
-                'package'     => sprintf(
-                    $format,
-                    $package->toString(),
-                    $package->isArchived ? ' (archived)' : ''
-                ),
+                'package' => sprintf($format, $package->toString(), $package->isArchived ? ' (archived)' : ''),
                 'green-heads' => implode("\n", $greenHeads),
             ];
         }
@@ -169,10 +139,7 @@ final class CheckCommand extends Command
         $firstRow = $rows[0];
 
         $table = new Table($output);
-        $table
-            ->setHeaders(array_keys($firstRow))
-            ->setRows($rows)
-            ->render();
+        $table->setHeaders(array_keys($firstRow))->setRows($rows)->render();
 
         return 0;
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PackageInfo\Repository;
 
+use function array_key_exists;
+
 final readonly class Head
 {
     public function __construct(
@@ -13,12 +15,11 @@ final readonly class Head
         public bool $composerJsonPresent,
         public array $requirements,
         public array $developmentRequirements,
-    ) {
-    }
+    ) {}
 
     public function hasRequirement(string $package): bool
     {
-        return isset($this->requirements[$package]);
+        return array_key_exists($package, $this->requirements);
     }
 
     public function getVersionConstraintOfRequirement(string $package): string
@@ -28,7 +29,7 @@ final readonly class Head
 
     public function hasDevelopmentRequirement(string $package): bool
     {
-        return isset($this->developmentRequirements[$package]);
+        return array_key_exists($package, $this->developmentRequirements);
     }
 
     public function getVersionConstraintOfDevelopmentRequirement(string $package): string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PackageInfo\Composer\Json;
 
+use function array_key_exists;
 use function count;
 
 final class MetaReader
@@ -28,7 +29,7 @@ final class MetaReader
     public function getRequirements(): array
     {
         $requirements = [];
-        if (isset($this->composer['require'])) {
+        if (array_key_exists('require', $this->composer)) {
             foreach ($this->composer['require'] as $package => $versionConstraint) {
                 $requirements[$package] = $versionConstraint;
             }
@@ -40,7 +41,7 @@ final class MetaReader
     public function getDevelopmentRequirements(): array
     {
         $developmentRequirements = [];
-        if (isset($this->composer['require-dev'])) {
+        if (array_key_exists('require-dev', $this->composer)) {
             foreach ($this->composer['require-dev'] as $package => $versionConstraint) {
                 $developmentRequirements[$package] = $versionConstraint;
             }

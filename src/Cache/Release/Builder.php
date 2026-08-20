@@ -18,14 +18,10 @@ final readonly class Builder
         private UrlComposer $urlComposer,
         private FileReader $fileReader,
         private MetaReader $reader,
-    ) {
-    }
+    ) {}
 
-    public function __invoke(
-        Package $package,
-        array $release,
-        ProgressBar $progressBarReleases
-    ): Package {
+    public function __invoke(Package $package, array $release, ProgressBar $progressBarReleases): Package
+    {
         $progressBarReleases->setMessage($release['tag_name']);
         $progressBarReleases->advance();
 

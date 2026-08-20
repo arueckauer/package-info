@@ -15,9 +15,6 @@ final class PackageTest extends TestCase
     {
         $package = new Package('millennial-falcon', 'hyperdrive', false);
 
-        self::assertSame(
-            'millennial-falcon/hyperdrive',
-            $package->toString()
-        );
+        static::assertSame('millennial-falcon/hyperdrive', $package->toString());
     }
 }

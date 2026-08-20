@@ -24,16 +24,12 @@ final readonly class Builder
         private UrlComposer $urlComposer,
         private FileReader $fileReader,
         private MetaReader $reader,
-    ) {
-    }
+    ) {}
 
-    public function __invoke(
-        Package $package,
-        array $branch,
-        ProgressBar $progressBarBranches
-    ): Package {
-            $progressBarBranches->setMessage($branch['name']);
-            $progressBarBranches->advance();
+    public function __invoke(Package $package, array $branch, ProgressBar $progressBarBranches): Package
+    {
+        $progressBarBranches->setMessage($branch['name']);
+        $progressBarBranches->advance();
 
         if (in_array($branch['name'], $this->ignoreBranchNames, true)) {
             return $package;

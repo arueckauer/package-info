@@ -17,8 +17,6 @@ final class CheckerFactory
      */
     public function __invoke(ContainerInterface $container): Checker
     {
-        return new Checker(
-            $container->get(VersionChecker::class)
-        );
+        return new Checker($container->get(VersionChecker::class));
     }
 }

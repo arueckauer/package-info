@@ -16,10 +16,10 @@ final class RowTest extends TestCase
     {
         $expected = [
             'Organization/Repository' => 'millennial-falcon-ship/the-ship',
-            'Composer Package Name'   => 'millennial-falcon/ship',
-            'Head Type'               => 'branch',
-            'Head Name'               => 'main',
-            'composer.json present'   => 'true',
+            'Composer Package Name' => 'millennial-falcon/ship',
+            'Head Type' => 'branch',
+            'Head Name' => 'main',
+            'composer.json present' => 'true',
         ];
 
         $row = new Row();
@@ -34,13 +34,10 @@ final class RowTest extends TestCase
             ],
             [
                 'starship/builder' => '^7.5',
-                'droid/build'      => '^9.8',
+                'droid/build' => '^9.8',
             ],
         );
 
-        self::assertSame(
-            $expected,
-            $row('millennial-falcon-ship/the-ship', $head)
-        );
+        static::assertSame($expected, $row('millennial-falcon-ship/the-ship', $head));
     }
 }
