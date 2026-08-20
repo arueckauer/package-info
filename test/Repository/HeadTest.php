@@ -13,59 +13,31 @@ final class HeadTest extends TestCase
 {
     public function test_hasRequirement(): void
     {
-        $head = new Head(
-            '',
-            '',
-            '',
-            false,
-            ['millennial-falcon/hyperdrive' => ''],
-            [],
-        );
+        $head = new Head('', '', '', false, ['millennial-falcon/hyperdrive' => ''], []);
 
-        self::assertTrue($head->hasRequirement('millennial-falcon/hyperdrive'));
-        self::assertFalse($head->hasRequirement('b-wing/hyperdrive'));
+        static::assertTrue($head->hasRequirement('millennial-falcon/hyperdrive'));
+        static::assertFalse($head->hasRequirement('b-wing/hyperdrive'));
     }
 
     public function test_getVersionConstraintOfRequirement(): void
     {
-        $head = new Head(
-            '',
-            '',
-            '',
-            false,
-            ['millennial-falcon/hyperdrive' => '^1.0'],
-            [],
-        );
+        $head = new Head('', '', '', false, ['millennial-falcon/hyperdrive' => '^1.0'], []);
 
-        self::assertSame('^1.0', $head->getVersionConstraintOfRequirement('millennial-falcon/hyperdrive'));
+        static::assertSame('^1.0', $head->getVersionConstraintOfRequirement('millennial-falcon/hyperdrive'));
     }
 
     public function test_hasDevelopmentRequirement(): void
     {
-        $head = new Head(
-            '',
-            '',
-            '',
-            false,
-            ['starship/builder' => ''],
-            [],
-        );
+        $head = new Head('', '', '', false, ['starship/builder' => ''], []);
 
-        self::assertTrue($head->hasRequirement('starship/builder'));
-        self::assertFalse($head->hasRequirement('droid/builder'));
+        static::assertTrue($head->hasRequirement('starship/builder'));
+        static::assertFalse($head->hasRequirement('droid/builder'));
     }
 
     public function test_getVersionConstraintOfDevelopmentRequirement(): void
     {
-        $head = new Head(
-            '',
-            '',
-            '',
-            false,
-            ['starship/builder' => '^7.5'],
-            [],
-        );
+        $head = new Head('', '', '', false, ['starship/builder' => '^7.5'], []);
 
-        self::assertSame('^7.5', $head->getVersionConstraintOfRequirement('starship/builder'));
+        static::assertSame('^7.5', $head->getVersionConstraintOfRequirement('starship/builder'));
     }
 }

@@ -17,9 +17,6 @@ final class CacheFactory
      */
     public function __invoke(ContainerInterface $container): Cache
     {
-        return new Cache(
-            new PackageContainer(),
-            $container->get('config')['cache_file_path'],
-        );
+        return new Cache(new PackageContainer(), $container->get('config')['cache_file_path']);
     }
 }

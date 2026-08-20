@@ -15,45 +15,36 @@ final class PackageContainerTest extends TestCase
 {
     public function test_has(): void
     {
-        $package   = new Package('millennial-falcon', 'hyperdrive', false);
+        $package = new Package('millennial-falcon', 'hyperdrive', false);
         $container = new PackageContainer($package);
 
-        self::assertTrue($container->has('millennial-falcon/hyperdrive'));
-        self::assertFalse($container->has('tie-fighter/hyperdrive'));
+        static::assertTrue($container->has('millennial-falcon/hyperdrive'));
+        static::assertFalse($container->has('tie-fighter/hyperdrive'));
     }
 
     public function test_get(): void
     {
-        $package   = new Package('millennial-falcon', 'hyperdrive', false);
+        $package = new Package('millennial-falcon', 'hyperdrive', false);
         $container = new PackageContainer($package);
 
-        self::assertSame(
-            $package,
-            $container->get('millennial-falcon/hyperdrive')
-        );
+        static::assertSame($package, $container->get('millennial-falcon/hyperdrive'));
     }
 
     public function test_add(): void
     {
-        $package   = new Package('millennial-falcon', 'hyperdrive', false);
+        $package = new Package('millennial-falcon', 'hyperdrive', false);
         $container = new PackageContainer();
         $container->add($package);
 
-        self::assertSame(
-            $package,
-            $container->get('millennial-falcon/hyperdrive')
-        );
+        static::assertSame($package, $container->get('millennial-falcon/hyperdrive'));
     }
 
     public function test_all(): void
     {
-        $package   = new Package('millennial-falcon', 'hyperdrive', false);
+        $package = new Package('millennial-falcon', 'hyperdrive', false);
         $container = new PackageContainer($package);
 
-        self::assertSame(
-            ['millennial-falcon/hyperdrive' => $package],
-            $container->all()
-        );
+        static::assertSame(['millennial-falcon/hyperdrive' => $package], $container->all());
     }
 
     public function test_all_is_sorted_by_name(): void
@@ -63,21 +54,14 @@ final class PackageContainerTest extends TestCase
         $packageC = new Package('b-wing', 'hyperdrive', false);
 
         $expected = [
-            'b-wing/hyperdrive'            => $packageC,
+            'b-wing/hyperdrive' => $packageC,
             'millennial-falcon/hyperdrive' => $packageA,
-            'x-wing/hyperdrive'            => $packageB,
+            'x-wing/hyperdrive' => $packageB,
         ];
 
-        $container = new PackageContainer(
-            $packageA,
-            $packageB,
-            $packageC
-        );
+        $container = new PackageContainer($packageA, $packageB, $packageC);
 
-        self::assertSame(
-            $expected,
-            $container->all()
-        );
+        static::assertSame($expected, $container->all());
     }
 
     /**
@@ -94,9 +78,6 @@ final class PackageContainerTest extends TestCase
         $containerB = new PackageContainer();
         $containerB->unserialize((string) $containerA->serialize());
 
-        self::assertEquals(
-            $containerA,
-            $containerB
-        );
+        static::assertEquals($containerA, $containerB);
     }
 }

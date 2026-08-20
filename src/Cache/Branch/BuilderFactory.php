@@ -25,7 +25,7 @@ final readonly class BuilderFactory
             $config['ignore_branches'],
             $container->get(UrlComposer::class),
             $container->get(FileReader::class),
-            $container->get(MetaReader::class)
+            $container->get(MetaReader::class),
         );
     }
 }

@@ -2,22 +2,28 @@
 
 declare(strict_types=1);
 
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
-use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
+$cacheDirectory = null;
+$cacheClass     = null;
+if (getenv('CI')) {
+    $cacheDirectory = '/tmp/rector';
+    $cacheClass     = FileCacheStorage::class;
+}
+
+return RectorConfig::configure()
+    ->withPaths([
         __DIR__ . '/bin',
         __DIR__ . '/config',
         __DIR__ . '/src',
         __DIR__ . '/test',
-    ]);
-
-    $rectorConfig->disableParallel();
-
-    $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_82,
-        PHPUnitSetList::PHPUNIT_100,
-    ]);
-};
+    ])
+    ->withSets([
+        LevelSetList::UP_TO_PHP_85,
+    ])
+    ->withComposerBased(
+        phpunit: true,
+    )
+    ->withCache($cacheDirectory, $cacheClass);

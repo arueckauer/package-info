@@ -18,9 +18,6 @@ final readonly class BuildCommandFactory
     {
         $config = $container->get('config');
 
-        return new BuildCommand(
-            $config['organizations'],
-            $container->get(Builder::class)
-        );
+        return new BuildCommand($config['organizations'], $container->get(Builder::class));
     }
 }

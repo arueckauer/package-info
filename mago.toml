@@ -1,0 +1,57 @@
+#:schema https://mago.carthage.software/1.47.2/schema.json
+# Welcome to Mago!
+# For full documentation, see https://mago.carthage.software/1.47.2/en/tools/overview/
+version = "1"
+php-version = "8.5"
+
+[source]
+workspace = "."
+paths    = ["bin", "config", "src", "test"]
+includes = ["vendor"]
+
+[source.glob]
+literal-separator = true
+
+[formatter]
+preset = "default"
+preserve-breaking-member-access-chain = true
+preserve-breaking-member-access-chain-first-method-on-same-line = true
+preserve-breaking-argument-list = true
+preserve-breaking-array-like = true
+preserve-breaking-parameter-list = true
+preserve-breaking-attribute-list = true
+preserve-breaking-conditional-expression = true
+preserve-breaking-condition-expression = true
+preserve-redundant-logical-binary-expression-parentheses = true
+
+[linter]
+integrations = ["laminas", "symfony", "phpunit"]
+
+[linter.rules]
+ambiguous-function-call = { enabled = false }
+assert-description = { enabled = false }
+literal-named-argument = { enabled = false }
+no-literal-password = { exclude = ["config/autoload/local.php"] }
+halstead = { effort-threshold = 7000 }
+# Architectural concerns tracked as future refactoring work
+excessive-parameter-list = { level = "warning" }
+cyclomatic-complexity    = { level = "warning" }
+kan-defect               = { level = "warning" }
+
+[analyzer]
+plugins = []
+find-unused-definitions = true
+find-unused-expressions = true
+analyze-dead-code = false
+memoize-properties = true
+check-throws = true
+unchecked-exceptions = ["Error", "LogicException"]
+unchecked-exception-classes = []
+check-missing-override = true
+find-unused-parameters = true
+strict-list-index-checks = true
+strict-array-index-existence = false
+allow-array-truthy-operand = false
+no-boolean-literal-comparison = false
+check-missing-type-hints = false
+register-super-globals = true

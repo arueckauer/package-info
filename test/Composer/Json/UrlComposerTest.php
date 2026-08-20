@@ -37,17 +37,10 @@ final class UrlComposerTest extends TestCase
     }
 
     #[DataProvider('urls')]
-    public function test__invoke(
-        string $expected,
-        string $owner,
-        string $repository,
-        string $head
-    ): void {
+    public function test__invoke(string $expected, string $owner, string $repository, string $head): void
+    {
         $urlComposer = new UrlComposer();
 
-        self::assertSame(
-            $expected,
-            $urlComposer($owner, $repository, $head)
-        );
+        static::assertSame($expected, $urlComposer($owner, $repository, $head));
     }
 }

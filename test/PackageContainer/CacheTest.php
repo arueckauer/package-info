@@ -17,19 +17,14 @@ final class CacheTest extends TestCase
 {
     public function test__destruct_writes_cache(): void
     {
-        $root      = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('test-cache-file')
-            ->at($root)
-            ->setContent('');
+        $root = vfsStream::setup();
+        $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent('');
 
         $cache = $this->cache($cacheFile->url());
         $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         unset($cache);
 
-        self::assertNotSame(
-            '',
-            $cacheFile->getContent()
-        );
+        static::assertNotSame('', $cacheFile->getContent());
     }
 
     public function test_getPackageContainer(): void
@@ -38,24 +33,14 @@ final class CacheTest extends TestCase
         $packageB = new Package('x-wing', 'hyperdrive', false);
         $packageC = new Package('b-wing', 'hyperdrive', true);
 
-        $expected = new PackageContainer(
-            $packageA,
-            $packageB,
-            $packageC
-        );
+        $expected = new PackageContainer($packageA, $packageB, $packageC);
 
-        // phpcs:ignore
         $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:1;s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}}';
 
-        $root      = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('test-cache-file')
-            ->at($root)
-            ->setContent($cacheContent);
+        $root = vfsStream::setup();
+        $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent($cacheContent);
 
-        self::assertEquals(
-            $expected,
-            ($this->cache($cacheFile->url()))->getPackageContainer()
-        );
+        static::assertEquals($expected, $this->cache($cacheFile->url())->getPackageContainer());
     }
 
     public function test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file(): void
@@ -64,13 +49,10 @@ final class CacheTest extends TestCase
 
         $filePath = vfsStream::url('home') . '/cache.dat';
 
-        self::assertEquals(
-            new PackageContainer(),
-            ($this->cache($filePath))->getPackageContainer()
-        );
+        static::assertEquals(new PackageContainer(), $this->cache($filePath)->getPackageContainer());
 
-        self::assertTrue($home->hasChild('cache.dat'));
-        self::assertFileExists($filePath);
+        static::assertTrue($home->hasChild('cache.dat'));
+        static::assertFileExists($filePath);
     }
 
     /**
@@ -78,19 +60,14 @@ final class CacheTest extends TestCase
      */
     public function test_write(): void
     {
-        $root      = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('test-cache-file')
-            ->at($root)
-            ->setContent('');
+        $root = vfsStream::setup();
+        $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent('');
 
         $cache = $this->cache($cacheFile->url());
         $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
         $cache->write();
 
-        self::assertNotSame(
-            '',
-            $cacheFile->getContent()
-        );
+        static::assertNotSame('', $cacheFile->getContent());
     }
 
     private function cache(string $cacheFilePath): Cache

@@ -18,7 +18,7 @@
     ],
     "homepage": "https://github.com/arueckauer/package-info",
     "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+        "php": "~8.5.0",
         "ext-json": "*",
         "composer/semver": "^3.4.4",
         "guzzlehttp/guzzle": "^8.0.0",
@@ -32,13 +32,12 @@
         "symfony/console": "^6.0 || ^7.4.1"
     },
     "require-dev": {
+        "carthage-software/mago": "1.47.2",
         "ergebnis/composer-normalize": "~2.52.0",
-        "laminas/laminas-coding-standard": "~3.1.0",
         "mikey179/vfsstream": "~1.6.12",
         "phpunit/phpunit": "~10.5.60",
         "rector/rector": "~2.6.0",
-        "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "~6.16.0"
+        "roave/security-advisories": "dev-latest"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -57,14 +56,9 @@
     ],
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "ergebnis/composer-normalize": true,
             "php-http/discovery": true
         },
         "sort-packages": true
-    },
-    "scripts": {
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf"
     }
 }

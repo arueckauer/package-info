@@ -2,6 +2,10 @@
 
 Verifying requirements of composer packages of a GitHub organization
 
+## Requirements
+
+- PHP 8.5
+
 ## Installation
 
 Clone the repository and install dependencies.
@@ -26,7 +30,32 @@ Place your personal access token in `github_api_token` and provide a `cache_file
 - `ignore_branches` An array of branch names, that will be ignored and thus not checked.
 - `cache_file_path` Location of the cache path.
 
-## Commands
+## Development
+
+### Quality Tools
+
+On the first run, `vendor/bin/mago` downloads the binary from GitHub. Set `GITHUB_TOKEN` to avoid rate-limit issues:
+
+```bash
+export GITHUB_TOKEN=$(gh auth token)
+```
+
+| Check           | Command                                                         |
+|-----------------|-----------------------------------------------------------------|
+| Lint            | `vendor/bin/mago lint`                                          |
+| Format check    | `vendor/bin/mago format --check`                                |
+| Auto-format     | `vendor/bin/mago format`                                        |
+| Static analysis | `vendor/bin/mago analyze --baseline mago-baseline.toml`         |
+| Tests           | `vendor/bin/phpunit`                                            |
+| Refactoring     | `vendor/bin/rector process --dry-run`                           |
+
+To suppress a newly accepted issue in the analyzer baseline:
+
+```bash
+vendor/bin/mago analyze --baseline mago-baseline.toml --generate-baseline
+```
+
+
 
 There are three commands available.
 

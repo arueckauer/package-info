@@ -40,25 +40,22 @@ final class GetCommand extends Command
 
         $output->writeln(sprintf(
             '<comment>Retrieving package information for </comment><info>%s</info>',
-            $packageName
+            $packageName,
         ));
 
-        if (! $this->packageContainer->has($packageName)) {
+        if (!$this->packageContainer->has($packageName)) {
             throw PackageNotFoundException::byPackage($packageName);
         }
 
         $package = $this->packageContainer->get($packageName);
-        $rows    = [];
+        $rows = [];
 
         foreach ($package->heads as $head) {
             $rows[] = ($this->row)($packageName, $head);
         }
 
         $table = new Table($output);
-        $table
-            ->setHeaders(array_keys($rows[0]))
-            ->setRows($rows)
-            ->render();
+        $table->setHeaders(array_keys($rows[0]))->setRows($rows)->render();
 
         return 0;
     }

@@ -12,11 +12,6 @@ final class CacheNotFoundException extends RuntimeException
 {
     public static function byFilename(string $filename): self
     {
-        return new self(
-            sprintf(
-                "Cache file (%s) could not be found.",
-                $filename
-            )
-        );
+        return new self(sprintf('Cache file (%s) could not be found.', $filename));
     }
 }

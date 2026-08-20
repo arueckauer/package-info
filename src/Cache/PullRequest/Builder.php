@@ -20,21 +20,16 @@ final readonly class Builder
         private UrlComposer $urlComposer,
         private FileReader $fileReader,
         private MetaReader $reader,
-    ) {
-    }
+    ) {}
 
-    public function __invoke(
-        Package $package,
-        array $pullRequest,
-        ProgressBar $progressBarPullRequests,
-    ): Package {
+    public function __invoke(Package $package, array $pullRequest, ProgressBar $progressBarPullRequests): Package
+    {
         $progressBarPullRequests->setMessage($pullRequest['head']['repo']['full_name'] ?? '');
         $progressBarPullRequests->advance();
 
-        $pullRequestExists = isset($pullRequest['head']['repo']['full_name'])
-            && null !== $pullRequest['head']['repo']['full_name'];
+        $pullRequestExists = ($pullRequest['head']['repo']['full_name'] ?? null) !== null;
 
-        if (! $pullRequestExists) {
+        if (!$pullRequestExists) {
             return $package;
         }
 

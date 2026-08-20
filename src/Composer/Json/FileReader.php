@@ -13,6 +13,10 @@ use const JSON_THROW_ON_ERROR;
 
 final readonly class FileReader
 {
+    /**
+     * @mago-expect lint:no-error-control-operator
+     * @mago-expect lint:no-empty-catch-clause
+     */
     public function __invoke(string $composerJsonPath): array
     {
         $composerJson = @file_get_contents($composerJsonPath);

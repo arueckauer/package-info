@@ -29,7 +29,7 @@ final readonly class BuilderFactory
             $container->get(Cache::class),
             $container->get(BranchBuilder::class),
             $container->get(ReleaseBuilder::class),
-            $container->get(PullRequestBuilder::class)
+            $container->get(PullRequestBuilder::class),
         );
     }
 }

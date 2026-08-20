@@ -38,13 +38,11 @@ final readonly class Cache
 
     /**
      * @throws Exception
+     * @mago-expect lint:no-error-control-operator
      */
     public function write(): void
     {
-        $result = @file_put_contents(
-            $this->cacheFilePath,
-            (string) $this->packageContainer->serialize()
-        );
+        $result = @file_put_contents($this->cacheFilePath, (string) $this->packageContainer->serialize());
 
         if (false === $result) {
             throw CacheFileNotWritableException::fromFilename($this->cacheFilePath);
@@ -53,7 +51,7 @@ final readonly class Cache
 
     private function read(): void
     {
-        if (! file_exists($this->cacheFilePath)) {
+        if (!file_exists($this->cacheFilePath)) {
             return;
         }
 

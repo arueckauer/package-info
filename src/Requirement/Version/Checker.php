@@ -10,12 +10,11 @@ final readonly class Checker
 {
     public function __construct(
         private VersionParser $versionParser,
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $minimumVersion, string $constraints): bool
     {
-        $actualConstraint   = $this->versionParser->parseConstraints($constraints);
+        $actualConstraint = $this->versionParser->parseConstraints($constraints);
         $requiredConstraint = $this->versionParser->parseConstraints($minimumVersion);
 
         return $actualConstraint->matches($requiredConstraint);

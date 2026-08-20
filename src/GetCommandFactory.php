@@ -17,9 +17,6 @@ final readonly class GetCommandFactory
      */
     public function __invoke(ContainerInterface $container): GetCommand
     {
-        return new GetCommand(
-            $container->get(PackageContainer::class),
-            $container->get(Row::class)
-        );
+        return new GetCommand($container->get(PackageContainer::class), $container->get(Row::class));
     }
 }

@@ -19,11 +19,7 @@ final readonly class GithubClientFactory
     public function __invoke(ContainerInterface $container): Client
     {
         $client = new Client();
-        $client->authenticate(
-            $container->get('config')['github_api_token'],
-            null,
-            AuthMethod::ACCESS_TOKEN
-        );
+        $client->authenticate($container->get('config')['github_api_token'], null, AuthMethod::ACCESS_TOKEN);
 
         return $client;
     }

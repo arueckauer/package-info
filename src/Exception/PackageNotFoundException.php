@@ -12,11 +12,6 @@ final class PackageNotFoundException extends RuntimeException
 {
     public static function byPackage(string $package): self
     {
-        return new self(
-            sprintf(
-                "Package (%s) could not be found.",
-                $package
-            )
-        );
+        return new self(sprintf('Package (%s) could not be found.', $package));
     }
 }

@@ -22,7 +22,7 @@ use function sprintf;
 
 final class Builder
 {
-    private ?ConsoleSectionOutput $sectionMain  = null;
+    private ?ConsoleSectionOutput $sectionMain = null;
     private ?ConsoleSectionOutput $sectionHeads = null;
 
     public function __construct(
@@ -32,25 +32,21 @@ final class Builder
         private readonly BranchBuilder $branchBuilder,
         private readonly ReleaseBuilder $releaseBuilder,
         private readonly PullRequestBuilder $pullRequestBuilder,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Exception
      */
     public function __invoke(ConsoleOutputInterface $output, string $organization): void
     {
-        if (
-            null === $this->sectionMain
-            || null === $this->sectionHeads
-        ) {
-            $this->sectionMain  = $output->section();
+        if (null === $this->sectionMain || null === $this->sectionHeads) {
+            $this->sectionMain = $output->section();
             $this->sectionHeads = $output->section();
         }
 
         $output->writeln(sprintf(
             '<comment>Retrieving repositories for <info>%s</info> organization</comment>',
-            $organization
+            $organization,
         ));
 
         $packages = $this->repositoriesAsPackages($organization);
@@ -124,21 +120,17 @@ final class Builder
     public function repositoriesAsPackages(string $org): array
     {
         $packages = [];
-        $page     = 1;
+        $page = 1;
         while (true) {
             $repos = $this->client->organization()->repositories($org, 'all', $page);
             ++$page;
 
-            if (! $repos) {
+            if (!$repos) {
                 break;
             }
 
             foreach ($repos as $repo) {
-                $packages[] = new Package(
-                    $org,
-                    $repo['name'],
-                    $repo['archived'],
-                );
+                $packages[] = new Package($org, $repo['name'], $repo['archived']);
             }
         }
 

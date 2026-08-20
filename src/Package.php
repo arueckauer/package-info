@@ -17,30 +17,21 @@ final readonly class Package
         public string $organization,
         public string $repository,
         public bool $isArchived,
-        Head ...$heads
+        Head ...$heads,
     ) {
         $this->heads = $heads;
     }
 
     public function toString(): string
     {
-        return sprintf(
-            '%s/%s',
-            $this->organization,
-            $this->repository
-        );
+        return sprintf('%s/%s', $this->organization, $this->repository);
     }
 
     public function withHead(Head $head): self
     {
-        $heads   = $this->heads;
+        $heads = $this->heads;
         $heads[] = $head;
 
-        return new self(
-            $this->organization,
-            $this->repository,
-            $this->isArchived,
-            ...$heads
-        );
+        return new self($this->organization, $this->repository, $this->isArchived, ...$heads);
     }
 }

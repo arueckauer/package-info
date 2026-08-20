@@ -14,10 +14,10 @@ final readonly class Row
     {
         return [
             'Organization/Repository' => $packageName,
-            'Composer Package Name'   => $head->packageName,
-            'Head Type'               => $head->headType,
-            'Head Name'               => $head->headName,
-            'composer.json present'   => var_export($head->composerJsonPresent, true),
+            'Composer Package Name' => $head->packageName,
+            'Head Type' => $head->headType,
+            'Head Name' => $head->headName,
+            'composer.json present' => var_export($head->composerJsonPresent, true),
         ];
     }
 }
