@@ -9,7 +9,6 @@ $realPath = realpath(__DIR__);
 assert(is_string($realPath));
 
 $aggregator = new ConfigAggregator([
-    Mezzio\Helper\ConfigProvider::class,
     Mezzio\ConfigProvider::class,
     Mezzio\Router\ConfigProvider::class,
     PackageInfo\ConfigProvider::class,
