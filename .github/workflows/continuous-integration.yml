@@ -19,6 +19,8 @@ jobs:
 
             -   name: "Install dependencies"
                 uses: ramsey/composer-install@v3
+                with:
+                    require-lock-file: true
 
             -   name: "Lint"
                 run: vendor/bin/mago lint
@@ -43,6 +45,8 @@ jobs:
 
             -   name: "Install dependencies"
                 uses: ramsey/composer-install@v3
+                with:
+                    require-lock-file: true
 
             -   name: "Analyze"
                 run: vendor/bin/mago analyze --baseline mago-baseline.toml
@@ -64,6 +68,8 @@ jobs:
 
             -   name: "Install dependencies"
                 uses: ramsey/composer-install@v3
+                with:
+                    require-lock-file: true
 
             -   name: "Run tests"
                 run: vendor/bin/phpunit
