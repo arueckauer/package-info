@@ -6,10 +6,10 @@ namespace PackageInfo\Console\Helper;
 
 final class ProgressBar
 {
-    public const FORMAT_MAIN = 'format_main';
-    public const FORMAT_BRANCHES = 'format_branches';
-    public const FORMAT_RELEASES = 'format_releases';
-    public const FORMAT_PULL_REQUESTS = 'format_pull_requests';
+    public const string FORMAT_MAIN = 'format_main';
+    public const string FORMAT_BRANCHES = 'format_branches';
+    public const string FORMAT_RELEASES = 'format_releases';
+    public const string FORMAT_PULL_REQUESTS = 'format_pull_requests';
 
     // phpcs:disable Generic.Files.LineLength.TooLong
     public static array $formats = [
