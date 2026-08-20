@@ -1,0 +1,733 @@
+variant = "loose"
+
+[[issues]]
+file = "config/container.php"
+code = "mixed-argument"
+message = '''Invalid argument type for argument #1 of `Laminas\ServiceManager\ServiceManager::__construct`: expected `array{'abstract_factories'?: array<array-key, Laminas\ServiceManager\Factory\AbstractFactoryInterface|class-string<Laminas\ServiceManager\Factory\AbstractFactoryInterface>>, 'aliases'?: array<string, string>, 'delegators'?: !Laminas\ServiceManager\ServiceManager::DelegatorsConfiguration, 'factories'?: !Laminas\ServiceManager\ServiceManager::FactoriesConfiguration, 'initializers'?: !Laminas\ServiceManager\ServiceManager::InitializersConfiguration, 'invokables'?: array<string, class-string>, 'lazy_services'?: array{'class_map'?: array<string, class-string>, 'proxies_namespace'?: non-empty-string, 'proxies_target_dir'?: non-empty-string, 'write_proxy_files'?: bool}, 'services'?: array<string, mixed>, 'shared'?: array<string, bool>, 'shared_by_default'?: bool, ...<string, mixed>}`, but found `mixed`.'''
+count = 1
+
+[[issues]]
+file = "config/container.php"
+code = "mixed-array-access"
+message = "Unsafe array access on type `mixed`."
+count = 1
+
+[[issues]]
+file = "config/container.php"
+code = "mixed-array-assignment"
+message = "Unsafe array assignment on type `mixed`."
+count = 2
+
+[[issues]]
+file = "config/container.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 2
+
+[[issues]]
+file = "src/Cache/Branch/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setMessage`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Composer\Json\UrlComposer::__invoke`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `array<array-key, string>`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `PackageInfo\Composer\Json\UrlComposer`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `PackageInfo\Composer\Json\FileReader`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #4 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `PackageInfo\Composer\Json\MetaReader`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/BuilderFactory.php"
+code = "mixed-array-access"
+message = "Unsafe array access on type `mixed`."
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/BuilderFactory.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 1
+
+[[issues]]
+file = "src/Cache/BuildCommand.php"
+code = "less-specific-argument"
+message = 'Argument type mismatch for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setFormatDefinition`: expected `string`, but provided type `array-key` is less specific.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuildCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Builder::__invoke`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuildCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `Symfony\Component\Console\Helper\ProgressBar::setFormatDefinition`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuildCommand.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 2
+
+[[issues]]
+file = "src/Cache/BuildCommandFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\BuildCommand::__construct`: expected `array<array-key, mixed>`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuildCommandFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\BuildCommand::__construct`: expected `PackageInfo\Cache\Builder`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuildCommandFactory.php"
+code = "mixed-array-access"
+message = "Unsafe array access on type `mixed`."
+count = 1
+
+[[issues]]
+file = "src/Cache/BuildCommandFactory.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 1
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Branch\Builder::__invoke`: expected `array<array-key, mixed>`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\PullRequest\Builder::__invoke`: expected `array<array-key, mixed>`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Release\Builder::__invoke`: expected `array<array-key, mixed>`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Package::__construct`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Package::__construct`: expected `bool`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-array-access"
+message = "Unsafe array access on type `mixed`."
+count = 2
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 4
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "possible-method-access-on-null"
+message = "Attempting to call a method on `null`."
+count = 3
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "possibly-null-argument"
+message = 'Argument #1 of method `Symfony\Component\Console\Helper\ProgressBar::__construct` is possibly `null`, but parameter type `Symfony\Component\Console\Output\OutputInterface` does not accept it.'
+count = 4
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\Builder::__construct`: expected `Github\Client`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Builder::__construct`: expected `array<array-key, mixed>`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Cache\Builder::__construct`: expected `PackageInfo\PackageContainer\Cache`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #4 of `PackageInfo\Cache\Builder::__construct`: expected `PackageInfo\Cache\Branch\Builder`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #5 of `PackageInfo\Cache\Builder::__construct`: expected `PackageInfo\Cache\Release\Builder`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #6 of `PackageInfo\Cache\Builder::__construct`: expected `PackageInfo\Cache\PullRequest\Builder`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-array-access"
+message = "Unsafe array access on type `mixed`."
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 1
+
+[[issues]]
+file = "src/Cache/PullRequest/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setMessage`: expected `string`, but found `nonnull`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/PullRequest/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Composer\Json\UrlComposer::__invoke`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/PullRequest/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/PullRequest/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\PullRequest\Builder::__construct`: expected `PackageInfo\Composer\Json\UrlComposer`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/PullRequest/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\PullRequest\Builder::__construct`: expected `PackageInfo\Composer\Json\FileReader`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/PullRequest/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Cache\PullRequest\Builder::__construct`: expected `PackageInfo\Composer\Json\MetaReader`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Release/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setMessage`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Release/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Composer\Json\UrlComposer::__invoke`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Release/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Release/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\Release\Builder::__construct`: expected `PackageInfo\Composer\Json\UrlComposer`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Release/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Release\Builder::__construct`: expected `PackageInfo\Composer\Json\FileReader`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Release/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Cache\Release\Builder::__construct`: expected `PackageInfo\Composer\Json\MetaReader`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "invalid-iterator"
+message = "The expression provided to `foreach` is not iterable. It resolved to type `mixed`, which is not iterable."
+count = 1
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Requirement\Checker::checkDevelopmentRequirements`: expected `PackageInfo\Repository\Head`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Requirement\Checker::checkRequirements`: expected `PackageInfo\Repository\Head`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #2 of `in_array`: expected `array<array-key, ('V.in_array() extends mixed)>`, but found `mixed`."
+count = 1
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #2 of `sprintf`: expected `Stringable|null|scalar`, but found `mixed`."
+count = 3
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #2 of `sprintf`: expected `Stringable|null|scalar`, but found `nonnull`."
+count = 1
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 8
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-method-access"
+message = "Attempting to access a method on a non-object type (`mixed`)."
+count = 3
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-operand"
+message = "Right operand in `&&` operation has `mixed` type."
+count = 1
+
+[[issues]]
+file = "src/CheckCommand.php"
+code = "mixed-property-access"
+message = "Attempting to access a property on a non-object type (`mixed`)."
+count = 6
+
+[[issues]]
+file = "src/CheckCommandFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\CheckCommand::__construct`: expected `PackageInfo\PackageContainer`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/CheckCommandFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\CheckCommand::__construct`: expected `PackageInfo\Requirement\Checker`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/FileReader.php"
+code = "mixed-return-statement"
+message = 'Could not infer a precise return type for function `PackageInfo\Composer\Json\FileReader::__invoke`. Saw type `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/FileReaderFactory.php"
+code = "unused-parameter"
+message = "Parameter `$container` is never used."
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/MetaReader.php"
+code = "invalid-iterator"
+message = "The expression provided to `foreach` is not iterable. It resolved to type `mixed`, which is not iterable."
+count = 2
+
+[[issues]]
+file = "src/Composer/Json/MetaReader.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 4
+
+[[issues]]
+file = "src/Composer/Json/MetaReader.php"
+code = "mixed-return-statement"
+message = 'Could not infer a precise return type for function `PackageInfo\Composer\Json\MetaReader::getPackageName`. Saw type `nonnull`.'
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/MetaReaderFactory.php"
+code = "unused-parameter"
+message = "Parameter `$container` is never used."
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/UrlComposerFactory.php"
+code = "unused-parameter"
+message = "Parameter `$container` is never used."
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Exception\PackageNotFoundException::byPackage`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Output\Table\Row::__invoke`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\PackageContainer::get`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\PackageContainer::has`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #2 of `sprintf`: expected `Stringable|null|scalar`, but found `mixed`."
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "possibly-null-argument"
+message = "Argument #1 of function `array_keys` is possibly `null`, but parameter type `array<array-key, mixed>` does not accept it."
+count = 1
+
+[[issues]]
+file = "src/GetCommand.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PackageInfo\Exception\PackageNotFoundException` in `PackageInfo\GetCommand::execute`.'
+count = 1
+
+[[issues]]
+file = "src/GetCommandFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\GetCommand::__construct`: expected `PackageInfo\PackageContainer`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/GetCommandFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\GetCommand::__construct`: expected `PackageInfo\Output\Table\Row`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/GithubClientFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `Github\Client::authenticate`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/GithubClientFactory.php"
+code = "mixed-array-access"
+message = "Unsafe array access on type `mixed`."
+count = 1
+
+[[issues]]
+file = "src/Output/Table/RowFactory.php"
+code = "unused-parameter"
+message = "Parameter `$container` is never used."
+count = 1
+
+[[issues]]
+file = "src/PackageContainer.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\PackageContainer::unserialize`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/PackageContainer.php"
+code = "mixed-property-type-coercion"
+message = 'A value with a less specific type `mixed` is being assigned to property `$data` (array<array-key, PackageInfo\Package>).'
+count = 1
+
+[[issues]]
+file = "src/PackageContainer/CacheFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `PackageInfo\PackageContainer\Cache::__construct`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/PackageContainer/CacheFactory.php"
+code = "mixed-array-access"
+message = "Unsafe array access on type `mixed`."
+count = 1
+
+[[issues]]
+file = "src/PackageContainerFactory.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #1 of `file_exists`: expected `string`, but found `nonnull`."
+count = 1
+
+[[issues]]
+file = "src/PackageContainerFactory.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #1 of `file_get_contents`: expected `string`, but found `nonnull`."
+count = 1
+
+[[issues]]
+file = "src/PackageContainerFactory.php"
+code = "mixed-assignment"
+message = "Assigning `nonnull` type to a variable may lead to unexpected behavior."
+count = 1
+
+[[issues]]
+file = "src/Repository/Head.php"
+code = "mixed-return-statement"
+message = 'Could not infer a precise return type for function `PackageInfo\Repository\Head::getVersionConstraintOfDevelopmentRequirement`. Saw type `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Repository/Head.php"
+code = "mixed-return-statement"
+message = 'Could not infer a precise return type for function `PackageInfo\Repository\Head::getVersionConstraintOfRequirement`. Saw type `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Requirement/Checker.php"
+code = "less-specific-argument"
+message = 'Argument type mismatch for argument #2 of `PackageInfo\Requirement\Checker::checkDevelopmentRequirement`: expected `string`, but provided type `array-key` is less specific.'
+count = 1
+
+[[issues]]
+file = "src/Requirement/Checker.php"
+code = "less-specific-argument"
+message = 'Argument type mismatch for argument #2 of `PackageInfo\Requirement\Checker::checkRequirement`: expected `string`, but provided type `array-key` is less specific.'
+count = 1
+
+[[issues]]
+file = "src/Requirement/Checker.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Requirement\Checker::checkDevelopmentRequirement`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Requirement/Checker.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Requirement\Checker::checkRequirement`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Requirement/Checker.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 2
+
+[[issues]]
+file = "src/Requirement/CheckerFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #1 of `PackageInfo\Requirement\Checker::__construct`: expected `PackageInfo\Requirement\Version\Checker`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Requirement/Version/CheckerFactory.php"
+code = "unused-parameter"
+message = "Parameter `$container` is never used."
+count = 1
+
+[[issues]]
+file = "test/Composer/Json/FileReaderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\FileReaderTest::test__invoke`.'
+count = 1
+
+[[issues]]
+file = "test/Composer/Json/MetaReaderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_getDevelopmentRequirements`.'
+count = 1
+
+[[issues]]
+file = "test/Composer/Json/MetaReaderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_getPackageName`.'
+count = 1
+
+[[issues]]
+file = "test/Composer/Json/MetaReaderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_getRequirements`.'
+count = 1
+
+[[issues]]
+file = "test/Composer/Json/MetaReaderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_isComposerJsonPresent`.'
+count = 1
+
+[[issues]]
+file = "test/Composer/Json/UrlComposerTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\UrlComposerTest::test__invoke`.'
+count = 1
+
+[[issues]]
+file = "test/ConfigProviderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\Exception` in `PackageInfoTest\ConfigProviderTest::testInvoke`.'
+count = 1
+
+[[issues]]
+file = "test/ConfigProviderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\ConfigProviderTest::testInvoke`.'
+count = 1
+
+[[issues]]
+file = "test/ConfigProviderTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\GeneratorNotSupportedException` in `PackageInfoTest\ConfigProviderTest::testInvoke`.'
+count = 1
+
+[[issues]]
+file = "test/Output/Table/RowTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Output\Table\RowTest::test___invoke`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainer/CacheTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainer\CacheTest::test__destruct_writes_cache`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainer/CacheTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainer\CacheTest::test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainer/CacheTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainer\CacheTest::test_getPackageContainer`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainerTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_add`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainerTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_all_is_sorted_by_name`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainerTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_all`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainerTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_get`.'
+count = 1
+
+[[issues]]
+file = "test/PackageContainerTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_has`.'
+count = 1
+
+[[issues]]
+file = "test/PackageTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageTest::test_toString`.'
+count = 1
+
+[[issues]]
+file = "test/Repository/HeadTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_getVersionConstraintOfDevelopmentRequirement`.'
+count = 1
+
+[[issues]]
+file = "test/Repository/HeadTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_getVersionConstraintOfRequirement`.'
+count = 1
+
+[[issues]]
+file = "test/Repository/HeadTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_hasDevelopmentRequirement`.'
+count = 1
+
+[[issues]]
+file = "test/Repository/HeadTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_hasRequirement`.'
+count = 1
+
+[[issues]]
+file = "test/Requirement/Version/CheckerTest.php"
+code = "unhandled-thrown-type"
+message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Requirement\Version\CheckerTest::test__invoke`.'
+count = 1
