@@ -7,6 +7,7 @@ namespace PackageInfo;
 use LogicException;
 use Override;
 use PackageInfo\Requirement\Checker;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -22,6 +23,7 @@ use function in_array;
 use function is_countable;
 use function sprintf;
 
+#[AsCommand(name: 'check', description: 'Check all package information against given requirement')]
 final class CheckCommand extends Command
 {
     public function __construct(
@@ -34,9 +36,6 @@ final class CheckCommand extends Command
     #[Override]
     public function configure(): void
     {
-        $this->setName('check');
-        $this->setDescription('Check all package information against given requirement');
-
         $this->addOption('require', 'r', InputOption::VALUE_OPTIONAL, 'Requirement, e.g. `php:8.0`');
         $this->addOption(
             'require-dev',

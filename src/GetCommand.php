@@ -7,6 +7,7 @@ namespace PackageInfo;
 use Override;
 use PackageInfo\Exception\PackageNotFoundException;
 use PackageInfo\Output\Table\Row;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function array_keys;
 use function sprintf;
 
+#[AsCommand(name: 'get', description: 'Lists all package information for given package')]
 final class GetCommand extends Command
 {
     public function __construct(
@@ -28,8 +30,6 @@ final class GetCommand extends Command
     #[Override]
     public function configure(): void
     {
-        $this->setName('get');
-        $this->setDescription('Lists all package information for given package');
         $this->addArgument('package-name', InputArgument::REQUIRED, 'Name of the package (vendor/project)');
     }
 

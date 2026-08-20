@@ -7,6 +7,7 @@ namespace PackageInfo\Cache;
 use Exception;
 use Override;
 use PackageInfo\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar as SymfonyProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,6 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use function assert;
 
+#[AsCommand(
+    name: 'cache:build',
+    description: 'Caches package information for repositories of configured organization(s)',
+)]
 final class BuildCommand extends Command
 {
     public function __construct(
@@ -22,13 +27,6 @@ final class BuildCommand extends Command
         private readonly Builder $builder,
     ) {
         parent::__construct();
-    }
-
-    #[Override]
-    public function configure(): void
-    {
-        $this->setName('cache:build');
-        $this->setDescription('Caches package information for repositories of configured organization(s)');
     }
 
     /**
