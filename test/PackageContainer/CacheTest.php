@@ -35,7 +35,6 @@ final class CacheTest extends TestCase
 
         $expected = new PackageContainer($packageA, $packageB, $packageC);
 
-        // phpcs:ignore
         $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:1;s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}}';
 
         $root = vfsStream::setup();
