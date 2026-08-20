@@ -134,7 +134,7 @@ final class CheckCommand extends Command
             return 0;
         }
 
-        /** @psalm-var array<int, string> $firstRow */
+        /** @var array<int, string> $firstRow */
         $firstRow = $rows[0];
 
         $table = new Table($output);
