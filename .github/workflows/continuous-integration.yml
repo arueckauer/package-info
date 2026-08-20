@@ -17,7 +17,7 @@ jobs:
             -   name: "Setup PHP"
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: "8.4"
+                    php-version: "8.5"
                     coverage: none
 
             -   name: "Install dependencies"
@@ -41,7 +41,7 @@ jobs:
             -   name: "Setup PHP"
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: "8.4"
+                    php-version: "8.5"
                     coverage: none
 
             -   name: "Install dependencies"
@@ -53,13 +53,8 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     tests:
-        name: "Tests (PHP ${{ matrix.php-version }})"
+        name: "Tests"
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                php-version:
-                    - "8.4"
-                    - "8.5"
         steps:
             -   name: "Checkout"
                 uses: actions/checkout@v4
@@ -67,7 +62,7 @@ jobs:
             -   name: "Setup PHP"
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: "${{ matrix.php-version }}"
+                    php-version: "8.5"
                     coverage: none
 
             -   name: "Install dependencies"
