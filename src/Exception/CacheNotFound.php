@@ -8,7 +8,7 @@ use RuntimeException;
 
 use function sprintf;
 
-final class CacheNotFoundException extends RuntimeException
+final class CacheNotFound extends RuntimeException
 {
     public static function byFilename(string $filename): self
     {
