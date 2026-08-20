@@ -7,6 +7,7 @@ namespace PackageInfoTest\Composer\Json;
 use org\bovigo\vfs\vfsStream;
 use PackageInfo\Composer\Json\FileReader;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 use function assert;
@@ -17,6 +18,7 @@ use function is_string;
 #[CoversClass(FileReader::class)]
 final class FileReaderTest extends TestCase
 {
+    /** @throws ExpectationFailedException */
     public function test__invoke(): void
     {
         $expected = [

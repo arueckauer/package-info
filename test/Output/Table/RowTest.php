@@ -7,11 +7,13 @@ namespace PackageInfoTest\Output\Table;
 use PackageInfo\Output\Table\Row;
 use PackageInfo\Repository\Head;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Row::class)]
 final class RowTest extends TestCase
 {
+    /** @throws ExpectationFailedException */
     public function test___invoke(): void
     {
         $expected = [

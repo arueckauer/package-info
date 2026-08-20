@@ -22,11 +22,19 @@ use PackageInfo\PackageContainer\Cache;
 use PackageInfo\Requirement\Checker;
 use PackageInfo\Requirement\Version\Checker as VersionChecker;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\GeneratorNotSupportedException;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(ConfigProvider::class)]
 final class ConfigProviderTest extends TestCase
 {
+    /**
+     * @throws ExpectationFailedException
+     * @throws Exception
+     * @throws GeneratorNotSupportedException
+     */
     public function testInvoke(): void
     {
         $configProvider = new ConfigProvider();

@@ -6,6 +6,7 @@ namespace PackageInfoTest\Composer\Json;
 
 use PackageInfo\Composer\Json\MetaReader;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(MetaReader::class)]
@@ -22,6 +23,7 @@ final class MetaReaderTest extends TestCase
         ],
     ];
 
+    /** @throws ExpectationFailedException */
     public function test_getPackageName(): void
     {
         $metaReader = new MetaReader();
@@ -30,6 +32,7 @@ final class MetaReaderTest extends TestCase
         static::assertSame('millennial-falcon/hyperdrive', $metaReader->getPackageName());
     }
 
+    /** @throws ExpectationFailedException */
     public function test_isComposerJsonPresent(): void
     {
         $metaReader = new MetaReader();
@@ -38,6 +41,7 @@ final class MetaReaderTest extends TestCase
         static::assertTrue($metaReader->isComposerJsonPresent());
     }
 
+    /** @throws ExpectationFailedException */
     public function test_getRequirements(): void
     {
         $expected = [
@@ -49,6 +53,7 @@ final class MetaReaderTest extends TestCase
         static::assertEquals($expected, $metaReader->getRequirements());
     }
 
+    /** @throws ExpectationFailedException */
     public function test_getDevelopmentRequirements(): void
     {
         $expected = [
