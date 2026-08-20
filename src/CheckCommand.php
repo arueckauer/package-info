@@ -113,7 +113,7 @@ final class CheckCommand extends Command
                         continue;
                     }
 
-                    $greenHeads[] = sprintf('%s [%s]', $head->headName, (string) $result->versionConstraint);
+                    $greenHeads[] = sprintf('%s [%s]', $head->headName, $result->versionConstraint);
                 }
             }
 
