@@ -2,6 +2,10 @@
 
 Verifying requirements of composer packages of a GitHub organization
 
+## Requirements
+
+- PHP 8.5
+
 ## Installation
 
 Clone the repository and install dependencies.
