@@ -31,7 +31,6 @@ final readonly class ConfigProvider
                     GetCommand::class => GetCommandFactory::class,
                     Output\Table\Row::class => Output\Table\RowFactory::class,
                     PackageContainer::class => PackageContainerFactory::class,
-                    PackageContainer\Cache::class => PackageContainer\CacheFactory::class,
                     Requirement\Checker::class => Requirement\CheckerFactory::class,
                     Requirement\Version\Checker::class => Requirement\Version\CheckerFactory::class,
                 ],

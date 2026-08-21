@@ -10,10 +10,11 @@ use PackageInfo\Cache\PullRequest\Builder as PullRequestBuilder;
 use PackageInfo\Cache\Release\Builder as ReleaseBuilder;
 use PackageInfo\Composer\Json\BatchFetcher;
 use PackageInfo\Composer\Json\UrlComposer;
-use PackageInfo\PackageContainer\Cache;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
+
+use function rtrim;
 
 final readonly class BuilderFactory
 {
@@ -24,11 +25,12 @@ final readonly class BuilderFactory
     public function __invoke(ContainerInterface $container): Builder
     {
         $config = $container->get('config');
+        $cacheDirectory = rtrim((string) ($config['cache_directory'] ?? ''), '/\\');
 
         return new Builder(
             $container->get(Client::class),
             $config['ignore_repositories'],
-            $container->get(Cache::class),
+            $cacheDirectory,
             $container->get(BranchBuilder::class),
             $container->get(ReleaseBuilder::class),
             $container->get(PullRequestBuilder::class),

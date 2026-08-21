@@ -19,5 +19,5 @@ return [
     'ignore_branches'          => [
         'gh-pages',
     ],
-    'cache_file_path'          => dirname(__DIR__, 2) . '/data/packages.cache',
+    'cache_directory'          => dirname(__DIR__, 2) . '/data',
 ];

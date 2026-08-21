@@ -16,7 +16,7 @@ use function usort;
 
 final class PackageContainer implements Serializable
 {
-    /** @var Package[] */
+    /** @var array<string, Package> */
     private array $data = [];
 
     public function __construct(Package ...$packages)
@@ -56,6 +56,7 @@ final class PackageContainer implements Serializable
         $this->data[$package->toString()] = $package;
     }
 
+    /** @return array<string, Package> */
     public function all(): array
     {
         return $this->data;

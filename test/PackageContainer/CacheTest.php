@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PackageInfoTest\PackageContainer;
 
 use Exception;
+use JsonException;
 use org\bovigo\vfs\vfsStream;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
@@ -27,36 +28,55 @@ final class CacheTest extends TestCase
         unset($cache);
 
         static::assertNotSame('', $cacheFile->getContent());
+        static::assertStringContainsString('"organization"', $cacheFile->getContent());
     }
 
-    /** @throws ExpectationFailedException */
+    /**
+     * @throws ExpectationFailedException
+     * @throws JsonException
+     */
     public function test_getPackageContainer(): void
     {
-        $packageA = new Package('millennial-falcon', 'hyperdrive', false);
-        $packageB = new Package('x-wing', 'hyperdrive', false);
-        $packageC = new Package('b-wing', 'hyperdrive', true);
+        $packageA = new Package('test-org', 'repo-a', false);
+        $packageB = new Package('test-org', 'repo-b', true);
 
-        $expected = new PackageContainer($packageA, $packageB, $packageC);
+        $expected = new PackageContainer($packageA, $packageB);
 
-        $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:1;s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}}';
+        $cacheContent = json_encode([
+            'organization' => 'test-org',
+            'generated_at' => '2026-01-01T00:00:00+00:00',
+            'repositories' => [
+                [
+                    'name'         => 'test-org/repo-a',
+                    'organization' => 'test-org',
+                    'repository'   => 'repo-a',
+                    'is_archived'  => false,
+                    'heads'        => [],
+                ],
+                [
+                    'name'         => 'test-org/repo-b',
+                    'organization' => 'test-org',
+                    'repository'   => 'repo-b',
+                    'is_archived'  => true,
+                    'heads'        => [],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR);
 
-        $root = vfsStream::setup();
+        $root      = vfsStream::setup();
         $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent($cacheContent);
 
         static::assertEquals($expected, $this->cache($cacheFile->url())->getPackageContainer());
     }
 
     /** @throws ExpectationFailedException */
-    public function test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file(): void
+    public function test_getPackageContainer_initializes_empty_PackageContainer_for_missing_cache_file(): void
     {
         $home = vfsStream::setup('home');
 
-        $filePath = vfsStream::url('home') . '/cache.dat';
+        $filePath = vfsStream::url('home') . '/cache.json';
 
         static::assertEquals(new PackageContainer(), $this->cache($filePath)->getPackageContainer());
-
-        static::assertTrue($home->hasChild('cache.dat'));
-        static::assertFileExists($filePath);
     }
 
     /**
@@ -72,10 +92,13 @@ final class CacheTest extends TestCase
         $cache->write();
 
         static::assertNotSame('', $cacheFile->getContent());
+        static::assertStringContainsString('"organization"', $cacheFile->getContent());
+        static::assertStringContainsString('"generated_at"', $cacheFile->getContent());
+        static::assertStringContainsString('millennial-falcon', $cacheFile->getContent());
     }
 
     private function cache(string $cacheFilePath): Cache
     {
-        return new Cache(new PackageContainer(), $cacheFilePath);
+        return new Cache(new PackageContainer(), $cacheFilePath, 'test-org');
     }
 }

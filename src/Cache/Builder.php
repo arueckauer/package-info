@@ -14,6 +14,7 @@ use PackageInfo\Composer\Json\BatchFetcher;
 use PackageInfo\Composer\Json\UrlComposer;
 use PackageInfo\Console\Helper\ProgressBar;
 use PackageInfo\Package;
+use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Cache;
 use Symfony\Component\Console\Helper\ProgressBar as SymfonyProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
@@ -22,6 +23,7 @@ use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use function count;
 use function explode;
 use function in_array;
+use function rtrim;
 use function sprintf;
 
 final class Builder
@@ -32,13 +34,20 @@ final class Builder
     public function __construct(
         private readonly Client $client,
         private readonly array $ignoreRepositories,
-        private readonly Cache $cache,
+        private readonly string $cacheDirectory,
         private readonly BranchBuilder $branchBuilder,
         private readonly ReleaseBuilder $releaseBuilder,
         private readonly PullRequestBuilder $pullRequestBuilder,
         private readonly BatchFetcher $batchFetcher,
         private readonly UrlComposer $urlComposer,
     ) {}
+
+    private function createCache(string $organization): Cache
+    {
+        $cacheFilePath = sprintf('%s/%s.json', rtrim($this->cacheDirectory, '/\\'), $organization);
+
+        return new Cache(new PackageContainer(), $cacheFilePath, $organization);
+    }
 
     /**
      * @throws Exception
@@ -55,6 +64,7 @@ final class Builder
             $organization,
         ));
 
+        $cache = $this->createCache($organization);
         $packages = $this->repositoriesAsPackages($organization);
 
         $progressBar = new SymfonyProgressBar($this->sectionMain);
@@ -155,7 +165,7 @@ final class Builder
                 $this->sectionHeads->clear();
             }
 
-            $this->cache->getPackageContainer()->add($package);
+            $cache->getPackageContainer()->add($package);
         }
 
         $progressBar->setMessage('');
@@ -173,7 +183,7 @@ final class Builder
             }
         }
 
-        $this->cache->write();
+        $cache->write();
     }
 
     /**

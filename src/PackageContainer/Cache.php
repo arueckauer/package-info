@@ -16,10 +16,14 @@ use function is_string;
 
 final readonly class Cache
 {
+    private JsonSerializer $serializer;
+
     public function __construct(
         private PackageContainer $packageContainer,
         private string $cacheFilePath,
+        private string $organization,
     ) {
+        $this->serializer = new JsonSerializer();
         $this->read();
     }
 
@@ -42,7 +46,10 @@ final readonly class Cache
      */
     public function write(): void
     {
-        $result = @file_put_contents($this->cacheFilePath, (string) $this->packageContainer->serialize());
+        $result = @file_put_contents(
+            $this->cacheFilePath,
+            $this->serializer->serialize($this->packageContainer, $this->organization),
+        );
 
         if (false === $result) {
             throw CacheFileNotWritable::fromFilename($this->cacheFilePath);
@@ -58,6 +65,13 @@ final readonly class Cache
         $cacheContent = file_get_contents($this->cacheFilePath);
         assert(is_string($cacheContent));
 
-        $this->packageContainer->unserialize($cacheContent);
+        if ($cacheContent === '') {
+            return;
+        }
+
+        $loaded = $this->serializer->deserialize($cacheContent);
+        foreach ($loaded->all() as $package) {
+            $this->packageContainer->add($package);
+        }
     }
 }
