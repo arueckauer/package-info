@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PackageInfo;
 
 use Github\Client;
+use PackageInfo\Composer\Json\BatchFetcherFactory;
 use PackageInfo\Composer\Json\FileReaderFactory;
 use PackageInfo\Composer\Json\MetaReaderFactory;
 use PackageInfo\Composer\Json\UrlComposerFactory;
@@ -23,6 +24,7 @@ final readonly class ConfigProvider
                     Cache\Release\Builder::class => Cache\Release\BuilderFactory::class,
                     CheckCommand::class => CheckCommandFactory::class,
                     Client::class => GithubClientFactory::class,
+                    Composer\Json\BatchFetcher::class => BatchFetcherFactory::class,
                     Composer\Json\FileReader::class => FileReaderFactory::class,
                     Composer\Json\MetaReader::class => MetaReaderFactory::class,
                     Composer\Json\UrlComposer::class => UrlComposerFactory::class,

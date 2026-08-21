@@ -11,6 +11,7 @@ use PackageInfo\Cache\Builder;
 use PackageInfo\Cache\PullRequest\Builder as PullRequestBuilder;
 use PackageInfo\Cache\Release\Builder as ReleaseBuilder;
 use PackageInfo\CheckCommand;
+use PackageInfo\Composer\Json\BatchFetcher as ComposerJsonBatchFetcher;
 use PackageInfo\Composer\Json\FileReader as ComposerJsonFileReader;
 use PackageInfo\Composer\Json\MetaReader as ComposerJsonMetaReader;
 use PackageInfo\Composer\Json\UrlComposer as ComposerJsonUrlComposer;
@@ -44,7 +45,7 @@ final class ConfigProviderTest extends TestCase
         static::assertIsArray($config['dependencies']);
         static::assertArrayHasKey('factories', $config['dependencies']);
         static::assertIsArray($config['dependencies']['factories']);
-        static::assertCount(16, $config['dependencies']['factories']);
+        static::assertCount(17, $config['dependencies']['factories']);
         static::assertArrayHasKey(BranchBuilder::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(BuildCommand::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(Builder::class, $config['dependencies']['factories']);
@@ -52,6 +53,7 @@ final class ConfigProviderTest extends TestCase
         static::assertArrayHasKey(CheckCommand::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(Checker::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(Client::class, $config['dependencies']['factories']);
+        static::assertArrayHasKey(ComposerJsonBatchFetcher::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(ComposerJsonFileReader::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(ComposerJsonMetaReader::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(ComposerJsonUrlComposer::class, $config['dependencies']['factories']);

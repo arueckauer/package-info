@@ -27,13 +27,13 @@ count = 2
 [[issues]]
 file = "src/Cache/Branch/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setMessage`: expected `string`, but found `mixed`.'
+message = 'Invalid argument type for argument #1 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `nonnull`.'
 count = 1
 
 [[issues]]
 file = "src/Cache/Branch/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `PackageInfo\Composer\Json\UrlComposer::__invoke`: expected `string`, but found `mixed`.'
+message = 'Invalid argument type for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setMessage`: expected `string`, but found `mixed`.'
 count = 1
 
 [[issues]]
@@ -43,27 +43,21 @@ message = 'Invalid argument type for argument #3 of `PackageInfo\Repository\Head
 count = 1
 
 [[issues]]
+file = "src/Cache/Branch/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #5 of `PackageInfo\Repository\Head::__construct`: expected `array<array-key, mixed>`, but found `nonnull`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/Branch/Builder.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #6 of `PackageInfo\Repository\Head::__construct`: expected `array<array-key, mixed>`, but found `nonnull`.'
+count = 1
+
+[[issues]]
 file = "src/Cache/Branch/BuilderFactory.php"
 code = "mixed-argument"
 message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `array<array-key, string>`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Cache/Branch/BuilderFactory.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `PackageInfo\Composer\Json\UrlComposer`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Cache/Branch/BuilderFactory.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `PackageInfo\Composer\Json\FileReader`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Cache/Branch/BuilderFactory.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #4 of `PackageInfo\Cache\Branch\Builder::__construct`: expected `PackageInfo\Composer\Json\MetaReader`, but found `mixed`.'
 count = 1
 
 [[issues]]
@@ -153,6 +147,12 @@ count = 1
 [[issues]]
 file = "src/Cache/Builder.php"
 code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `PackageInfo\Composer\Json\UrlComposer::__invoke`: expected `string`, but found `mixed`.'
+count = 3
+
+[[issues]]
+file = "src/Cache/Builder.php"
+code = "mixed-argument"
 message = 'Invalid argument type for argument #3 of `PackageInfo\Package::__construct`: expected `bool`, but found `mixed`.'
 count = 1
 
@@ -160,13 +160,13 @@ count = 1
 file = "src/Cache/Builder.php"
 code = "mixed-array-access"
 message = "Unsafe array access on type `mixed`."
-count = 2
+count = 6
 
 [[issues]]
 file = "src/Cache/Builder.php"
 code = "mixed-assignment"
 message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
-count = 4
+count = 8
 
 [[issues]]
 file = "src/Cache/Builder.php"
@@ -218,6 +218,18 @@ count = 1
 
 [[issues]]
 file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #7 of `PackageInfo\Cache\Builder::__construct`: expected `PackageInfo\Composer\Json\BatchFetcher`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #8 of `PackageInfo\Cache\Builder::__construct`: expected `PackageInfo\Composer\Json\UrlComposer`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Cache/BuilderFactory.php"
 code = "mixed-array-access"
 message = "Unsafe array access on type `mixed`."
 count = 1
@@ -231,13 +243,13 @@ count = 1
 [[issues]]
 file = "src/Cache/PullRequest/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setMessage`: expected `string`, but found `nonnull`.'
+message = 'Invalid argument type for argument #1 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `nonnull`.'
 count = 1
 
 [[issues]]
 file = "src/Cache/PullRequest/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `PackageInfo\Composer\Json\UrlComposer::__invoke`: expected `string`, but found `mixed`.'
+message = 'Invalid argument type for argument #1 of `Symfony\Component\Console\Helper\ProgressBar::setMessage`: expected `string`, but found `nonnull`.'
 count = 1
 
 [[issues]]
@@ -247,21 +259,21 @@ message = 'Invalid argument type for argument #3 of `PackageInfo\Repository\Head
 count = 1
 
 [[issues]]
-file = "src/Cache/PullRequest/BuilderFactory.php"
+file = "src/Cache/PullRequest/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\PullRequest\Builder::__construct`: expected `PackageInfo\Composer\Json\UrlComposer`, but found `mixed`.'
+message = 'Invalid argument type for argument #5 of `PackageInfo\Repository\Head::__construct`: expected `array<array-key, mixed>`, but found `nonnull`.'
 count = 1
 
 [[issues]]
-file = "src/Cache/PullRequest/BuilderFactory.php"
+file = "src/Cache/PullRequest/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\PullRequest\Builder::__construct`: expected `PackageInfo\Composer\Json\FileReader`, but found `mixed`.'
+message = 'Invalid argument type for argument #6 of `PackageInfo\Repository\Head::__construct`: expected `array<array-key, mixed>`, but found `nonnull`.'
 count = 1
 
 [[issues]]
-file = "src/Cache/PullRequest/BuilderFactory.php"
+file = "src/Cache/Release/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `PackageInfo\Cache\PullRequest\Builder::__construct`: expected `PackageInfo\Composer\Json\MetaReader`, but found `mixed`.'
+message = 'Invalid argument type for argument #1 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `nonnull`.'
 count = 1
 
 [[issues]]
@@ -273,31 +285,19 @@ count = 1
 [[issues]]
 file = "src/Cache/Release/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `PackageInfo\Composer\Json\UrlComposer::__invoke`: expected `string`, but found `mixed`.'
+message = 'Invalid argument type for argument #3 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `mixed`.'
 count = 1
 
 [[issues]]
 file = "src/Cache/Release/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `mixed`.'
+message = 'Invalid argument type for argument #5 of `PackageInfo\Repository\Head::__construct`: expected `array<array-key, mixed>`, but found `nonnull`.'
 count = 1
 
 [[issues]]
-file = "src/Cache/Release/BuilderFactory.php"
+file = "src/Cache/Release/Builder.php"
 code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `PackageInfo\Cache\Release\Builder::__construct`: expected `PackageInfo\Composer\Json\UrlComposer`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Cache/Release/BuilderFactory.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #2 of `PackageInfo\Cache\Release\Builder::__construct`: expected `PackageInfo\Composer\Json\FileReader`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Cache/Release/BuilderFactory.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `PackageInfo\Cache\Release\Builder::__construct`: expected `PackageInfo\Composer\Json\MetaReader`, but found `mixed`.'
+message = 'Invalid argument type for argument #6 of `PackageInfo\Repository\Head::__construct`: expected `array<array-key, mixed>`, but found `nonnull`.'
 count = 1
 
 [[issues]]
@@ -370,6 +370,24 @@ count = 1
 file = "src/CheckCommandFactory.php"
 code = "mixed-argument"
 message = 'Invalid argument type for argument #2 of `PackageInfo\CheckCommand::__construct`: expected `PackageInfo\Requirement\Checker`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/BatchFetcher.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/BatchFetcher.php"
+code = "possibly-invalid-argument"
+message = '''Possible argument type mismatch for argument #3 of `GuzzleHttp\Pool::__construct`: expected `array{'concurrency'?: (callable(int): int)|int, 'fulfilled'?: (callable(Psr\Http\Message\ResponseInterface, int|string, GuzzleHttp\Promise\PromiseInterface<mixed, mixed>): mixed), 'options'?: array{'allow_redirects'?: array{'max'?: int, 'on_redirect'?: (callable(Psr\Http\Message\RequestInterface, Psr\Http\Message\ResponseInterface, Psr\Http\Message\UriInterface, int|string): mixed), 'protocols'?: non-empty-array<array-key, string>, 'referer'?: bool, 'strict'?: bool, 'track_redirects'?: bool}|bool, 'auth'?: array{0: string, 1: string, 2?: null|string}|false|null|string, 'base_uri'?: Psr\Http\Message\UriInterface|string, 'body'?: Iterator<mixed, mixed>|Psr\Http\Message\StreamInterface|Stringable|has-method<'__invoke'>|null|resource|string, 'cert'?: array{0: string, 1?: null|string}|string, 'cert_type'?: string, 'connect_timeout'?: float|int, 'cookies'?: GuzzleHttp\Cookie\CookieJarInterface|false, 'crypto_method'?: int, 'crypto_method_max'?: int, 'curl'?: array<int|string, mixed>, 'debug'?: bool|resource, 'decode_content'?: bool|string, 'delay'?: float|int, 'expect'?: bool|int, 'force_ip_resolve'?: string, 'form_params'?: array<array-key, array<array-key, mixed>|bool|float|int|null|string>, 'headers'?: array<array-key, non-empty-array<array-key, string>|string>|null, 'http_errors'?: bool, 'idn_conversion'?: bool|int|null, 'json'?: mixed, 'multipart'?: array<array-key, array{'contents': mixed, 'filename'?: string, 'headers'?: array<array-key, string>, 'name': int|string}>, 'multiplex'?: string, 'on_headers'?: (callable(Psr\Http\Message\ResponseInterface, Psr\Http\Message\RequestInterface, int|string): mixed), 'on_stats'?: (callable(GuzzleHttp\TransferStats, int|string): mixed), 'on_trailers'?: (callable(array<string, list<string>>, Psr\Http\Message\ResponseInterface, Psr\Http\Message\RequestInterface, int|string): mixed), 'progress'?: (callable(int, int, int, int, int|string): mixed), 'protocols'?: non-empty-array<array-key, string>, 'proxy'?: array{'http'?: null|string, 'https'?: null|string, 'no'?: array<array-key, string>|null|string}|string, 'query'?: array<array-key, mixed>|string, 'read_timeout'?: float|int, 'request_factory'?: Psr\Http\Message\RequestFactoryInterface, 'response_factory'?: Psr\Http\Message\ResponseFactoryInterface, 'retries'?: int, 'sink'?: Psr\Http\Message\StreamInterface|resource|string, 'ssl_key'?: array{0: string, 1?: null|string}|string, 'ssl_key_type'?: string, 'stream'?: bool, 'stream_context'?: array<array-key, mixed>, 'stream_factory'?: Psr\Http\Message\StreamFactoryInterface, 'synchronous'?: bool, 'timeout'?: float|int, 'uri_factory'?: Psr\Http\Message\UriFactoryInterface, 'verify'?: bool|string, 'version'?: float|int|string, ...}, 'rejected'?: (callable(mixed, int|string, GuzzleHttp\Promise\PromiseInterface<mixed, mixed>): mixed)}`, but possibly received `array{'concurrency': int, 'fulfilled': (closure(Psr\Http\Message\ResponseInterface, string): void), 'rejected': (closure(mixed, string): void)}`.'''
+count = 1
+
+[[issues]]
+file = "src/Composer/Json/BatchFetcher.php"
+code = "unused-parameter"
+message = "Parameter `$reason` is never used."
 count = 1
 
 [[issues]]
