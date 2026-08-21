@@ -9,6 +9,8 @@ use Github\Client;
 use PackageInfo\Cache\Branch\Builder as BranchBuilder;
 use PackageInfo\Cache\PullRequest\Builder as PullRequestBuilder;
 use PackageInfo\Cache\Release\Builder as ReleaseBuilder;
+use PackageInfo\Composer\Json\BatchFetcher;
+use PackageInfo\Composer\Json\UrlComposer;
 use PackageInfo\Console\Helper\ProgressBar;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer\Cache;
@@ -17,6 +19,7 @@ use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\ConsoleSectionOutput;
 
 use function count;
+use function explode;
 use function in_array;
 use function sprintf;
 
@@ -32,6 +35,8 @@ final class Builder
         private readonly BranchBuilder $branchBuilder,
         private readonly ReleaseBuilder $releaseBuilder,
         private readonly PullRequestBuilder $pullRequestBuilder,
+        private readonly BatchFetcher $batchFetcher,
+        private readonly UrlComposer $urlComposer,
     ) {}
 
     /**
@@ -65,40 +70,75 @@ final class Builder
             }
 
             $branches = $this->client->repo()->branches($package->organization, $package->repository);
+            $releases = $this->client->repo()->releases()->all($package->organization, $package->repository);
+            $pullRequests = $this->client->pullRequests()->all($package->organization, $package->repository);
+
+            $urls = [];
+            foreach ($branches as $i => $branch) {
+                $urls['b:' . $i] = ($this->urlComposer)($package->organization, $package->repository, $branch['name']);
+            }
+            foreach ($releases as $i => $release) {
+                $urls['r:' . $i] = ($this->urlComposer)(
+                    $package->organization,
+                    $package->repository,
+                    $release['tag_name'],
+                );
+            }
+            foreach ($pullRequests as $i => $pullRequest) {
+                $repoFullName = $pullRequest['head']['repo']['full_name'] ?? null;
+                if ($repoFullName !== null) {
+                    [$headOwner, $headRepository] = explode('/', (string) $repoFullName, 2);
+                    $urls['p:' . $i] = ($this->urlComposer)($headOwner, $headRepository, $pullRequest['head']['ref']);
+                }
+            }
+
+            $fetched = $this->batchFetcher->fetch($urls);
 
             if (count($branches) > 0) {
                 $progressBarBranches = new SymfonyProgressBar($this->sectionHeads);
                 $progressBarBranches->setFormat('format_branches');
                 $progressBarBranches->setMaxSteps(count($branches));
 
-                foreach ($branches as $branch) {
-                    $package = ($this->branchBuilder)($package, $branch, $progressBarBranches);
+                foreach ($branches as $i => $branch) {
+                    $package = ($this->branchBuilder)(
+                        $package,
+                        $branch,
+                        $fetched['b:' . $i] ?? [],
+                        $progressBarBranches,
+                    );
                 }
 
                 $this->sectionHeads->clear();
             }
-
-            $releases = $this->client->repo()->releases()->all($package->organization, $package->repository);
 
             if (count($releases) > 0) {
                 $progressBarReleases = new SymfonyProgressBar($this->sectionHeads);
                 $progressBarReleases->setFormat('format_releases');
                 $progressBarReleases->setMaxSteps(count($releases));
 
-                foreach ($releases as $release) {
-                    $package = ($this->releaseBuilder)($package, $release, $progressBarReleases);
+                foreach ($releases as $i => $release) {
+                    $package = ($this->releaseBuilder)(
+                        $package,
+                        $release,
+                        $fetched['r:' . $i] ?? [],
+                        $progressBarReleases,
+                    );
                 }
                 $this->sectionHeads->clear();
             }
 
-            $pullRequests = $this->client->pullRequests()->all($package->organization, $package->repository);
             if (count($pullRequests) > 0) {
                 $progressBarPullRequests = new SymfonyProgressBar($this->sectionHeads);
                 $progressBarPullRequests->setFormat('format_pull_requests');
-                $progressBarPullRequests->setMaxSteps(count($releases));
+                $progressBarPullRequests->setMaxSteps(count($pullRequests));
 
-                foreach ($pullRequests as $pullRequest) {
-                    $package = ($this->pullRequestBuilder)($package, $pullRequest, $progressBarPullRequests);
+                foreach ($pullRequests as $i => $pullRequest) {
+                    $package = ($this->pullRequestBuilder)(
+                        $package,
+                        $pullRequest,
+                        $fetched['p:' . $i] ?? [],
+                        $progressBarPullRequests,
+                    );
                 }
                 $this->sectionHeads->clear();
             }

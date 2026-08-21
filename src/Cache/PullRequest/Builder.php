@@ -4,47 +4,33 @@ declare(strict_types=1);
 
 namespace PackageInfo\Cache\PullRequest;
 
-use PackageInfo\Composer\Json\FileReader;
-use PackageInfo\Composer\Json\MetaReader;
-use PackageInfo\Composer\Json\UrlComposer;
 use PackageInfo\Package;
 use PackageInfo\Repository\Head;
 use PackageInfo\Repository\Head\Type;
 use Symfony\Component\Console\Helper\ProgressBar;
 
-use function explode;
-
 final readonly class Builder
 {
-    public function __construct(
-        private UrlComposer $urlComposer,
-        private FileReader $fileReader,
-        private MetaReader $reader,
-    ) {}
-
-    public function __invoke(Package $package, array $pullRequest, ProgressBar $progressBarPullRequests): Package
-    {
+    public function __invoke(
+        Package $package,
+        array $pullRequest,
+        array $composerData,
+        ProgressBar $progressBarPullRequests,
+    ): Package {
         $progressBarPullRequests->setMessage($pullRequest['head']['repo']['full_name'] ?? '');
         $progressBarPullRequests->advance();
 
-        $pullRequestExists = ($pullRequest['head']['repo']['full_name'] ?? null) !== null;
-
-        if (!$pullRequestExists) {
+        if (($pullRequest['head']['repo']['full_name'] ?? null) === null) {
             return $package;
         }
 
-        [$headOwner, $headRepository] = explode('/', (string) $pullRequest['head']['repo']['full_name']);
-
-        $url = ($this->urlComposer)($headOwner, $headRepository, $pullRequest['head']['ref']);
-        $this->reader->setComposer(($this->fileReader)($url));
-
         $head = new Head(
-            $this->reader->getPackageName(),
+            $composerData['name'] ?? '',
             Type::PullRequest->value,
             $pullRequest['head']['ref'],
-            $this->reader->isComposerJsonPresent(),
-            $this->reader->getRequirements(),
-            $this->reader->getDevelopmentRequirements(),
+            $composerData !== [],
+            $composerData['require'] ?? [],
+            $composerData['require-dev'] ?? [],
         );
 
         return $package->withHead($head);
