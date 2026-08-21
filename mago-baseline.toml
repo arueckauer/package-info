@@ -379,12 +379,6 @@ message = 'Could not infer a precise return type for function `PackageInfo\Compo
 count = 1
 
 [[issues]]
-file = "src/Composer/Json/FileReaderFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
-count = 1
-
-[[issues]]
 file = "src/Composer/Json/MetaReader.php"
 code = "invalid-iterator"
 message = "The expression provided to `foreach` is not iterable. It resolved to type `mixed`, which is not iterable."
@@ -403,48 +397,6 @@ message = 'Could not infer a precise return type for function `PackageInfo\Compo
 count = 1
 
 [[issues]]
-file = "src/Composer/Json/MetaReaderFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
-count = 1
-
-[[issues]]
-file = "src/Composer/Json/UrlComposerFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
-count = 1
-
-[[issues]]
-file = "src/GetCommand.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `PackageInfo\Exception\PackageNotFoundException::byPackage`: expected `string`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/GetCommand.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `PackageInfo\Output\Table\Row::__invoke`: expected `string`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/GetCommand.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `PackageInfo\PackageContainer::get`: expected `string`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/GetCommand.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #1 of `PackageInfo\PackageContainer::has`: expected `string`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/GetCommand.php"
-code = "mixed-argument"
-message = "Invalid argument type for argument #2 of `sprintf`: expected `Stringable|null|scalar`, but found `mixed`."
-count = 1
-
-[[issues]]
 file = "src/GetCommand.php"
 code = "mixed-assignment"
 message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
@@ -454,12 +406,6 @@ count = 1
 file = "src/GetCommand.php"
 code = "possibly-null-argument"
 message = "Argument #1 of function `array_keys` is possibly `null`, but parameter type `array<array-key, mixed>` does not accept it."
-count = 1
-
-[[issues]]
-file = "src/GetCommand.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PackageInfo\Exception\PackageNotFoundException` in `PackageInfo\GetCommand::execute`.'
 count = 1
 
 [[issues]]
@@ -484,12 +430,6 @@ count = 1
 file = "src/GithubClientFactory.php"
 code = "mixed-array-access"
 message = "Unsafe array access on type `mixed`."
-count = 1
-
-[[issues]]
-file = "src/Output/Table/RowFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
 count = 1
 
 [[issues]]
@@ -583,147 +523,9 @@ message = 'Invalid argument type for argument #1 of `PackageInfo\Requirement\Che
 count = 1
 
 [[issues]]
-file = "src/Requirement/Version/CheckerFactory.php"
-code = "unused-parameter"
-message = "Parameter `$container` is never used."
-count = 1
-
-[[issues]]
-file = "test/Composer/Json/FileReaderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\FileReaderTest::test__invoke`.'
-count = 1
-
-[[issues]]
-file = "test/Composer/Json/MetaReaderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_getDevelopmentRequirements`.'
-count = 1
-
-[[issues]]
-file = "test/Composer/Json/MetaReaderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_getPackageName`.'
-count = 1
-
-[[issues]]
-file = "test/Composer/Json/MetaReaderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_getRequirements`.'
-count = 1
-
-[[issues]]
-file = "test/Composer/Json/MetaReaderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\MetaReaderTest::test_isComposerJsonPresent`.'
-count = 1
-
-[[issues]]
 file = "test/Composer/Json/UrlComposerTest.php"
 code = "unhandled-thrown-type"
 message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Composer\Json\UrlComposerTest::test__invoke`.'
-count = 1
-
-[[issues]]
-file = "test/ConfigProviderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\Exception` in `PackageInfoTest\ConfigProviderTest::testInvoke`.'
-count = 1
-
-[[issues]]
-file = "test/ConfigProviderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\ConfigProviderTest::testInvoke`.'
-count = 1
-
-[[issues]]
-file = "test/ConfigProviderTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\GeneratorNotSupportedException` in `PackageInfoTest\ConfigProviderTest::testInvoke`.'
-count = 1
-
-[[issues]]
-file = "test/Output/Table/RowTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Output\Table\RowTest::test___invoke`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainer/CacheTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainer\CacheTest::test__destruct_writes_cache`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainer/CacheTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainer\CacheTest::test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainer/CacheTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainer\CacheTest::test_getPackageContainer`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainerTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_add`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainerTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_all_is_sorted_by_name`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainerTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_all`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainerTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_get`.'
-count = 1
-
-[[issues]]
-file = "test/PackageContainerTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageContainerTest::test_has`.'
-count = 1
-
-[[issues]]
-file = "test/PackageTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\PackageTest::test_toString`.'
-count = 1
-
-[[issues]]
-file = "test/Repository/HeadTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_getVersionConstraintOfDevelopmentRequirement`.'
-count = 1
-
-[[issues]]
-file = "test/Repository/HeadTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_getVersionConstraintOfRequirement`.'
-count = 1
-
-[[issues]]
-file = "test/Repository/HeadTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_hasDevelopmentRequirement`.'
-count = 1
-
-[[issues]]
-file = "test/Repository/HeadTest.php"
-code = "unhandled-thrown-type"
-message = 'Potentially unhandled exception `PHPUnit\Framework\ExpectationFailedException` in `PackageInfoTest\Repository\HeadTest::test_hasRequirement`.'
 count = 1
 
 [[issues]]

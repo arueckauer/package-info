@@ -7,6 +7,7 @@ namespace PackageInfoTest\Composer\Json;
 use PackageInfo\Composer\Json\UrlComposer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(UrlComposer::class)]
@@ -37,6 +38,7 @@ final class UrlComposerTest extends TestCase
     }
 
     #[DataProvider('urls')]
+    /** @throws ExpectationFailedException */
     public function test__invoke(string $expected, string $owner, string $repository, string $head): void
     {
         $urlComposer = new UrlComposer();

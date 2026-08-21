@@ -8,11 +8,13 @@ use Exception;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(PackageContainer::class)]
 final class PackageContainerTest extends TestCase
 {
+    /** @throws ExpectationFailedException */
     public function test_has(): void
     {
         $package = new Package('millennial-falcon', 'hyperdrive', false);
@@ -22,6 +24,7 @@ final class PackageContainerTest extends TestCase
         static::assertFalse($container->has('tie-fighter/hyperdrive'));
     }
 
+    /** @throws ExpectationFailedException */
     public function test_get(): void
     {
         $package = new Package('millennial-falcon', 'hyperdrive', false);
@@ -30,6 +33,7 @@ final class PackageContainerTest extends TestCase
         static::assertSame($package, $container->get('millennial-falcon/hyperdrive'));
     }
 
+    /** @throws ExpectationFailedException */
     public function test_add(): void
     {
         $package = new Package('millennial-falcon', 'hyperdrive', false);
@@ -39,6 +43,7 @@ final class PackageContainerTest extends TestCase
         static::assertSame($package, $container->get('millennial-falcon/hyperdrive'));
     }
 
+    /** @throws ExpectationFailedException */
     public function test_all(): void
     {
         $package = new Package('millennial-falcon', 'hyperdrive', false);
@@ -47,6 +52,7 @@ final class PackageContainerTest extends TestCase
         static::assertSame(['millennial-falcon/hyperdrive' => $package], $container->all());
     }
 
+    /** @throws ExpectationFailedException */
     public function test_all_is_sorted_by_name(): void
     {
         $packageA = new Package('millennial-falcon', 'hyperdrive', false);

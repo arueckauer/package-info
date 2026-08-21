@@ -10,11 +10,13 @@ use PackageInfo\Package;
 use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Cache;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Cache::class)]
 final class CacheTest extends TestCase
 {
+    /** @throws ExpectationFailedException */
     public function test__destruct_writes_cache(): void
     {
         $root = vfsStream::setup();
@@ -27,6 +29,7 @@ final class CacheTest extends TestCase
         static::assertNotSame('', $cacheFile->getContent());
     }
 
+    /** @throws ExpectationFailedException */
     public function test_getPackageContainer(): void
     {
         $packageA = new Package('millennial-falcon', 'hyperdrive', false);
@@ -43,6 +46,7 @@ final class CacheTest extends TestCase
         static::assertEquals($expected, $this->cache($cacheFile->url())->getPackageContainer());
     }
 
+    /** @throws ExpectationFailedException */
     public function test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file(): void
     {
         $home = vfsStream::setup('home');

@@ -8,6 +8,7 @@ use Composer\Semver\VersionParser;
 use PackageInfo\Requirement\Version\Checker;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Checker::class)]
@@ -32,6 +33,7 @@ final class CheckerTest extends TestCase
     }
 
     #[DataProvider('checks')]
+    /** @throws ExpectationFailedException */
     public function test__invoke(bool $expected, string $minimumVersion, string $constraints): void
     {
         $check = new Checker(new VersionParser());

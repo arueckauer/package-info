@@ -6,7 +6,7 @@ namespace PackageInfo\PackageContainer;
 
 use Exception;
 use PackageInfo\PackageContainer;
-use PackageInfo\PackageContainer\Exception\CacheFileNotWritableException;
+use PackageInfo\PackageContainer\Exception\CacheFileNotWritable;
 
 use function assert;
 use function file_exists;
@@ -45,7 +45,7 @@ final readonly class Cache
         $result = @file_put_contents($this->cacheFilePath, (string) $this->packageContainer->serialize());
 
         if (false === $result) {
-            throw CacheFileNotWritableException::fromFilename($this->cacheFilePath);
+            throw CacheFileNotWritable::fromFilename($this->cacheFilePath);
         }
     }
 

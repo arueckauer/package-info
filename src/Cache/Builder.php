@@ -115,7 +115,7 @@ final class Builder
     }
 
     /**
-     * @psalm-return array<Package>
+     * @return array<Package>
      */
     public function repositoriesAsPackages(string $org): array
     {

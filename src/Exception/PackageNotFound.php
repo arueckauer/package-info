@@ -8,7 +8,7 @@ use RuntimeException;
 
 use function sprintf;
 
-final class PackageNotFoundException extends RuntimeException
+final class PackageNotFound extends RuntimeException
 {
     public static function byPackage(string $package): self
     {
