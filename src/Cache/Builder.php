@@ -6,6 +6,7 @@ namespace PackageInfo\Cache;
 
 use Exception;
 use Github\Client;
+use Github\Exception\RuntimeException as GithubRuntimeException;
 use PackageInfo\Cache\Branch\Builder as BranchBuilder;
 use PackageInfo\Cache\PullRequest\Builder as PullRequestBuilder;
 use PackageInfo\Cache\Release\Builder as ReleaseBuilder;
@@ -61,6 +62,7 @@ final class Builder
         $progressBar->setMessage('');
         $progressBar->setMaxSteps(count($packages));
 
+        $skipped = [];
         foreach ($packages as $package) {
             $progressBar->setMessage($package->toString());
             $progressBar->advance();
@@ -69,9 +71,19 @@ final class Builder
                 continue;
             }
 
-            $branches = $this->client->repo()->branches($package->organization, $package->repository);
-            $releases = $this->client->repo()->releases()->all($package->organization, $package->repository);
-            $pullRequests = $this->client->pullRequests()->all($package->organization, $package->repository);
+            try {
+                $branches = $this->client->repo()->branches($package->organization, $package->repository);
+                $releases = $this->client->repo()->releases()->all($package->organization, $package->repository);
+            } catch (GithubRuntimeException $e) {
+                $skipped[] = sprintf('%s: %s', $package->toString(), $e->getMessage());
+                continue;
+            }
+
+            try {
+                $pullRequests = $this->client->pullRequests()->all($package->organization, $package->repository);
+            } catch (GithubRuntimeException) {
+                $pullRequests = [];
+            }
 
             $urls = [];
             foreach ($branches as $i => $branch) {
@@ -150,6 +162,16 @@ final class Builder
         $progressBar->advance(-1);
         $progressBar->advance();
         $output->writeln('');
+
+        if ($skipped !== []) {
+            $output->writeln(sprintf(
+                '<comment>Skipped %d repository/repositories due to API errors:</comment>',
+                count($skipped),
+            ));
+            foreach ($skipped as $message) {
+                $output->writeln(sprintf('  <error> %s </error>', $message));
+            }
+        }
 
         $this->cache->write();
     }
