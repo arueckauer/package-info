@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PackageInfo\PackageContainer;
 
-use PackageInfo\PackageContainer;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-final class CacheFactory
+final readonly class CacheFactory
 {
     /**
      * @throws ContainerExceptionInterface
@@ -17,6 +16,15 @@ final class CacheFactory
      */
     public function __invoke(ContainerInterface $container): Cache
     {
-        return new Cache(new PackageContainer(), $container->get('config')['cache_file_path']);
+        $config = $container->get('config');
+        $cacheDirectory = rtrim((string) ($config['cache_directory'] ?? ''), '/\\');
+
+        $serializer = $container->get(JsonSerializer::class);
+        assert($serializer instanceof JsonSerializer);
+
+        return new Cache(
+            $cacheDirectory,
+            $serializer,
+        );
     }
 }

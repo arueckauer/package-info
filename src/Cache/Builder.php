@@ -55,6 +55,7 @@ final class Builder
             $organization,
         ));
 
+        $packageContainer = $this->cache->read($organization);
         $packages = $this->repositoriesAsPackages($organization);
 
         $progressBar = new SymfonyProgressBar($this->sectionMain);
@@ -155,7 +156,7 @@ final class Builder
                 $this->sectionHeads->clear();
             }
 
-            $this->cache->getPackageContainer()->add($package);
+            $packageContainer->add($package);
         }
 
         $progressBar->setMessage('');
@@ -173,7 +174,7 @@ final class Builder
             }
         }
 
-        $this->cache->write();
+        $this->cache->write($organization, $packageContainer);
     }
 
     /**

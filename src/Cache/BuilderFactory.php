@@ -25,10 +25,13 @@ final readonly class BuilderFactory
     {
         $config = $container->get('config');
 
+        $cache = $container->get(Cache::class);
+        assert($cache instanceof Cache);
+
         return new Builder(
             $container->get(Client::class),
             $config['ignore_repositories'],
-            $container->get(Cache::class),
+            $cache,
             $container->get(BranchBuilder::class),
             $container->get(ReleaseBuilder::class),
             $container->get(PullRequestBuilder::class),

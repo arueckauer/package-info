@@ -16,7 +16,7 @@ use function usort;
 
 final class PackageContainer implements Serializable
 {
-    /** @var Package[] */
+    /** @var array<string, Package> */
     private array $data = [];
 
     public function __construct(Package ...$packages)
@@ -26,6 +26,23 @@ final class PackageContainer implements Serializable
         foreach ($packages as $package) {
             $this->add($package);
         }
+    }
+
+    public static function withPackages(Package ...$packages): self
+    {
+        return new self(...$packages);
+    }
+
+    public static function merge(self ...$containers): self
+    {
+        $all = [];
+        foreach ($containers as $container) {
+            foreach ($container->all() as $package) {
+                $all[] = $package;
+            }
+        }
+
+        return new self(...$all);
     }
 
     /**
@@ -56,6 +73,7 @@ final class PackageContainer implements Serializable
         $this->data[$package->toString()] = $package;
     }
 
+    /** @return array<string, Package> */
     public function all(): array
     {
         return $this->data;

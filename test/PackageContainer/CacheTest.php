@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PackageInfoTest\PackageContainer;
 
-use Exception;
+use JsonException;
 use org\bovigo\vfs\vfsStream;
 use PackageInfo\Package;
 use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Cache;
+use PackageInfo\PackageContainer\Exception\CacheFileNotWritable;
+use PackageInfo\PackageContainer\JsonSerializer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
@@ -16,66 +18,83 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Cache::class)]
 final class CacheTest extends TestCase
 {
-    /** @throws ExpectationFailedException */
-    public function test__destruct_writes_cache(): void
+    /**
+     * @throws ExpectationFailedException
+     * @throws JsonException
+     */
+    public function test_read_returns_deserialized_PackageContainer(): void
     {
+        $organization = 'test-org';
+
+        $packageA = new Package($organization, 'repo-a', false);
+        $packageB = new Package($organization, 'repo-b', true);
+
+        $expected = new PackageContainer($packageA, $packageB);
+
+        $cacheContent = json_encode([
+            'organization' => $organization,
+            'generated_at' => '2026-01-01T00:00:00+00:00',
+            'repositories' => [
+                [
+                    'name' => 'test-org/repo-a',
+                    'organization' => $organization,
+                    'repository' => 'repo-a',
+                    'is_archived' => false,
+                    'heads' => [],
+                ],
+                [
+                    'name' => 'test-org/repo-b',
+                    'organization' => $organization,
+                    'repository' => 'repo-b',
+                    'is_archived' => true,
+                    'heads' => [],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR);
+
         $root = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent('');
+        vfsStream::newFile('test-org.json')->at($root)->setContent($cacheContent);
 
-        $cache = $this->cache($cacheFile->url());
-        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
-        unset($cache);
-
-        static::assertNotSame('', $cacheFile->getContent());
+        static::assertEquals($expected, $this->cache($root->url())->read($organization));
     }
 
     /** @throws ExpectationFailedException */
-    public function test_getPackageContainer(): void
+    public function test_read_returns_empty_PackageContainer_for_missing_file(): void
     {
-        $packageA = new Package('millennial-falcon', 'hyperdrive', false);
-        $packageB = new Package('x-wing', 'hyperdrive', false);
-        $packageC = new Package('b-wing', 'hyperdrive', true);
+        $cacheDirectory = vfsStream::url('home');
 
-        $expected = new PackageContainer($packageA, $packageB, $packageC);
-
-        $cacheContent = 'a:3:{s:17:"b-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"b-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:1;s:5:"heads";a:0:{}}s:28:"millennial-falcon/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:17:"millennial-falcon";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}s:17:"x-wing/hyperdrive";O:19:"PackageInfo\Package":4:{s:12:"organization";s:6:"x-wing";s:10:"repository";s:10:"hyperdrive";s:10:"isArchived";b:0;s:5:"heads";a:0:{}}}';
-
-        $root = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent($cacheContent);
-
-        static::assertEquals($expected, $this->cache($cacheFile->url())->getPackageContainer());
+        static::assertEquals(new PackageContainer(), $this->cache($cacheDirectory)->read('test-org'));
     }
 
     /** @throws ExpectationFailedException */
-    public function test_getPackageContainer_initializes_empty_PackageContainer_for_invalid_cache_file(): void
+    public function test_read_returns_empty_PackageContainer_for_empty_file(): void
     {
-        $home = vfsStream::setup('home');
+        $root = vfsStream::setup();
+        vfsStream::newFile('test-org.json')->at($root)->setContent('');
 
-        $filePath = vfsStream::url('home') . '/cache.dat';
-
-        static::assertEquals(new PackageContainer(), $this->cache($filePath)->getPackageContainer());
-
-        static::assertTrue($home->hasChild('cache.dat'));
-        static::assertFileExists($filePath);
+        static::assertEquals(new PackageContainer(), $this->cache($root->url())->read('test-org'));
     }
 
     /**
-     * @throws Exception
+     * @throws CacheFileNotWritable
+     * @throws ExpectationFailedException
      */
     public function test_write(): void
     {
         $root = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent('');
+        $cacheFile = vfsStream::newFile('test-org.json')->at($root)->setContent('');
 
-        $cache = $this->cache($cacheFile->url());
-        $cache->getPackageContainer()->add(new Package('millennial-falcon', 'hyperdrive', false));
-        $cache->write();
+        $packageContainer = new PackageContainer(new Package('millennial-falcon', 'hyperdrive', false));
+        $this->cache($root->url())->write('test-org', $packageContainer);
 
         static::assertNotSame('', $cacheFile->getContent());
+        static::assertStringContainsString('"organization"', $cacheFile->getContent());
+        static::assertStringContainsString('"generated_at"', $cacheFile->getContent());
+        static::assertStringContainsString('millennial-falcon', $cacheFile->getContent());
     }
 
-    private function cache(string $cacheFilePath): Cache
+    private function cache(string $cacheDirectory): Cache
     {
-        return new Cache(new PackageContainer(), $cacheFilePath);
+        return new Cache($cacheDirectory, new JsonSerializer());
     }
 }
