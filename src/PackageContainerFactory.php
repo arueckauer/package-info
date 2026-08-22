@@ -9,6 +9,8 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
+use function assert;
+use function file_get_contents;
 use function glob;
 use function is_array;
 use function rtrim;
@@ -22,15 +24,15 @@ final readonly class PackageContainerFactory
      */
     public function __invoke(ContainerInterface $container): PackageContainer
     {
-        $packageContainer = new PackageContainer();
-        $serializer = new JsonSerializer();
-
+        $serializer = $container->get(JsonSerializer::class);
+        assert($serializer instanceof JsonSerializer);
         $config = $container->get('config');
         $cacheDirectory = rtrim((string) ($config['cache_directory'] ?? ''), '/\\');
 
         $files = glob(sprintf('%s/*.json', $cacheDirectory));
         assert(is_array($files));
 
+        $containers = [];
         foreach ($files as $file) {
             $content = file_get_contents($file);
 
@@ -38,12 +40,9 @@ final readonly class PackageContainerFactory
                 continue;
             }
 
-            $loaded = $serializer->deserialize($content);
-            foreach ($loaded->all() as $package) {
-                $packageContainer->add($package);
-            }
+            $containers[] = $serializer->deserialize($content);
         }
 
-        return $packageContainer;
+        return PackageContainer::merge(...$containers);
     }
 }

@@ -28,6 +28,23 @@ final class PackageContainer implements Serializable
         }
     }
 
+    public static function withPackages(Package ...$packages): self
+    {
+        return new self(...$packages);
+    }
+
+    public static function merge(self ...$containers): self
+    {
+        $all = [];
+        foreach ($containers as $container) {
+            foreach ($container->all() as $package) {
+                $all[] = $package;
+            }
+        }
+
+        return new self(...$all);
+    }
+
     /**
      * @throws Exception
      */

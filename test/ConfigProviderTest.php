@@ -19,6 +19,7 @@ use PackageInfo\ConfigProvider;
 use PackageInfo\GetCommand;
 use PackageInfo\Output\Table\Row;
 use PackageInfo\PackageContainer;
+use PackageInfo\PackageContainer\JsonSerializer;
 use PackageInfo\Requirement\Checker;
 use PackageInfo\Requirement\Version\Checker as VersionChecker;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -42,9 +43,13 @@ final class ConfigProviderTest extends TestCase
 
         static::assertArrayHasKey('dependencies', $config);
         static::assertIsArray($config['dependencies']);
+        static::assertArrayHasKey('invokables', $config['dependencies']);
+        static::assertIsArray($config['dependencies']['invokables']);
+        static::assertCount(1, $config['dependencies']['invokables']);
+        static::assertArrayHasKey(JsonSerializer::class, $config['dependencies']['invokables']);
         static::assertArrayHasKey('factories', $config['dependencies']);
         static::assertIsArray($config['dependencies']['factories']);
-        static::assertCount(16, $config['dependencies']['factories']);
+        static::assertCount(17, $config['dependencies']['factories']);
         static::assertArrayHasKey(BranchBuilder::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(BuildCommand::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(Builder::class, $config['dependencies']['factories']);

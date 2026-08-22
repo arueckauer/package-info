@@ -16,6 +16,9 @@ final readonly class ConfigProvider
     {
         return [
             'dependencies' => [
+                'invokables' => [
+                    PackageContainer\JsonSerializer::class => PackageContainer\JsonSerializer::class,
+                ],
                 'factories' => [
                     Cache\Branch\Builder::class => Cache\Branch\BuilderFactory::class,
                     Cache\BuildCommand::class => Cache\BuildCommandFactory::class,

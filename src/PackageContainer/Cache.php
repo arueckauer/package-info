@@ -4,51 +4,29 @@ declare(strict_types=1);
 
 namespace PackageInfo\PackageContainer;
 
-use Exception;
 use PackageInfo\PackageContainer;
 use PackageInfo\PackageContainer\Exception\CacheFileNotWritable;
 
-use function assert;
 use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
-use function is_string;
 
 final readonly class Cache
 {
-    private JsonSerializer $serializer;
-
     public function __construct(
-        private PackageContainer $packageContainer,
         private string $cacheFilePath,
-        private string $organization,
-    ) {
-        $this->serializer = new JsonSerializer();
-        $this->read();
-    }
+        private JsonSerializer $serializer,
+    ) {}
 
     /**
-     * @throws Exception
-     */
-    public function __destruct()
-    {
-        $this->write();
-    }
-
-    public function getPackageContainer(): PackageContainer
-    {
-        return $this->packageContainer;
-    }
-
-    /**
-     * @throws Exception
+     * @throws CacheFileNotWritable
      * @mago-expect lint:no-error-control-operator
      */
-    public function write(): void
+    public function write(string $organization, PackageContainer $packageContainer): void
     {
         $result = @file_put_contents(
             $this->cacheFilePath,
-            $this->serializer->serialize($this->packageContainer, $this->organization),
+            $this->serializer->serialize($packageContainer, $organization),
         );
 
         if (false === $result) {
@@ -56,22 +34,18 @@ final readonly class Cache
         }
     }
 
-    private function read(): void
+    public function read(): PackageContainer
     {
         if (!file_exists($this->cacheFilePath)) {
-            return;
+            return new PackageContainer();
         }
 
         $cacheContent = file_get_contents($this->cacheFilePath);
-        assert(is_string($cacheContent));
 
-        if ($cacheContent === '') {
-            return;
+        if ($cacheContent === false || $cacheContent === '') {
+            return new PackageContainer();
         }
 
-        $loaded = $this->serializer->deserialize($cacheContent);
-        foreach ($loaded->all() as $package) {
-            $this->packageContainer->add($package);
-        }
+        return $this->serializer->deserialize($cacheContent);
     }
 }
