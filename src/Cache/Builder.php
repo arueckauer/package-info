@@ -29,13 +29,10 @@ final class Builder
     private ?ConsoleSectionOutput $sectionMain = null;
     private ?ConsoleSectionOutput $sectionHeads = null;
 
-    /**
-     * @param callable(string): Cache $cacheFactory
-     */
     public function __construct(
         private readonly Client $client,
         private readonly array $ignoreRepositories,
-        private readonly mixed $cacheFactory,
+        private readonly Cache $cache,
         private readonly BranchBuilder $branchBuilder,
         private readonly ReleaseBuilder $releaseBuilder,
         private readonly PullRequestBuilder $pullRequestBuilder,
@@ -58,8 +55,7 @@ final class Builder
             $organization,
         ));
 
-        $cache = ($this->cacheFactory)($organization);
-        $packageContainer = $cache->read();
+        $packageContainer = $this->cache->read($organization);
         $packages = $this->repositoriesAsPackages($organization);
 
         $progressBar = new SymfonyProgressBar($this->sectionMain);
@@ -178,7 +174,7 @@ final class Builder
             }
         }
 
-        $cache->write($organization, $packageContainer);
+        $this->cache->write($organization, $packageContainer);
     }
 
     /**

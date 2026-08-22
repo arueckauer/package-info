@@ -19,6 +19,7 @@ use PackageInfo\ConfigProvider;
 use PackageInfo\GetCommand;
 use PackageInfo\Output\Table\Row;
 use PackageInfo\PackageContainer;
+use PackageInfo\PackageContainer\Cache;
 use PackageInfo\PackageContainer\JsonSerializer;
 use PackageInfo\Requirement\Checker;
 use PackageInfo\Requirement\Version\Checker as VersionChecker;
@@ -62,6 +63,7 @@ final class ConfigProviderTest extends TestCase
         static::assertArrayHasKey(ComposerJsonUrlComposer::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(GetCommand::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(PackageContainer::class, $config['dependencies']['factories']);
+        static::assertArrayHasKey(Cache::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(PullRequestBuilder::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(ReleaseBuilder::class, $config['dependencies']['factories']);
         static::assertArrayHasKey(Row::class, $config['dependencies']['factories']);

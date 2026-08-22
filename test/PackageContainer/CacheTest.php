@@ -24,25 +24,27 @@ final class CacheTest extends TestCase
      */
     public function test_read_returns_deserialized_PackageContainer(): void
     {
-        $packageA = new Package('test-org', 'repo-a', false);
-        $packageB = new Package('test-org', 'repo-b', true);
+        $organization = 'test-org';
+
+        $packageA = new Package($organization, 'repo-a', false);
+        $packageB = new Package($organization, 'repo-b', true);
 
         $expected = new PackageContainer($packageA, $packageB);
 
         $cacheContent = json_encode([
-            'organization' => 'test-org',
+            'organization' => $organization,
             'generated_at' => '2026-01-01T00:00:00+00:00',
             'repositories' => [
                 [
                     'name' => 'test-org/repo-a',
-                    'organization' => 'test-org',
+                    'organization' => $organization,
                     'repository' => 'repo-a',
                     'is_archived' => false,
                     'heads' => [],
                 ],
                 [
                     'name' => 'test-org/repo-b',
-                    'organization' => 'test-org',
+                    'organization' => $organization,
                     'repository' => 'repo-b',
                     'is_archived' => true,
                     'heads' => [],
@@ -51,26 +53,26 @@ final class CacheTest extends TestCase
         ], JSON_THROW_ON_ERROR);
 
         $root = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('test-cache-file')->at($root)->setContent($cacheContent);
+        vfsStream::newFile('test-org.json')->at($root)->setContent($cacheContent);
 
-        static::assertEquals($expected, $this->cache($cacheFile->url())->read());
+        static::assertEquals($expected, $this->cache($root->url())->read($organization));
     }
 
     /** @throws ExpectationFailedException */
     public function test_read_returns_empty_PackageContainer_for_missing_file(): void
     {
-        $filePath = vfsStream::url('home') . '/cache.json';
+        $cacheDirectory = vfsStream::url('home');
 
-        static::assertEquals(new PackageContainer(), $this->cache($filePath)->read());
+        static::assertEquals(new PackageContainer(), $this->cache($cacheDirectory)->read('test-org'));
     }
 
     /** @throws ExpectationFailedException */
     public function test_read_returns_empty_PackageContainer_for_empty_file(): void
     {
         $root = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('cache.json')->at($root)->setContent('');
+        vfsStream::newFile('test-org.json')->at($root)->setContent('');
 
-        static::assertEquals(new PackageContainer(), $this->cache($cacheFile->url())->read());
+        static::assertEquals(new PackageContainer(), $this->cache($root->url())->read('test-org'));
     }
 
     /**
@@ -80,10 +82,10 @@ final class CacheTest extends TestCase
     public function test_write(): void
     {
         $root = vfsStream::setup();
-        $cacheFile = vfsStream::newFile('cache.json')->at($root)->setContent('');
+        $cacheFile = vfsStream::newFile('test-org.json')->at($root)->setContent('');
 
-        $container = new PackageContainer(new Package('millennial-falcon', 'hyperdrive', false));
-        $this->cache($cacheFile->url())->write('test-org', $container);
+        $packageContainer = new PackageContainer(new Package('millennial-falcon', 'hyperdrive', false));
+        $this->cache($root->url())->write('test-org', $packageContainer);
 
         static::assertNotSame('', $cacheFile->getContent());
         static::assertStringContainsString('"organization"', $cacheFile->getContent());
@@ -91,8 +93,8 @@ final class CacheTest extends TestCase
         static::assertStringContainsString('millennial-falcon', $cacheFile->getContent());
     }
 
-    private function cache(string $cacheFilePath): Cache
+    private function cache(string $cacheDirectory): Cache
     {
-        return new Cache($cacheFilePath, new JsonSerializer());
+        return new Cache($cacheDirectory, new JsonSerializer());
     }
 }

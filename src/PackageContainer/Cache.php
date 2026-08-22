@@ -14,7 +14,7 @@ use function file_put_contents;
 final readonly class Cache
 {
     public function __construct(
-        private string $cacheFilePath,
+        private string $cacheDirectory,
         private JsonSerializer $serializer,
     ) {}
 
@@ -24,28 +24,37 @@ final readonly class Cache
      */
     public function write(string $organization, PackageContainer $packageContainer): void
     {
+        $cacheFilePath = $this->cacheFilePath($organization);
+
         $result = @file_put_contents(
-            $this->cacheFilePath,
+            $cacheFilePath,
             $this->serializer->serialize($packageContainer, $organization),
         );
 
         if (false === $result) {
-            throw CacheFileNotWritable::fromFilename($this->cacheFilePath);
+            throw CacheFileNotWritable::fromFilename($cacheFilePath);
         }
     }
 
-    public function read(): PackageContainer
+    public function read(string $organization): PackageContainer
     {
-        if (!file_exists($this->cacheFilePath)) {
+        $cacheFilePath = $this->cacheFilePath($organization);
+
+        if (!file_exists($cacheFilePath)) {
             return new PackageContainer();
         }
 
-        $cacheContent = file_get_contents($this->cacheFilePath);
+        $cacheContent = file_get_contents($cacheFilePath);
 
         if ($cacheContent === false || $cacheContent === '') {
             return new PackageContainer();
         }
 
         return $this->serializer->deserialize($cacheContent);
+    }
+
+    private function cacheFilePath(string $organization): string
+    {
+        return sprintf('%s/%s.json', $this->cacheDirectory, $organization);
     }
 }

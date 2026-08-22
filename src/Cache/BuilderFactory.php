@@ -11,13 +11,9 @@ use PackageInfo\Cache\Release\Builder as ReleaseBuilder;
 use PackageInfo\Composer\Json\BatchFetcher;
 use PackageInfo\Composer\Json\UrlComposer;
 use PackageInfo\PackageContainer\Cache;
-use PackageInfo\PackageContainer\JsonSerializer;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-
-use function rtrim;
-use function sprintf;
 
 final readonly class BuilderFactory
 {
@@ -28,19 +24,14 @@ final readonly class BuilderFactory
     public function __invoke(ContainerInterface $container): Builder
     {
         $config = $container->get('config');
-        $cacheDirectory = rtrim((string) ($config['cache_directory'] ?? ''), '/\\');
-        $serializer = $container->get(JsonSerializer::class);
-        assert($serializer instanceof JsonSerializer);
 
-        $cacheFactory = static fn(string $organization): Cache => new Cache(
-            sprintf('%s/%s.json', $cacheDirectory, $organization),
-            $serializer,
-        );
+        $cache = $container->get(Cache::class);
+        assert($cache instanceof Cache);
 
         return new Builder(
             $container->get(Client::class),
             $config['ignore_repositories'],
-            $cacheFactory,
+            $cache,
             $container->get(BranchBuilder::class),
             $container->get(ReleaseBuilder::class),
             $container->get(PullRequestBuilder::class),
