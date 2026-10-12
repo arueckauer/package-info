@@ -38,6 +38,6 @@ final class FileReaderTest extends TestCase
         $root = vfsStream::setup();
         $composerJson = vfsStream::newFile('composer.json')->at($root)->setContent($content);
 
-        static::assertSame($expected, (new FileReader())($composerJson->url()));
+        static::assertSame($expected, new FileReader()($composerJson->url()));
     }
 }
