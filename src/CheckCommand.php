@@ -77,7 +77,7 @@ final class CheckCommand extends Command
         $this->checker->developmentRequirements = $checkRequirement ? [] : [$requiredPackage => $lowestRequiredVersion];
         $checkMessage = $checkRequirement
             ? sprintf('for requirement <info>%s</info> ', $require)
-            : sprintf('for development requirement <info>%s</info> ', $requireDev);
+            : sprintf('for development requirement <info>%s</info> ', (string) $requireDev);
 
         $packages = $this->packageContainer->all();
         $output->writeln(sprintf(
