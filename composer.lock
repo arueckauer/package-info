@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d09eeea753d3c14f9673e2abf866d163",
+    "content-hash": "a5b38b9e971dfc1357a162da5b1bdf40",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -3397,16 +3397,16 @@
     "packages-dev": [
         {
             "name": "carthage-software/mago",
-            "version": "1.57.0",
+            "version": "1.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/carthage-software/mago.git",
-                "reference": "9656cd55d51d96bd6dc57f1f1e73c15f22cb7cc3"
+                "reference": "95a25d686a2b584c387326e466d6ead8c885465d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carthage-software/mago/zipball/9656cd55d51d96bd6dc57f1f1e73c15f22cb7cc3",
-                "reference": "9656cd55d51d96bd6dc57f1f1e73c15f22cb7cc3",
+                "url": "https://api.github.com/repos/carthage-software/mago/zipball/95a25d686a2b584c387326e466d6ead8c885465d",
+                "reference": "95a25d686a2b584c387326e466d6ead8c885465d",
                 "shasum": ""
             },
             "require": {
@@ -3448,7 +3448,7 @@
             ],
             "support": {
                 "issues": "https://github.com/carthage-software/mago/issues",
-                "source": "https://github.com/carthage-software/mago/tree/1.57.0"
+                "source": "https://github.com/carthage-software/mago/tree/1.59.0"
             },
             "funding": [
                 {
@@ -3456,7 +3456,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-14T07:10:47+00:00"
+            "time": "2026-10-25T00:59:15+00:00"
         },
         {
             "name": "ergebnis/composer-normalize",
