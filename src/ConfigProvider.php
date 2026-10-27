@@ -29,7 +29,6 @@ final readonly class ConfigProvider
                     Client::class => GithubClientFactory::class,
                     Composer\Json\BatchFetcher::class => BatchFetcherFactory::class,
                     Composer\Json\FileReader::class => FileReaderFactory::class,
-                    Composer\Json\MetaReader::class => MetaReaderFactory::class,
                     Composer\Json\UrlComposer::class => UrlComposerFactory::class,
                     GetCommand::class => GetCommandFactory::class,
                     Output\Table\Row::class => Output\Table\RowFactory::class,
