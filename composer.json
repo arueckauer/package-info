@@ -31,7 +31,7 @@
     },
     "require-dev": {
         "carthage-software/mago": "~1.59.0",
-        "ergebnis/composer-normalize": "~2.54.0",
+        "ergebnis/composer-normalize": "~2.56.0",
         "mikey179/vfsstream": "~1.6.12",
         "phpunit/phpunit": "~13.4.5",
         "rector/rector": "~2.8.1",
