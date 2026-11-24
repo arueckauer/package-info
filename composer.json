@@ -30,7 +30,7 @@
         "symfony/console": "^8.1.9"
     },
     "require-dev": {
-        "carthage-software/mago": "~1.59.0",
+        "carthage-software/mago": "~1.61.0",
         "ergebnis/composer-normalize": "~2.58.0",
         "mikey179/vfsstream": "~1.6.12",
         "phpunit/phpunit": "~13.4.5",

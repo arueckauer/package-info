@@ -1,30 +1,6 @@
 variant = "loose"
 
 [[issues]]
-file = "config/container.php"
-code = "mixed-argument"
-message = '''Invalid argument type for argument #1 of `Laminas\ServiceManager\ServiceManager::__construct`: expected `array{'abstract_factories'?: array<array-key, Laminas\ServiceManager\Factory\AbstractFactoryInterface|class-string<Laminas\ServiceManager\Factory\AbstractFactoryInterface>>, 'aliases'?: array<string, string>, 'delegators'?: !Laminas\ServiceManager\ServiceManager::DelegatorsConfiguration, 'factories'?: !Laminas\ServiceManager\ServiceManager::FactoriesConfiguration, 'initializers'?: !Laminas\ServiceManager\ServiceManager::InitializersConfiguration, 'invokables'?: array<string, class-string>, 'lazy_services'?: array{'class_map'?: array<string, class-string>, 'proxies_namespace'?: non-empty-string, 'proxies_target_dir'?: non-empty-string, 'write_proxy_files'?: bool}, 'services'?: array<string, mixed>, 'shared'?: array<string, bool>, 'shared_by_default'?: bool, ...<string, mixed>}`, but found `mixed`.'''
-count = 1
-
-[[issues]]
-file = "config/container.php"
-code = "mixed-array-access"
-message = "Unsafe array access on type `mixed`."
-count = 1
-
-[[issues]]
-file = "config/container.php"
-code = "mixed-array-assignment"
-message = "Unsafe array assignment on type `mixed`."
-count = 2
-
-[[issues]]
-file = "config/container.php"
-code = "mixed-assignment"
-message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
-count = 2
-
-[[issues]]
 file = "src/Cache/Branch/Builder.php"
 code = "mixed-argument"
 message = 'Invalid argument type for argument #1 of `PackageInfo\Repository\Head::__construct`: expected `string`, but found `nonnull`.'
