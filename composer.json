@@ -34,7 +34,7 @@
         "ergebnis/composer-normalize": "~2.59.0",
         "mikey179/vfsstream": "~1.6.12",
         "phpunit/phpunit": "~13.4.5",
-        "rector/rector": "~2.8.1",
+        "rector/rector": "~2.9.0",
         "roave/security-advisories": "dev-latest"
     },
     "minimum-stability": "stable",
